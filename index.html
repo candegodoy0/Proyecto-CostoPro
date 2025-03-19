@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang = "es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name = "viewport" content="width=device-width,initial-scale=1.0">
+  <title>CostoPro: Calculadora de Costos De Producción</title>
+  <!--Área para incluir futuras hojas de estilo CSS-->
+</head>
+
+<body>
+  <!-- Encabezado de la página-->
+  <!-- Agregar estilos para el encabezado y la barra de navegación-->
+  <header>
+    <h1>CostoPro: Calculadora de Costos De Producción</h1>
+    <nav>
+
+      <ul>
+        <!--Lista de enlaces de navegación-->
+        <!--Agregar estilo a los enlaces de navegación-->
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#calculadora">Calculadora</a></li>        
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+  <!--Sección de Introducción-->
+  <section id ="inicio">
+  <h1>Bienvenido a CostoPro</h1>
+  <img src="imagenes/imagenpc.jpg.png" alt= "">
+  <p>Calcula de manera sencilla los costos de producción para tu fábrica o negocio. Obtén estimaciones precisas para ayudarte a fijar precios adecuados.</p>
+  <button onclick="location.href='#calculadora'">Comienza a calcular</button>"
+  </section>
+
+  <!-- Sección de la Calculadora-->
+  <section id="calculadora"> 
+    <h2>Calculadora de Costos</h2>
+
+    <!--Sección para gastos variables-->
+    <section id="gastos-variables">
+    <h3>Gastos variables (por unidad)</h3>
+    <p> Aquí podrás agregar los costod relacionados con los materiales y cantidades necesarias para producir una unidad de producto.</p>
+
+    <!--Formulario para agregar materiales-->
+    <form>
+    <label for = "material">Material (ej.tornillo):</label>
+    <input type="text" id="material" name="material" placeholder="Material">
+    <label for = "costo-variable">Costo por unidad($):</label>
+    <input type="number" id="costo-variable" name="costo-variable"placeholder="Ejemplo: 9.400">
+    <label for = "cantidad">Cantidad requerida: </label>
+    <input type="number" id="cantidad" name="cantidad"placeholder="Ejemplo: 50">
+
+    <!--Botón para agregar más materiales-->
+    <button type="button">Agregar Material</button>
+    </form>
+
+    <!--Lista de materiales agregados-->
+      <ul id="lista-variables">
+      <!-- Aquí se listarán los materiales y sus costos -->
+    </ul>
+  </section>
+
+    <!--Sección para gastos fijos-->
+    <section id="gastos-fijos">
+    <h3>Gastos Fijos</h3>
+    <p>Aquí podras agregar los costos fijos relacionados con la producción, como alquiler, sueldos, etc </p>
+
+    <!--Formulario para agregar gastos fijos-->
+    <form>
+    <label for = "concepto-fijo">Concepto:</label>
+    <input type="text" id="concepto-fijo" name="concepto-fijo" placeholder="Ejemplo: Alquiler">
+    <label for = "costo-fijo">Costo fijo ($):</label>
+    <input type="number" id="costo-fijo" name="costo-fijo" placeholder="Ejemplo: 1000">
+
+     <!--Botón para agregar más gastos fijos-->
+    <button type="button">Agregar Gasto Fijo</button>
+    </form>
+
+    <!--Lista de gastos fijos agregados-->
+      <ul id="lista-fijos">
+      <!-- Aquí se listarán los gastos fijos -->
+      </ul>
+   </section>
+
+    <!--Seccion para calcular el costo total de producción-->
+    <section id="produccion">
+     <h3>Cantidad a producir</h3>
+    <p> Indica cuantas unidades deseas producir para calcular el costo total</p>
+
+    <!--Formulario para indicar total de produccion-->
+    <!-- Agregar estilos para la alineación y diseño del formulario-->
+    <form>
+       <label for="cantidad-produccion">Cantidad de unidades:</label>
+     <input type="number" id="cantidad-produccion" name="cantidad-produccion" placeholder="Ejemplo: 100"min="1">
+      <!-- Campo para ingresar el porcentaje de la ganancia -->
+      <label for="ganancia">Porcentaje de Ganancia($):</label>
+      <input type="number" id="ganancia" name ="ganancia" placeholder="Ingrese el porcentaje de ganancia">
+      <!-- Botón para calcular el costo total -->
+        <button type="button" onclick="calcularCosto()" >Calcular Costo Total</button>
+    </form>
+
+    <!--Tabla de resultados--> 
+    <!-- Agregar estilos para la tabla de resultados-->
+    <table id ="tabla-resultados">
+      <tr>
+        <th>Concepto</th>
+        <th>Costo</th>
+      </tr>
+      <tr>
+        <td>Gastos Variables</td>
+        <td id = "total-variables">$0.00</td>
+      </tr>
+        <tr>
+        <td>Gastos Fijos</td>
+        <td id = "total-fijos">$0.00</td>
+      </tr>
+        <tr>
+          <td>Costo Total de Producción</td>
+        <td id = "costo-total">$0.00</td>
+      </tr>
+        <tr>
+        <td>Costo Por unidad</td>
+        <td id = "costo-ganancia">$0.00</td>
+      </tr>
+    </table>
+  </section>
+
+</main>
+
+  <!--Sección de contacto-->
+  <footer id="contacto"> 
+    <h2>Contacto</h2>
+    <p>Correo: atencionCP@costopro.com</p>
+  </footer>
+
+<!--Sección de JavaScript (agregar la funcionalidad en futuras entregas)-->
+  <script>
+    //Funcion que calculara el costo total
+    function calcularCosto(){
+      //Lógica para calcular el costo total de producción
+      //Se obtienen los valores de los campos del formulario
+      //Se realiza el cálculo del costo total y el precio final
+      //Actualizar los valores en la tabla
+      console.log("Función calcularCosto pendiente de implementación.");
+    }
+    //Implementacion de más interactividad y funcionalidades (validaciones de formulario, animaciones o cualquier otra)
+  </script>
+
+</body>
+</html>
