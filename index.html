@@ -12,8 +12,8 @@
   <h1>Bienvenido a CostoPro</h1>
   <!--Enlaces para cambiar de iniciar sesion a crear cuenta-->
   <div>
-  <button onclick="loguearse">Iniciar sesión</button>
-  <button onclick="registrarse">Crear cuenta</button>
+  <button onclick="loguearse()">Iniciar sesión</button>
+  <button onclick="registrarse()">Crear cuenta</button>
 </div>
   <!--Formulario para login-->
 <!-- Agregar estilos para la alineación y diseño del formulario-->
@@ -64,19 +64,20 @@
           <label for = "cantidad">Cantidad requerida: </label>
           <input type="number" id="cantidad" name="cantidad"placeholder="Ejemplo: 50">
           <label for = "unidad-material">Unidad de medida: </label>
-          <input type="number" id="unidad-material" name="unidad-material">
+          <select id="unidad-material" name="unidad-material">
           <option value="litros">Litros</option>
           <option value="metros">Metros</option>
           <option value="cajas">Cajas</option>
-          <label for = "cantidad-equivalente">Cantidad de unidades estándar por unidad seleccionada: </label>
-          <input type="number" id="cantidad-equivalente" name="cantidad-equivalente"placeholder="Ejemplo: 10">
+ </select>
+ <label for = "cantidad-equivalente">Cantidad de unidades estándar por unidad seleccionada: </label>
+ <input type="number" id="cantidad-equivalente" name="cantidad-equivalente"placeholder="Ejemplo: 10">
       
     <!--Lista de materiales agregados-->
       <ul id="lista-materiales">
         <!-- Aquí se listarán los materiales y sus costos -->
       </ul>
         </form>
-        <button onclick="pasoiguiente('gastos-fijos')">Paso siguiente</button>
+        <button onclick="pasoSiguiente('gastos-fijos')">Paso siguiente</button>
 </section>
 
     <!--Sección para gastos fijos-->
@@ -115,7 +116,7 @@
       <label for="ganancia">Tipo de calculo:</label>
       <input type="number" id="ganancia" name ="ganancia" placeholder="Ingrese el porcentaje de ganancia">
       <select id="tipo-calculo" name="tipo-calculo">
-<option value=""unidad > Por Unidad</option>
+<option value="unidad" > Por Unidad</option>
 <option value="total">Por Cantidad Total</option>
       <!-- Botón para calcular el costo total -->
         <button type="button" onclick="calcularCosto()" >Calcular Costo Total</button>
