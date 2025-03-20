@@ -9,6 +9,25 @@
 </head>
 
 <body>
+  <h1>Bienvenido a CostoPro</h1>
+  <!--Enlaces para cambiar de iniciar sesion a crear cuenta-->
+  <div>
+  <button onclick="loguearse">Iniciar sesión</button>
+  <button onclick="registrarse">Crear cuenta</button>
+</div>
+  <!--Formulario para login-->
+<!-- Agregar estilos para la alineación y diseño del formulario-->
+ <h3>Iniciar sesión</h3>
+<form>
+<!-- Campos para que el usuario ingrese los datos -->
+<label for="nombre">Nombre de usuario:</label>
+<input type="text" id="nombre-usuario" name="nombre-usuario">
+<label for="contrasña">Contraseña:</label>
+<input type="text" id="contraseña" name ="contraseña">
+
+<!-- Botón para iniciar sesión -->
+ <button type="button" onclick="Entregar" >Iniciar sesión</button>
+</form>
   <!-- Encabezado de la página-->
   <!-- Agregar estilos para el encabezado y la barra de navegación-->
   <header>
@@ -29,7 +48,6 @@
     
   <!--Sección de Introducción-->
   <section id ="inicio">
-    <h1>Bienvenido a CostoPro</h1>
     <img src="imagenes/imagenpc.jpg.png" alt= "">
     <p>Calcula de manera sencilla los costos de producción para tu fábrica o negocio. Obtén estimaciones precisas para ayudarte a fijar precios adecuados.</p>
     <button onclick="location.href='#calculadora'">Comienza a calcular</button>"
@@ -52,13 +70,13 @@
           <option value="cajas">Cajas</option>
           <label for = "cantidad-equivalente">Cantidad de unidades estándar por unidad seleccionada: </label>
           <input type="number" id="cantidad-equivalente" name="cantidad-equivalente"placeholder="Ejemplo: 10">
-          <button onclick="location.href='#calculadora'">Agregar material</button>"
-          
+      
     <!--Lista de materiales agregados-->
       <ul id="lista-materiales">
         <!-- Aquí se listarán los materiales y sus costos -->
       </ul>
         </form>
+        <button onclick="pasoiguiente('gastos-fijos')">Paso siguiente</button>
 </section>
 
     <!--Sección para gastos fijos-->
@@ -81,6 +99,7 @@
       <ul id="lista-fijos">
       <!-- Aquí se listarán los gastos fijos -->
       </ul>
+      <button onclick="pasoiguiente('cantidad-produccion')">Paso siguiente</button>
    </section>
 
     <!--Seccion para calcular el costo total de producción-->
@@ -141,6 +160,7 @@
     <p>Email: atencionCP@costopro.com</p>
     <p>Teléfono: 3406987596</p>
     <p>Ubicación: 124, BV 25 de Mayo, 3000</p>
+
     <h1>Ponte en contacto</h1>
         <!--Formulario para pedir ayuda-->
     <!-- Agregar estilos para la alineación y diseño del formulario-->
