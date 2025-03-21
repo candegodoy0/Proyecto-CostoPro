@@ -10,14 +10,14 @@
 
 <body>
   <h1>Bienvenido a CostoPro</h1>
+  <p>En esta página podrás calcular de manera sencilla los costos de producción para tu fábrica o negocio. Obtén estimaciones precisas para ayudarte a fijar precios adecuados.</p>
   <!--Enlaces para cambiar de iniciar sesion a crear cuenta-->
   <div>
   <button onclick="loguearse()">Iniciar sesión</button>
   <button onclick="registrarse()">Crear cuenta</button>
 </div>
-  <!--Formulario para login-->
+  <!--Formulario para inicio de sesión-->
 <!-- Agregar estilos para la alineación y diseño del formulario-->
- <h3>Iniciar sesión</h3>
 <form>
 <!-- Campos para que el usuario ingrese los datos -->
 <label for="nombre">Nombre de usuario:</label>
@@ -46,43 +46,24 @@
 
   <main>
 
-  <!--Sección de inicio-->
-     <section id ="inicio">
-  <h1>Bienvenido a CostoPro</h1>
-  <!--Enlaces para cambiar de iniciar sesion a crear cuenta-->
-  <button onclick="loguearse()">Iniciar sesión</button>
-  <button onclick="registrarse()">Crear cuenta</button>
-
   <img src="imagenes/imagenpc.jpg.png" alt= "">
-  <p>Calcula de manera sencilla los costos de producción para tu fábrica o negocio. Obtén estimaciones precisas para ayudarte a fijar precios adecuados.</p>
   <button onclick="location.href='#calculadora'">Comienza a calcular</button>
-  </section>  
-
-  <!--Formulario para inicio de sesión-->
-<!-- Agregar estilos para la alineación y diseño del formulario-->
-<form>
-<!-- Campos para que el usuario ingrese los datos -->
-<label for="nombre">Nombre de usuario:</label>
-<input type="text" id="nombre-usuario" name="nombre-usuario">
-<label for="contraseña">Contraseña:</label>
-<input type="text" id="contraseña" name ="contraseña">
-<!-- Botón para iniciar sesión -->
- <button type="button">Iniciar sesión</button>
-</form>
 
       <!--Sección para agregar los productos-->
       <section id ="producto">
         <h3>Agrega tu producto</h3>
         <form>
-          <label for = "nombre-producto">Nombre del producto (ej.mesa):</label>
-          <input type="text" id="nombre-producto" name="nombre-producto">
-          <label for = "nombre-material">Materiales que requiere (ej.tornillo):</label>
-          <input type="text" id="nombre-material" name="nombre-material">
+          <label for = "nombre-producto">Nombre del producto:</label>
+          <input type="text" id="nombre-producto" name="nombre-producto" placeholder="Ejemplo: Mesa">
+          <h3>Gastos Variables (por unidad)</h3>
+          <p>Aquí podrás agregar los costos relacionados con los materiales y cantidades necesarias para producir una unidad de producto</p>
+          <label for = "nombre-material">Materiales que requiere:</label>
+          <input type="text" id="nombre-material" name="nombre-material" placeholder="Ejemplo: Tornillo">
           <label for = "costo-material">Costo material($):</label>
-          <input type="number" id="costo-material" name="costo-material">
+          <input type="number" id="costo-material" name="costo-material" placeholder="Ejemplo: $1.000">
           <label for = "cantidad">Cantidad requerida: </label>
           <input type="number" id="cantidad" name="cantidad">
-          <label for = "unidad-material">Unidad de medida: </label>
+          <label for = "unidad-material">Unidad de medida: </label placeholder="Ejemplo: 50">
           <select id="unidad-material" name="unidad-material">
           <option value="litros">Litros</option>
           <option value="metros">Metros</option>
@@ -115,7 +96,7 @@
     <!--Seccion para calcular el costo total de producción-->
     <section id="produccion">
      <h3>Cantidad a producir</h3>
-    <p> Indica cuantas unidades deseas producir para calcular el costo total</p>
+    <p> Indica cuantas unidades deseas producir para calcular el costo total.</p>
 
     <!--Formulario para indicar total de produccion-->
     <!-- Agregar estilos para la alineación y diseño del formulario-->
@@ -136,15 +117,11 @@
     <!--Tabla de resultados--> 
     <!-- Agregar estilos para la tabla de resultados-->
      <section id="resultados">
-      <h3>Resultados</h3>
+      <h3>Tabla de Resultados</h3>
     <table id ="tabla-resultados">
       <tr>
         <th>Concepto</th>
         <th>Costo</th>
-      </tr>
-      <tr>
-        <td>Gastos Variables</td>
-        <td id = "total-variables">$0.00</td>
       </tr>
         <tr>
         <td>Gastos Fijos</td>
@@ -164,7 +141,7 @@
 </main>
 
   <!--Sección de contacto-->
-  <footer id="contacto"> c
+  <footer id="contacto"> 
     <h2>Contactanos</h2>
     <p>Si tienes preguntas sobre nuestros servicios, necesita ayuda o quiera compartir sus comentarios, nuestro equipo dedicado está aquí para ayudarlo en cada paso del camino.</p>
     <p>Email: atencionCP@costopro.com</p>
@@ -181,7 +158,7 @@
      <label for="direccion-correo-electronico">Dirección de correo electrónico:</label>
      <input type="text" id="direccion-correo-electronico" name ="direccion-correo-electronico">
      <label for="mensaje">Mensaje:</label>
-     <input type="text" id="mensaje" name ="mensaje" placeholder="Ingrese el mensaje">
+     <input type="text" id="mensaje" name ="mensaje">
      <!-- Botón para calcular el costo total -->
        <button type="button" onclick="Entregar" >Entregar</button>
    </form>
