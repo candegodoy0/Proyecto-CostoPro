@@ -45,24 +45,43 @@
   </header>
 
   <main>
-    
-  <!--Sección de Introducción-->
-  <section id ="inicio">
-    <img src="imagenes/imagenpc.jpg.png" alt= "">
-    <p>Calcula de manera sencilla los costos de producción para tu fábrica o negocio. Obtén estimaciones precisas para ayudarte a fijar precios adecuados.</p>
-    <button onclick="location.href='#calculadora'">Comienza a calcular</button>"
-    </section>  
+
+  <!--Sección de inicio-->
+     <section id ="inicio">
+  <h1>Bienvenido a CostoPro</h1>
+  <!--Enlaces para cambiar de iniciar sesion a crear cuenta-->
+  <button onclick="loguearse()">Iniciar sesión</button>
+  <button onclick="registrarse()">Crear cuenta</button>
+
+  <img src="imagenes/imagenpc.jpg.png" alt= "">
+  <p>Calcula de manera sencilla los costos de producción para tu fábrica o negocio. Obtén estimaciones precisas para ayudarte a fijar precios adecuados.</p>
+  <button onclick="location.href='#calculadora'">Comienza a calcular</button>
+  </section>  
+
+  <!--Formulario para inicio de sesión-->
+<!-- Agregar estilos para la alineación y diseño del formulario-->
+<form>
+<!-- Campos para que el usuario ingrese los datos -->
+<label for="nombre">Nombre de usuario:</label>
+<input type="text" id="nombre-usuario" name="nombre-usuario">
+<label for="contraseña">Contraseña:</label>
+<input type="text" id="contraseña" name ="contraseña">
+<!-- Botón para iniciar sesión -->
+ <button type="button">Iniciar sesión</button>
+</form>
 
       <!--Sección para agregar los productos-->
       <section id ="producto">
         <h3>Agrega tu producto</h3>
         <form>
-          <label for = "nombre-producto">Nombre (ej.tornillo):</label>
-          <input type="text" id="nombre-material" name="nombre-material" placeholder="Material">
+          <label for = "nombre-producto">Nombre del producto (ej.mesa):</label>
+          <input type="text" id="nombre-producto" name="nombre-producto">
+          <label for = "nombre-material">Materiales que requiere (ej.tornillo):</label>
+          <input type="text" id="nombre-material" name="nombre-material">
           <label for = "costo-material">Costo material($):</label>
-          <input type="number" id="costo-material" name="costo-material"placeholder="Ejemplo: 9.400">
+          <input type="number" id="costo-material" name="costo-material">
           <label for = "cantidad">Cantidad requerida: </label>
-          <input type="number" id="cantidad" name="cantidad"placeholder="Ejemplo: 50">
+          <input type="number" id="cantidad" name="cantidad">
           <label for = "unidad-material">Unidad de medida: </label>
           <select id="unidad-material" name="unidad-material">
           <option value="litros">Litros</option>
@@ -70,14 +89,9 @@
           <option value="cajas">Cajas</option>
  </select>
  <label for = "cantidad-equivalente">Cantidad de unidades estándar por unidad seleccionada: </label>
- <input type="number" id="cantidad-equivalente" name="cantidad-equivalente"placeholder="Ejemplo: 10">
-      
-    <!--Lista de materiales agregados-->
-      <ul id="lista-materiales">
-        <!-- Aquí se listarán los materiales y sus costos -->
-      </ul>
-        </form>
-        <button onclick="pasoSiguiente('gastos-fijos')">Paso siguiente</button>
+ <input type="number" id="cantidad-equivalente" name="cantidad-equivalente">
+ </form>
+ <button onclick="pasoSiguiente('gastos-fijos')">Paso siguiente</button>
 </section>
 
     <!--Sección para gastos fijos-->
@@ -92,15 +106,10 @@
     <label for = "costo-fijo">Costo fijo ($):</label>
     <input type="number" id="costo-fijo" name="costo-fijo" placeholder="Ejemplo: 1000">
 
-     <!--Botón para agregar más gastos fijos-->
+     <!--Botón para agregar gastos fijos-->
     <button type="button">Agregar Gasto Fijo</button>
     </form>
-
-    <!--Lista de gastos fijos agregados-->
-      <ul id="lista-fijos">
-      <!-- Aquí se listarán los gastos fijos -->
-      </ul>
-      <button onclick="pasoiguiente('cantidad-produccion')">Paso siguiente</button>
+      <button onclick="pasoSiguiente('produccion')">Paso siguiente</button>
    </section>
 
     <!--Seccion para calcular el costo total de producción-->
@@ -111,13 +120,14 @@
     <!--Formulario para indicar total de produccion-->
     <!-- Agregar estilos para la alineación y diseño del formulario-->
     <form>
-      <label for="tipo-calculo">Porcentaje de Ganancia($):</label>
-      <!-- Campo para ingresar el porcentaje de la ganancia -->
-      <label for="ganancia">Tipo de calculo:</label>
+          <!-- Campo para ingresar el porcentaje de la ganancia -->
+      <label for="ganancia">Porcentaje de Ganancia($):</label>
       <input type="number" id="ganancia" name ="ganancia" placeholder="Ingrese el porcentaje de ganancia">
+      <label for="tipo-calculo">Tipo de calculo:</label>
       <select id="tipo-calculo" name="tipo-calculo">
 <option value="unidad" > Por Unidad</option>
 <option value="total">Por Cantidad Total</option>
+</select>
       <!-- Botón para calcular el costo total -->
         <button type="button" onclick="calcularCosto()" >Calcular Costo Total</button>
     </form>
@@ -154,21 +164,20 @@
 </main>
 
   <!--Sección de contacto-->
-  <footer id="contacto"> 
-    <h1>Ayuda y soporte</h1>
+  <footer id="contacto"> c
     <h2>Contactanos</h2>
     <p>Si tienes preguntas sobre nuestros servicios, necesita ayuda o quiera compartir sus comentarios, nuestro equipo dedicado está aquí para ayudarlo en cada paso del camino.</p>
     <p>Email: atencionCP@costopro.com</p>
     <p>Teléfono: 3406987596</p>
     <p>Ubicación: 124, BV 25 de Mayo, 3000</p>
 
-    <h1>Ponte en contacto</h1>
+    <h2>Ponte en contacto</h2>
         <!--Formulario para pedir ayuda-->
     <!-- Agregar estilos para la alineación y diseño del formulario-->
     <form>
     <!-- Campos para que el usuario ingrese los datos -->
-      <label for="nombre">Su nombre:</label>
-    <input type="text" id="nombre" name="nombre">
+      <label for="nombre-usuario">Nombre de usuario:</label>
+    <input type="text" id="nombre-usuario" name="nombre-usuario">
      <label for="direccion-correo-electronico">Dirección de correo electrónico:</label>
      <input type="text" id="direccion-correo-electronico" name ="direccion-correo-electronico">
      <label for="mensaje">Mensaje:</label>
@@ -189,6 +198,19 @@
       //Actualizar los valores en la tabla
       console.log("Función calcularCosto pendiente de implementación.");
     }
+
+    //Funcion para loguarse en la pagina
+    function loguearse(){
+      //Lógica para iniciar sesión en la página
+      console.log("Función para loguarse.");
+    }
+
+    //Funcion para crear una cuenta en la pagina
+    function registrarse(){
+      //Lógica para crearse una cuenta en la página
+      console.log("Función para registrarse.");
+    }
+
     //Implementacion de más interactividad y funcionalidades (validaciones de formulario, animaciones o cualquier otra)
   </script>
 
