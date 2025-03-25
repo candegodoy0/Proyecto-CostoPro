@@ -21,10 +21,10 @@
 <!-- Agregar estilos para la alineación y diseño del formulario-->
 <form>
 <!-- Campos para que el usuario ingrese los datos -->
-<label for="nombre">Nombre de usuario:</label>
+<label for="nombre">Nombre de usuario:</label placeholder="Nombre de usuario">
 <input type="text" id="nombre-usuario" name="nombre-usuario">
 <label for="contrasña">Contraseña:</label>
-<input type="text" id="contraseña" name ="contraseña">
+<input type="text" id="contraseña" name ="contraseña" placeholder="Contraseña">>
 
 <!-- Botón para iniciar sesión -->
  <button type="button" onclick="Entregar" >Iniciar sesión</button>
@@ -38,10 +38,12 @@
       <ul>
         <!--Lista de enlaces de navegación-->
         <!--Agregar estilo a los enlaces de navegación-->
+        <h2>Menú</h2>
         <li><a href="#inicio">Inicio</a></li>
         <li><a href="#calculadora">Calculadora</a></li>        
-        <li><a href="#contacto">Contacto</a></li>
       </ul>
+      <h2>Apoyo</h2>
+      <li><a href="#contacto">Ayuda y Soporte</a></li>
     </nav>
   </header>
 
@@ -51,28 +53,51 @@
 
       <!--Sección para agregar los productos-->
       <section id ="producto">
-        <h3>Agrega tu producto</h3>
+        <h3>Productos</h3>
         <form>
           <label for = "nombre-producto">Nombre del producto:</label>
           <input type="text" id="nombre-producto" name="nombre-producto" placeholder="Ejemplo: Mesa">
+          <button type="button">Agregar producto</button>
           <h3>Gastos Variables (por unidad)</h3>
           <p>Aquí podrás agregar los costos relacionados con los materiales y cantidades necesarias para producir una unidad de producto</p>
           <label for = "nombre-material">Materiales que requiere:</label>
           <input type="text" id="nombre-material" name="nombre-material" placeholder="Ejemplo: Tornillo">
-          <label for = "costo-material">Costo material($):</label>
+          <label for = "costo-material">Costo por unidad($):</label>
           <input type="number" id="costo-material" name="costo-material" placeholder="Ejemplo: $1.000">
           <label for = "cantidad">Cantidad requerida: </label>
-          <input type="number" id="cantidad" name="cantidad">
-          <label for = "unidad-material">Unidad de medida: </label placeholder="Ejemplo: 50">
+          <input type="number" id="cantidad" name="cantidad" placeholder="Ejemplo: 50">>
+          <label for = "unidad-material">Unidad de medida: </label>
           <select id="unidad-material" name="unidad-material">
           <option value="litros">Litros</option>
           <option value="metros">Metros</option>
           <option value="cajas">Cajas</option>
  </select>
  <label for = "cantidad-equivalente">Cantidad de unidades estándar por unidad seleccionada: </label>
- <input type="number" id="cantidad-equivalente" name="cantidad-equivalente">
+ <input type="number" id="cantidad-equivalente" name="cantidad-equivalente" placeholder="Ejemplo: 150">
  </form>
- <button onclick="pasoSiguiente('gastos-fijos')">Paso siguiente</button>
+ <!--Botón para agregar más materiales-->
+ <button type="button">+</button>
+ <!--Tabla de materiales agregados--> 
+    <!-- Agregar estilos para la tabla de resultados-->
+     <section id="materiales-variables">
+      <h3>Lista de materiales agregados</h3>
+    <table id ="tabla-resultados">
+      <tr>
+        <th>Material</th>
+        <th>Costo</th>
+        <th>Cantidad</th>
+      </tr>
+        <tr>
+        <td>Tornillo </td>
+        <td id = "material-1">$0.00</td>
+      </tr>
+        <tr>
+          <td>Pintura</td>
+        <td id = "material-2">$0.00</td>
+      </tr>
+    </table>
+
+    <button onclick="pasoSiguiente('gastos-fijos')">Paso siguiente</button>
 </section>
 
     <!--Sección para gastos fijos-->
@@ -85,10 +110,28 @@
     <label for = "concepto-fijo">Concepto:</label>
     <input type="text" id="concepto-fijo" name="concepto-fijo" placeholder="Ejemplo: Alquiler">
     <label for = "costo-fijo">Costo fijo ($):</label>
-    <input type="number" id="costo-fijo" name="costo-fijo" placeholder="Ejemplo: 1000">
+    <input type="number" id="costo-fijo" name="costo-fijo" placeholder="Ejemplo: $1000">
 
-     <!--Botón para agregar gastos fijos-->
-    <button type="button">Agregar Gasto Fijo</button>
+    <!--Tabla de materiales agregados--> 
+    <!-- Agregar estilos para la tabla de resultados-->
+    <section id="gastos-fijos-agregados">
+      <h3>Lista de gastos fijos  agregados</h3>
+    <table id ="tabla-resultados">
+      <tr>
+        <th>Material</th>
+        <th>Costo</th>
+      </tr>
+        <tr>
+        <td>Alquier </td>
+        <td id = "gasto-1">$0.00</td>
+      </tr>
+        <tr>
+          <td>Impuestos</td>
+        <td id = "gasto-2">$0.00</td>
+      </tr>
+    </table>
+     <!--Botón para agregar más gastos fijos-->
+    <button type="button">+</button>
     </form>
       <button onclick="pasoSiguiente('produccion')">Paso siguiente</button>
    </section>
@@ -103,7 +146,7 @@
     <form>
           <!-- Campo para ingresar el porcentaje de la ganancia -->
       <label for="ganancia">Porcentaje de Ganancia($):</label>
-      <input type="number" id="ganancia" name ="ganancia" placeholder="Ingrese el porcentaje de ganancia">
+      <input type="number" id="ganancia" name ="ganancia" placeholder="Ejemplo: 21%">
       <label for="tipo-calculo">Tipo de calculo:</label>
       <select id="tipo-calculo" name="tipo-calculo">
 <option value="unidad" > Por Unidad</option>
@@ -124,8 +167,8 @@
         <th>Costo</th>
       </tr>
         <tr>
-        <td>Gastos Fijos</td>
-        <td id = "total-fijos">$0.00</td>
+        <td>Gastos Variables </td>
+        <td id = "total-variables">$0.00</td>
       </tr>
         <tr>
           <td>Costo Total de Producción</td>
@@ -142,6 +185,7 @@
 
   <!--Sección de contacto-->
   <footer id="contacto"> 
+    <h3>Ayuda y soporte</h3>
     <h2>Contactanos</h2>
     <p>Si tienes preguntas sobre nuestros servicios, necesita ayuda o quiera compartir sus comentarios, nuestro equipo dedicado está aquí para ayudarlo en cada paso del camino.</p>
     <p>Email: atencionCP@costopro.com</p>
@@ -157,6 +201,8 @@
     <input type="text" id="nombre-usuario" name="nombre-usuario">
      <label for="direccion-correo-electronico">Dirección de correo electrónico:</label>
      <input type="text" id="direccion-correo-electronico" name ="direccion-correo-electronico">
+     <label for="numero-telefono">Número de teléfono:</label>
+     <input type="text" id="numero-telefono" name ="numero-telefono">
      <label for="mensaje">Mensaje:</label>
      <input type="text" id="mensaje" name ="mensaje">
      <!-- Botón para calcular el costo total -->
