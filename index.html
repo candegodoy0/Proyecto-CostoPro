@@ -51,16 +51,13 @@
 
   <main>
 
-  <button onclick="location.href='#calculadora'">Comienza a calcular</button>
-
       <!--Sección para agregar los productos-->
       <section id ="producto">
         <h3>Productos</h3>
         <form>
           <label for = "nombre-producto">Nombre del producto:</label>
           <input type="text" id="nombre-producto" name="nombre-producto" placeholder="Ejemplo: Mesa">
-          <button type="button">+</button>
-          <p>Agregar producto</p>
+          <button type="button">+ (agregar producto)</button>
           <h3>Gastos Variables (por unidad)</h3>
           <p>Aquí podrás agregar los costos relacionados con los materiales y cantidades necesarias para producir una unidad de producto</p>
           <label for = "nombre-material">Materiales que requiere:</label>
@@ -79,8 +76,7 @@
  <input type="number" id="cantidad-equivalente" name="cantidad-equivalente" placeholder="Ejemplo: 150">
  </form>
  <!--Botón para agregar más materiales-->
- <button type="button">+</button>
- <p>Agregar otro material</p>
+ <button type="button">+ (agregar otro material)</button>
  <!--Tabla de materiales agregados--> 
     <!-- Agregar estilos para la tabla de resultados-->
      <section id="materiales-variables">
@@ -101,8 +97,7 @@
       </tr>
     </table>
 
-    <button onclick="pasoSiguiente('gastos-fijos')">></button>
-    <p>Paso siguiente</p>
+    <button onclick="pasoSiguiente('gastos-fijos')">> (paso siguiente)</button>
 </section>
 
     <!--Sección para gastos fijos-->
@@ -118,8 +113,7 @@
     <input type="number" id="costo-fijo" name="costo-fijo" placeholder="Ejemplo: $1000">
 
      <!--Botón para agregar más gastos fijos-->
-    <button type="button">+</button>
- <p>Agregar otro material</p>
+    <button type="button">+ 8agregar gasto fijo</button>
 
     <!--Tabla de materiales agregados--> 
     <!-- Agregar estilos para la tabla de resultados-->
@@ -140,8 +134,7 @@
       </tr>
     </table>
      <!--Botón para agregar más gastos fijos-->
-     <button onclick="pasoSiguiente('produccion')">></button>
-   <p>Paso siguiente</p>
+     <button onclick="pasoSiguiente('produccion')">> (paso siguiente)</button>
     </form>
    </section>
 
