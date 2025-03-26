@@ -21,18 +21,20 @@
 <!-- Agregar estilos para la alineación y diseño del formulario-->
 <form>
 <!-- Campos para que el usuario ingrese los datos -->
-<label for="nombre">Nombre de usuario:</label placeholder="Nombre de usuario">
-<input type="text" id="nombre-usuario" name="nombre-usuario">
+<label for="nombre">Nombre de usuario:</label>
+<input type="text" id="nombre-usuario" name="nombre-usuario" placeholder="Nombre de usuario">
 <label for="contrasña">Contraseña:</label>
-<input type="text" id="contraseña" name ="contraseña" placeholder="Contraseña">>
+<input type="text" id="contraseña" name ="contraseña" placeholder="Contraseña">
 
 <!-- Botón para iniciar sesión -->
- <button type="button" onclick="Entregar" >Iniciar sesión</button>
+ <button type="button" onclick="Entregar" >Ingresar</button>
 </form>
   <!-- Encabezado de la página-->
   <!-- Agregar estilos para el encabezado y la barra de navegación-->
   <header>
     <h1>CostoPro: Calculadora de Costos De Producción</h1>
+    <p>Calcula los costos de producción de manera sencilla.  Obtén estimaciones precisas para ayudar a fijar precios adecuados.</p>
+    <button onclick="location.href='#calculadora'">Comienza a calcular</button>
     <nav>
 
       <ul>
@@ -57,7 +59,8 @@
         <form>
           <label for = "nombre-producto">Nombre del producto:</label>
           <input type="text" id="nombre-producto" name="nombre-producto" placeholder="Ejemplo: Mesa">
-          <button type="button">Agregar producto</button>
+          <button type="button">+</button>
+          <p>Agregar producto</p>
           <h3>Gastos Variables (por unidad)</h3>
           <p>Aquí podrás agregar los costos relacionados con los materiales y cantidades necesarias para producir una unidad de producto</p>
           <label for = "nombre-material">Materiales que requiere:</label>
@@ -77,10 +80,11 @@
  </form>
  <!--Botón para agregar más materiales-->
  <button type="button">+</button>
+ <p>Agregar otro material</p>
  <!--Tabla de materiales agregados--> 
     <!-- Agregar estilos para la tabla de resultados-->
      <section id="materiales-variables">
-      <h3>Lista de materiales agregados</h3>
+      <h3>Lista de materiales</h3>
     <table id ="tabla-resultados">
       <tr>
         <th>Material</th>
@@ -97,7 +101,8 @@
       </tr>
     </table>
 
-    <button onclick="pasoSiguiente('gastos-fijos')">Paso siguiente</button>
+    <button onclick="pasoSiguiente('gastos-fijos')">></button>
+    <p>Paso siguiente</p>
 </section>
 
     <!--Sección para gastos fijos-->
@@ -112,10 +117,14 @@
     <label for = "costo-fijo">Costo fijo ($):</label>
     <input type="number" id="costo-fijo" name="costo-fijo" placeholder="Ejemplo: $1000">
 
+     <!--Botón para agregar más gastos fijos-->
+    <button type="button">+</button>
+ <p>Agregar otro material</p>
+
     <!--Tabla de materiales agregados--> 
     <!-- Agregar estilos para la tabla de resultados-->
     <section id="gastos-fijos-agregados">
-      <h3>Lista de gastos fijos  agregados</h3>
+      <h3>Lista de gastos fijos</h3>
     <table id ="tabla-resultados">
       <tr>
         <th>Material</th>
@@ -131,13 +140,14 @@
       </tr>
     </table>
      <!--Botón para agregar más gastos fijos-->
-    <button type="button">+</button>
+     <button onclick="pasoSiguiente('produccion')">></button>
+   <p>Paso siguiente</p>
     </form>
-      <button onclick="pasoSiguiente('produccion')">Paso siguiente</button>
    </section>
 
     <!--Seccion para calcular el costo total de producción-->
     <section id="produccion">
+      <h1>Calculadora</h1>
      <h3>Cantidad a producir</h3>
     <p> Indica cuantas unidades deseas producir para calcular el costo total.</p>
 
@@ -145,7 +155,7 @@
     <!-- Agregar estilos para la alineación y diseño del formulario-->
     <form>
           <!-- Campo para ingresar el porcentaje de la ganancia -->
-      <label for="ganancia">Porcentaje de Ganancia($):</label>
+      <label for="ganancia">Porcentaje de Ganancia(%):</label>
       <input type="number" id="ganancia" name ="ganancia" placeholder="Ejemplo: 21%">
       <label for="tipo-calculo">Tipo de calculo:</label>
       <select id="tipo-calculo" name="tipo-calculo">
@@ -160,7 +170,7 @@
     <!--Tabla de resultados--> 
     <!-- Agregar estilos para la tabla de resultados-->
      <section id="resultados">
-      <h3>Tabla de Resultados</h3>
+      <h3>TABLA DE RESULTADOS</h3>
     <table id ="tabla-resultados">
       <tr>
         <th>Concepto</th>
@@ -198,13 +208,13 @@
     <form>
     <!-- Campos para que el usuario ingrese los datos -->
       <label for="nombre-usuario">Nombre de usuario:</label>
-    <input type="text" id="nombre-usuario" name="nombre-usuario">
+    <input type="text" id="nombre-usuario" name="nombre-usuario" placeholder="Nombre">
      <label for="direccion-correo-electronico">Dirección de correo electrónico:</label>
-     <input type="text" id="direccion-correo-electronico" name ="direccion-correo-electronico">
+     <input type="text" id="direccion-correo-electronico" name ="direccion-correo-electronico" placeholder="Correo electrónico">
      <label for="numero-telefono">Número de teléfono:</label>
-     <input type="text" id="numero-telefono" name ="numero-telefono">
+     <input type="text" id="numero-telefono" name ="numero-telefono" placeholder="Teléfono">
      <label for="mensaje">Mensaje:</label>
-     <input type="text" id="mensaje" name ="mensaje">
+     <input type="text" id="mensaje" name ="mensaje" placeholder="Escribe tu mensaje">
      <!-- Botón para calcular el costo total -->
        <button type="button" onclick="Entregar" >Entregar</button>
    </form>
