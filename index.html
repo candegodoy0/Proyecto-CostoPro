@@ -9,13 +9,13 @@
 </head>
 
 <body>
-  <img src="imagenes/logo_CostoPro.png" alt="">
+  <img src="assets/logo_CostoPro.png" alt="">
   <h1>Bienvenido a CostoPro</h1>
   <p>En esta página podrás calcular de manera sencilla los costos de producción para tu fábrica o negocio. Obtén estimaciones precisas para ayudarte a fijar precios adecuados.</p>
   <!--Enlaces para cambiar de iniciar sesion a crear cuenta-->
   <div>
-  <button onclick="loguearse()">Iniciar sesión</button>
-  <button onclick="registrarse()">Crear cuenta</button>
+  <button>Iniciar sesión</button>
+  <button>Crear cuenta</button>
 </div>
   <!--Formulario para inicio de sesión-->
 <!-- Agregar estilos para la alineación y diseño del formulario-->
@@ -27,14 +27,14 @@
 <input type="text" id="contraseña" name ="contraseña" placeholder="Contraseña">
 
 <!-- Botón para iniciar sesión -->
- <button type="button" onclick="Entregar" >Ingresar</button>
+ <button type="button">Ingresar</button>
 </form>
   <!-- Encabezado de la página-->
   <!-- Agregar estilos para el encabezado y la barra de navegación-->
   <header>
     <h1>CostoPro: Calculadora de Costos De Producción</h1>
     <p>Calcula los costos de producción de manera sencilla.  Obtén estimaciones precisas para ayudar a fijar precios adecuados.</p>
-    <button onclick="location.href='#calculadora'">Comienza a calcular</button>
+    <button>Comienza a calcular</button>
     <nav>
 
       <ul>
@@ -97,7 +97,7 @@
       </tr>
     </table>
 
-    <button onclick="pasoSiguiente('gastos-fijos')">> (paso siguiente)</button>
+    <button>Paso siguiente >></button>
 </section>
 
     <!--Sección para gastos fijos-->
@@ -113,7 +113,7 @@
     <input type="number" id="costo-fijo" name="costo-fijo" placeholder="Ejemplo: $1000">
 
      <!--Botón para agregar más gastos fijos-->
-    <button type="button">+ 8agregar gasto fijo</button>
+    <button type="button">+ (agregar otro gasto)</button>
 
     <!--Tabla de materiales agregados--> 
     <!-- Agregar estilos para la tabla de resultados-->
@@ -134,7 +134,7 @@
       </tr>
     </table>
      <!--Botón para agregar más gastos fijos-->
-     <button onclick="pasoSiguiente('produccion')">> (paso siguiente)</button>
+     <button>Paso siguiente >> </button>
     </form>
    </section>
 
@@ -156,7 +156,7 @@
 <option value="total">Por Cantidad Total</option>
 </select>
       <!-- Botón para calcular el costo total -->
-        <button type="button" onclick="calcularCosto()" >Calcular Costo Total</button>
+        <button type="button">Calcular Costo Total</button>
     </form>
 </section>
 
@@ -209,15 +209,11 @@
      <label for="mensaje">Mensaje:</label>
      <input type="text" id="mensaje" name ="mensaje" placeholder="Escribe tu mensaje">
      <!-- Botón para calcular el costo total -->
-       <button type="button" onclick="Entregar" >Entregar</button>
+       <button type="button">Entregar</button>
    </form>
 
-  </footer>
-
-<!--Sección de JavaScript (agregar la funcionalidad en futuras entregas)-->
-  <script>
     //Funcion que calculara el costo total
-    function calcularCosto(){
+    // function calcularCosto(){
       //Lógica para calcular el costo total de producción
       //Se obtienen los valores de los campos del formulario
       //Se realiza el cálculo del costo total y el precio final
@@ -238,7 +234,6 @@
     }
 
     //Implementacion de más interactividad y funcionalidades (validaciones de formulario, animaciones o cualquier otra)
-  </script>
 
 </body>
 </html>
