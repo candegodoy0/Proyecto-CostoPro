@@ -1,5 +1,6 @@
-*{
+* {
   box-sizing: border-box;
+  }
 
 body{
     font-family: 'Arial', sans-serif;
@@ -351,5 +352,5 @@ footer h2, footer h3{
     font-size: 14px;
   }
 }
-}
+
 
