@@ -142,7 +142,7 @@ header p{
     max-width: 700px;
 }
 
-.btn, button{
+button.btn{
     padding: 10px 20px;
     background-color: #004aad;
     color: white;
@@ -170,7 +170,7 @@ section{
     border-radius: 8px;
     box-shadow: 0 3px 6px rgba(0, 0,0,0.1);
 }
-
+/*
 form{
     display: flex;
     flex-direction: column;
@@ -179,6 +179,7 @@ form{
     gap:10px;
 }
 
+*/
 form label{
     margin-top: 10px;
     font-weight: bold;
@@ -198,12 +199,15 @@ input, select, textarea{
     border-collapse: collapse;
 }
 
+/*
 table{
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
     background-color: #f9f9f9;
     table-layout: auto;
+    max-width: 800px;
+    margin: auto;
 
 }
 
@@ -214,7 +218,7 @@ table th, table td{
     font-size: 14px;
     
 }
-
+*/
 th{
     background-color: #e0e0e0;
     color: #333;
@@ -233,6 +237,36 @@ footer h2, footer h3{
   padding: 20px;
   gap: 20px;
 }
+
+iframe{
+    border: 0;
+    width: 100%;
+    height: 100%;
+}
+/*
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-dialog{
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.modal-content{
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+    */
 
 @media(max-width: 768px){
     body{
@@ -288,11 +322,17 @@ footer h2, footer h3{
     table{
         display: block;
         overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .logo{
         margin: 0 auto 20px;
         width: 140px;
+    }
+
+    .modal-dialog{
+        max-width: 90%;
+        margin: 0 auto;
     }
 }
 @media (max-width: 1024px) {
