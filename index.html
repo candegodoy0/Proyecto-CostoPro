@@ -129,6 +129,8 @@
  <!--Tabla de materiales agregados--> 
      <section id="materiales-variables" class="container my-5">
       <h3 class="text-center mb-4">Lista de materiales</h3>
+     
+      <div class="table-container">
       <div class="table-responsive">
     <table id ="tabla-materiales" class="table table-bordered table-striped">
         <thead class="table-primary">
@@ -138,7 +140,7 @@
         <th>Cantidad</th>
       </tr>
       </thead>
-    </tbody>
+    <tbody>
     <tr>
         <td> </td>
         <td id = "material-1">$0.00</td>
@@ -150,8 +152,10 @@
         <td> </td> 
       </tr>
     </tbody>
-    </table>
+  </table>
   </div>
+</div>
+
 
   <div class="text-end">
     <button class="btn btn-primary">Paso siguiente >></button>
@@ -184,19 +188,20 @@
   </div>
     </section>
 
+
     <!--Tabla de gastos fijos agregados--> 
     <section id="gastos-fijos-agregados" class="container my-5">
       <h3 class="text-center mb-4">Lista de gastos fijos</h3>
 
       <div class="table-responsive">
         <table id ="tabla-gastos-fijos" class="table table-bordered table-striped">
-      <thead class="table-secondary">
+      <thead class="table-primary">
       <tr>
         <th>Concepto</th>
         <th>Costo</th>
       </tr>
       </thead>
-    </tbody>
+    <tbody>
         <tr>
         <td> </td>
         <td id = "gasto-1">$0.00</td>
@@ -246,13 +251,14 @@
   </div>
 </section>
 
+
     <!--Tabla de resultados--> 
      <section id="resultados" class="container my-5">
       <h3 class="text-center mb-4">TABLA DE RESULTADOS</h3>
 
       <div class="table-responsive">
         <table class="table table-bordered table-hover" id="tabla-final">
-        <thead class="table-success">
+        <thead class="table-primary">
       <tr>
         <th>Concepto</th>
         <th>Costo</th>
@@ -320,7 +326,7 @@
 
     <div class ="col-12 col-md-6 mb-3">
      <label for="mensaje" class="form-label text-white">Mensaje:</label>
-     <input type="text" class="form-control"  id="mensaje" name ="mensaje"  placeholder="Escribe tu mensaje"> 
+     <textarea class="form-control"  id="mensaje" name ="mensaje"  placeholder="Escribe tu mensaje"> </textarea> 
     </div>
   </div>
 
