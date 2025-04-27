@@ -142,7 +142,7 @@ header p{
     max-width: 700px;
 }
 
-button.btn{
+.btn, button{
     padding: 10px 20px;
     background-color: #004aad;
     color: white;
@@ -164,22 +164,26 @@ main{
 section{
     background-color: white;
     color: black;
+    /*
     padding: 30px;
     margin: 30px auto;
     max-width: 800px;
+    */
     border-radius: 8px;
     box-shadow: 0 3px 6px rgba(0, 0,0,0.1);
 }
-/*
+
+
 form{
+    /*
     display: flex;
     flex-direction: column;
     max-width: 600px;
+    */
     margin: 0 auto;
     gap:10px;
 }
 
-*/
 form label{
     margin-top: 10px;
     font-weight: bold;
@@ -199,7 +203,6 @@ input, select, textarea{
     border-collapse: collapse;
 }
 
-/*
 table{
     width: 100%;
     border-collapse: collapse;
@@ -218,7 +221,7 @@ table th, table td{
     font-size: 14px;
     
 }
-*/
+
 th{
     background-color: #e0e0e0;
     color: #333;
@@ -255,6 +258,7 @@ iframe{
     justify-content: center;
     align-items: center;
 }
+    */
 
 .modal-dialog{
     max-width: 500px;
@@ -266,7 +270,6 @@ iframe{
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
-    */
 
 @media(max-width: 768px){
     body{

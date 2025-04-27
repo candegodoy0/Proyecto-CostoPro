@@ -50,33 +50,32 @@
       ¿Cómo funciona la calculadora?
     </button>
 
-
+    
   <!-- Modal de ayuda para la calculadora -->
-  <div class="modal fade" id="ayudaCalculadora" tabindex="-1" aria-labelledby="ayudaCalculadoraLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="ayudaCalculadoraLabel">¿Cómo funciona la calculadora?</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-        <div class="modal-body">
-          <p>Esta calculadora te permite estimar el costo total de producción y el precio por unidad de un producto.</p>
-          <ul>
-            <li> 1. Ingresa los gastos variables por unidad: materiales, cantidades, y costos.</li>
-            <li> 2. Ingresa los gastos fijos como sueldos, alquiler, etc.</li>
-            <li> 3. Especifica cuántas unidades vas a producir y el porcentaje de ganancia deseado.</li>
-            <li> 4. Elija  si quiere calcular por unidad o por cantidad total.</li>
-          </ul>
-          <p>El sistema te mostrará los costos detallados y el precio sugerido para vender tu producto.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        </div>
+<div class="modal fade" id="ayudaCalculadora" tabindex="-1" aria-labelledby="ayudaCalculadoraLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ayudaCalculadoraLabel">¿Cómo funciona la calculadora?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <p>Esta calculadora te permite estimar el costo total de producción y el precio por unidad de un producto.</p>
+        <ul>
+          <li> 1. Ingresa los gastos variables por unidad: materiales, cantidades, y costos.</li>
+          <li> 2. Ingresa los gastos fijos como sueldos, alquiler, etc.</li>
+          <li> 3. Especifica cuántas unidades vas a producir y el porcentaje de ganancia deseado.</li>
+          <li> 4. Elija  si quiere calcular por unidad o por cantidad total.</li>
+        </ul>
+        <p>El sistema te mostrará los costos detallados y el precio sugerido para vender tu producto.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
-  
-
+</div>
+    
         <form>
           <div class ="row">
             <div class ="col-12 col-md-6 mb-3">
@@ -225,18 +224,20 @@
     <!--Formulario para indicar total de produccion-->
     <!-- Agregar estilos para la alineación y diseño del formulario-->
     <form>
-      <div class ="mb-3">
+      <div class ="row">
+        <div class="col-12 col-md-6 mb-3">
           <!-- Campo para ingresar el porcentaje de la ganancia -->
       <label for="ganancia" class="form-label">Porcentaje de Ganancia(%):</label>
       <input type="number"class="form-control" id="ganancia" name ="ganancia" placeholder="Ejemplo: 21%">
     </div>
 
-    <div class ="mb-3">
+      <div class="col-12 col-md-6 mb-3">
       <label for="tipo-calculo" class="form-label">Tipo de calculo:</label>
       <select class="form-select" id="tipo-calculo" name="tipo-calculo">
 <option value="unidad" > Por Unidad</option>
 <option value="total">Por Cantidad Total</option>
 </select>
+</div>
 </div>
 
       <!-- Botón para calcular el costo total -->
@@ -319,7 +320,7 @@
 
     <div class ="col-12 col-md-6 mb-3">
      <label for="mensaje" class="form-label text-white">Mensaje:</label>
-     <textarea class="form-control" id="mensaje" name ="mensaje" rows="4" placeholder="Escribe tu mensaje"> </textarea>
+     <input type="text" class="form-control"  id="mensaje" name ="mensaje"  placeholder="Escribe tu mensaje"> 
     </div>
   </div>
 
