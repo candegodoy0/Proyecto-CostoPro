@@ -203,14 +203,35 @@ input, select, textarea{
     border-collapse: collapse;
 }
 
+.table-responsive{
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    display: block;
+    max-width: 100%;
+    padding: 0;
+    margin:0;
+}
+
+.table-responsive table{
+    width: 100%;
+    min-width: 100%;
+    display: table;
+}
+
+.table-container{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
 table{
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
     background-color: #f9f9f9;
     table-layout: auto;
-    max-width: 800px;
-    margin: auto;
+    margin: 0 auto;
 
 }
 
@@ -272,6 +293,29 @@ iframe{
 }
 
 @media(max-width: 768px){
+
+    .table-container{
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .table-responsive{
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .table-responsive table{
+        width: 100% !important;
+        min-width: 100% !important;
+        display: table;
+    }
     body{
         padding-left: 0;
     }
@@ -322,11 +366,6 @@ iframe{
         font-size: 14px;
     }
 
-    table{
-        display: block;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
 
     .logo{
         margin: 0 auto 20px;
