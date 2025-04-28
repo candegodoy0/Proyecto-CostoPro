@@ -65,7 +65,6 @@
           <li> 1. Ingresa los gastos variables por unidad: materiales, cantidades, y costos.</li>
           <li> 2. Ingresa los gastos fijos como sueldos, alquiler, etc.</li>
           <li> 3. Especifica cuántas unidades vas a producir y el porcentaje de ganancia deseado.</li>
-          <li> 4. Elija  si quiere calcular por unidad o por cantidad total.</li>
         </ul>
         <p>El sistema te mostrará los costos detallados y el precio sugerido para vender tu producto.</p>
       </div>
@@ -84,7 +83,26 @@
           </div>
         </div>
 
-          <button type="button" class="btn btn-primary mb-4">+ (agregar producto)</button>
+        <button type="button" class="btn btn-outline-info mt-3" data-bs-toggle="modal" data-bs-target="#agregarProducto">
+          Agregar producto
+        </button>
+    
+    <div class="modal fade" id="agregarProducto" tabindex="-1" aria-labelledby="agregarProductoLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="agregarProductoLabel">Producto agregado correctamente.</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <p>Continua agregando los gastos variables y fijos </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
       
     
           <h4>Gastos Variables (por unidad)</h4>
@@ -120,8 +138,26 @@
 </div>
 </div>
 
- <!--Botón para agregar más materiales-->
- <button type="button" class="btn btn-secondary">+ (agregar otro material)</button>
+<button type="button" class="btn btn-outline-info mt-3" data-bs-toggle="modal" data-bs-target="#agregarMaterial">
+  Agregar material
+</button>
+
+<div class="modal fade" id="agregarMaterial" tabindex="-1" aria-labelledby="agregarMaterialLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+  </div>
+  <div class="modal-body">
+    <p>Material agregado correctamente.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+  </div>
+</div>
+</div>
+</div>
+
 </form>
 </div>
 </section>
@@ -162,7 +198,6 @@
   </div>
 </section>
 
-    <!--Sección para gastos fijos-->
     <section id="gastos-fijos">
       <div class="container">
     <h3>Gastos Fijos</h3>
@@ -182,8 +217,27 @@
   </div>
 </div>
 
-   <!--Botón para agregar más gastos fijos-->
-    <button type="button" class="btn btn-secondary">+ (agregar otro gasto)</button>
+
+<button type="button" class="btn btn-outline-info mt-3" data-bs-toggle="modal" data-bs-target="#agregarGasto">
+  Agregar gasto
+</button>
+
+<div class="modal fade" id="agregarGasto" tabindex="-1" aria-labelledby="agregarGastoLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+  </div>
+  <div class="modal-body">
+    <p>Gasto agregado correctamente.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+  </div>
+</div>
+</div>
+</div>
+
     </form>
   </div>
     </section>
@@ -236,12 +290,10 @@
       <input type="number"class="form-control" id="ganancia" name ="ganancia" placeholder="Ejemplo: 21%">
     </div>
 
-      <div class="col-12 col-md-6 mb-3">
-      <label for="tipo-calculo" class="form-label">Tipo de calculo:</label>
-      <select class="form-select" id="tipo-calculo" name="tipo-calculo">
-<option value="unidad" > Por Unidad</option>
-<option value="total">Por Cantidad Total</option>
-</select>
+    <div class="col-12 col-md-6 mb-3">
+      <!-- Campo para ingresar la catidad de unidades a producir -->
+  <label for="cantidadTotal" class="form-label">Cantidad de unidades a producir:</label>
+  <input type="number"class="form-control" id="cantidadTotal" name ="cantidadTotal" placeholder="Ejemplo: 200">
 </div>
 </div>
 
