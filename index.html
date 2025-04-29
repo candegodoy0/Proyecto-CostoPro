@@ -79,11 +79,11 @@
           <div class ="row">
             <div class ="col-12 col-md-6 mb-3">
           <label for = "nombre-producto" class="form-label">Nombre del producto:</label>
-          <input type="text" class="form-control" id="nombre-producto" name="nombre-producto" placeholder="Ejemplo: Mesa">
+          <input type="text" class="form-control" id="nombre-producto" name="nombre-producto" placeholder="Ejemplo: Mesa" required>
           </div>
         </div>
 
-        <button type="button" class="btn btn-outline-info mt-3" data-bs-toggle="modal" data-bs-target="#agregarProducto">
+        <button type="submit" class="btn btn-outline-info mt-3" data-bs-toggle="modal" data-bs-target="#agregarProducto">
           Agregar producto
         </button>
     
@@ -111,16 +111,16 @@
           <div class ="row">
             <div class ="col-12 col-md-6 mb-3">
           <label for = "nombre-material"class="form-label">Materiales que requiere:</label>
-          <input type="text" class="form-control" id="nombre-material" name="nombre-material" placeholder="Ejemplo: Tornillo">
+          <input type="text" class="form-control" id="nombre-material" name="nombre-material" placeholder="Ejemplo: Tornillo" required>
           </div>
           <div class="col-12 col-md-6 mb-3">
           <label for = "costo-material" class="form-label">Costo por unidad($):</label>
-          <input type="number"class="form-control" id="costo-material" name="costo-material" placeholder="Ejemplo: $1.000">
+          <input type="number"class="form-control" id="costo-material" name="costo-material" placeholder="Ejemplo: $1.000" required>
           </div>
 
           <div class="col-12 col-md-6 col-lg-4">
           <label for = "cantidad"class="form-label">Cantidad requerida: </label>
-          <input type="number"class="form-control" id="cantidad" name="cantidad" placeholder="Ejemplo: 50">
+          <input type="number"class="form-control" id="cantidad" name="cantidad" placeholder="Ejemplo: 50" required>
           </div>
 
           <div class="col-12 col-md-6 mb-3">
@@ -134,11 +134,11 @@
 
 <div class="col-12 col-md-6 mb-3">
  <label for = "cantidad-equivalente" class="form-label">Cantidad de unidades estándar por unidad seleccionada: </label>
- <input type="number" class="form-control" id="cantidad-equivalente" name="cantidad-equivalente" placeholder="Ejemplo: 150">
+ <input type="number" class="form-control" id="cantidad-equivalente" name="cantidad-equivalente" placeholder="Ejemplo: 150" required>
 </div>
 </div>
 
-<button type="button" class="btn btn-outline-info mt-3" data-bs-toggle="modal" data-bs-target="#agregarMaterial">
+<button type="submit" class="btn btn-outline-info mt-3" data-bs-toggle="modal" data-bs-target="#agregarMaterial">
   Agregar material
 </button>
 
@@ -208,17 +208,17 @@
       <div class ="row">
       <div class="col-12 col-md-6 mb-3">
         <label for="concepto-fijo" class="form-label">Concepto:</label>
-    <input type="text"class="form-control" id="concepto-fijo" name="concepto-fijo" placeholder="Ejemplo: Alquiler">
+    <input type="text"class="form-control" id="concepto-fijo" name="concepto-fijo" placeholder="Ejemplo: Alquiler" required>
   </div>
 
   <div class ="col-12 col-md-6 mb-3">
     <label for = "costo-fijo" class="form-label">Costo fijo ($):</label>
-    <input type="number"class="form-control" id="costo-fijo" name="costo-fijo" placeholder="Ejemplo: $1000">
+    <input type="number"class="form-control" id="costo-fijo" name="costo-fijo" placeholder="Ejemplo: $1000" required>
   </div>
 </div>
 
 
-<button type="button" class="btn btn-outline-info mt-3" data-bs-toggle="modal" data-bs-target="#agregarGasto">
+<button type="submit" class="btn btn-outline-info mt-3" data-bs-toggle="modal" data-bs-target="#agregarGasto">
   Agregar gasto
 </button>
 
@@ -287,18 +287,18 @@
         <div class="col-12 col-md-6 mb-3">
           <!-- Campo para ingresar el porcentaje de la ganancia -->
       <label for="ganancia" class="form-label">Porcentaje de Ganancia(%):</label>
-      <input type="number"class="form-control" id="ganancia" name ="ganancia" placeholder="Ejemplo: 21%">
+      <input type="number"class="form-control" id="ganancia" name ="ganancia" placeholder="Ejemplo: 21%" required>
     </div>
 
     <div class="col-12 col-md-6 mb-3">
       <!-- Campo para ingresar la catidad de unidades a producir -->
   <label for="cantidadTotal" class="form-label">Cantidad de unidades a producir:</label>
-  <input type="number"class="form-control" id="cantidadTotal" name ="cantidadTotal" placeholder="Ejemplo: 200">
+  <input type="number"class="form-control" id="cantidadTotal" name ="cantidadTotal" placeholder="Ejemplo: 200" required>
 </div>
 </div>
 
       <!-- Botón para calcular el costo total -->
-        <button type="button" class="btn btn-success">Calcular Costo Total</button>
+        <button type="submit" class="btn btn-success">Calcular Costo Total</button>
     </form>
   </div>
 </section>
@@ -361,28 +361,28 @@
         <div class ="col-12 col-md-6 mb-3">
     <!-- Campos para que el usuario ingrese los datos -->
       <label for="nombre-usuario" class="form-label text-white">Nombre de usuario:</label>
-    <input type="text" class="form-control" id="nombre-usuario" name="nombre-usuario" placeholder="Nombre">
+    <input type="text" class="form-control" id="nombre-usuario" name="nombre-usuario" placeholder="Nombre" required>
   </div>
 
     <div class ="col-12 col-md-6 mb-3">
-     <label for="direccion-correo-electronico"class="form-label text-white">Dirección de correo electrónico:</label>
-     <input type="text" class="form-control" id="direccion-correo-electronico" name ="direccion-correo-electronico" placeholder="Correo electrónico">
+     <label for="email"class="form-label text-white">Dirección de correo electrónico:</label>
+     <input type="email" class="form-control" id="email" name ="email" placeholder="Correo electrónico" required>
     </div>
   </div>
 
   <div class ="row mb-3">
     <div class ="col-12 col-md-6 mb-3">
      <label for="numero-telefono" class="form-label text-white">Número de teléfono:</label>
-     <input type="text" class="form-control" id="numero-telefono" name ="numero-telefono" placeholder="Teléfono">
+     <input type="text" class="form-control" id="numero-telefono" name ="numero-telefono" placeholder="Teléfono" required>
     </div>
 
     <div class ="col-12 col-md-6 mb-3">
      <label for="mensaje" class="form-label text-white">Mensaje:</label>
-     <textarea class="form-control"  id="mensaje" name ="mensaje"  placeholder="Escribe tu mensaje"> </textarea> 
+     <textarea class="form-control"  id="mensaje" name ="mensaje"  placeholder="Escribe tu mensaje" required> </textarea> 
     </div>
   </div>
 
-       <button type="button"class="btn btn-primary">Entregar</button>
+       <button type="submit"class="btn btn-primary">Entregar</button>
     </form>
   </div>
   </footer>
