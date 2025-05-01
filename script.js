@@ -43,7 +43,7 @@ function agregarGastosFijos() {
 
   while (seguir) {
     let concepto = prompt("Ingrese el concepto del gasto fijo (ej: Alquiler):");
-    let costo = parseFloat(prompt(`Ingrese el costo del gasto fijo ${concepto}(ej: 1000.00):`));
+    let costo = parseFloat(prompt(`Ingrese el costo del gasto fijo ${concepto} (ej: 1000.00):`));
 
     if (isNaN(costo)) {
       alert("Por favor, ingrese un valor numérico válido.");
@@ -52,7 +52,7 @@ function agregarGastosFijos() {
 
      // Se agrega el gasto fijo al array
     gastosFijos.push({ concepto, costo });
-    seguir = confirm("Quiere agregar otro gasto fijo?");
+    seguir = confirm("¿Quiere agregar otro gasto fijo?");
   }
 }
 
@@ -102,34 +102,41 @@ let costoPorUnidad = costoTotal / cantidadProduccion;
   // Costo por unidad con ganancia incluida
 let costoConGanancia = costoPorUnidad * (1 + gananciaPorcentual / 100);
 
-  // Mostrar resultados
-  alert("CÁLCULO FINALIZADO. Consulta aquí para ver el detalle.");
+// Mensaje para mostrar resultados de los calculos
+let mensaje = "CÁLCULO FINALIZADO\n";
+mensaje += "Producto: " + nombreProducto + "\n"; 
+mensaje += "Cantidad a producir: " + cantidadProduccion + "\n";
+mensaje += "Materiales: ";
 
+ for (let i = 0; i < materiales.length; i++) {
+  mensaje += materiales[i].nombre + ": $" + materiales[i].costoTotal;
+  if (i < materiales.length - 1) {
+    mensaje += " | "; 
+}
+}
+
+
+mensaje += "\nTotal gastos variables: $" + totalVariables + " | Total gastos fijos: $" + totalFijos;
+mensaje += " | Costo total: $" + costoTotal + " | Costo por unidad: $" + costoPorUnidad;
+mensaje += " | Costo con ganancia: $" + costoConGanancia;
+
+alert(mensaje);
+
+  // Mostrar todos los resultados en consola
   console.log("-----RESUMEN DE COSTOS-----");
-  console.log("Cantidad a producir:", cantidadProduccion);
+  console.log("Producto: " + nombreProducto);
+  console.log("Cantidad a producir: " + cantidadProduccion);
 
- console.log("Materiales:");
-for (let i = 0; i < materiales.length; i++) {
-  let mat = materiales[i];
-  console.log(mat.nombre + ": $" + mat.costoUnitario + " x " + mat.cantidad + " = $" + mat.costoTotal);
-}
-console.log("Total de gastos variables por unidad: $" + totalVariablesUnitarios);
-console.log("Total de gastos variables (x" + cantidadProduccion + "): $" + totalVariables);
+  console.log("Materiales:");
+  for (let i = 0; i < materiales.length; i++) {
+    console.log(materiales[i].nombre + ": $" + materiales[i].costoTotal);
+  }
 
-console.log("Gastos fijos:");
-for (let i = 0; i < gastosFijos.length; i++) {
-  let gasto = gastosFijos[i];
-  console.log(gasto.concepto + ": $" + gasto.costo);
-}
-console.log("Total de gastos fijos: $" + totalFijos);
-
-
-  console.log("--- Totales ---");
-
-  console.log("Costo total de producción: $" + costoTotal);
-  console.log("Costo por unidad sin ganancia: $" + costoPorUnidad);
-  console.log("Costo por unidad con ganancia: $" + costoConGanancia);
-  
+  console.log("Total gastos variables: $" + totalVariables);
+  console.log("Total gastos fijos: $" + totalFijos);
+  console.log("Costo total: $" + costoTotal);
+  console.log("Costo por unidad: $" + costoPorUnidad);
+  console.log("Costo con ganancia: $" + costoConGanancia);
 }
 
 /*
