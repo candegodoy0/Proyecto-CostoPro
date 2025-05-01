@@ -16,10 +16,16 @@ function agregarMateriales() {
 
   while (seguir) {
     let nombre = prompt("Ingrese el nombre del material (ej: Tornillo):");
-    let costoUnitario = parseFloat(prompt(`Ingrese el costo por unidad de ${nombre} (ej: 1000.00):`));
-    let cantidad = parseFloat(prompt(`Ingrese la cantidad requerida de ${nombre} por unidad de producto:`));
+    let costoUnitario = parseFloat(prompt(`Ingrese el costo por unidad de ${nombre} (ej: $1000.00):`));
+    let cantidad = parseFloat(prompt(`Ingrese la cantidad requerida de ${nombre} por unidad de producto (ej: 150):`));
+    let unidad = prompt(`Ingrese la unidad de medida para ${nombre} (ej: litros, metros, cajas):`);
+    let unidadesPorSeleccionada = parseFloat(prompt(`Ingrese cantidad de unidades estándar hay por cada ${unidad} (ej: 12 si una caja tiene 12 unidades):`));
 
-    if (isNaN(costoUnitario) || isNaN(cantidad)) {
+    if (isNaN(costoUnitario) 
+      || isNaN(cantidad) ||
+    isNaN(unidadesPorSeleccionada) ||
+    unidadesPorSeleccionada <= 0
+  ) {
       alert("Por favor, ingrese valores numéricos válidos.");
       continue;
     }
@@ -29,6 +35,8 @@ function agregarMateriales() {
       nombre,
       costoUnitario,
       cantidad,
+      unidad,
+      unidadesPorSeleccionada,
       costoTotal: costoUnitario * cantidad
     });
 
@@ -79,12 +87,17 @@ function calcularCostos() {
   }
 
   // Calcular total de gastos variables por unidad
+  function calcularCostoMateriales(materiales) {
 let totalVariablesUnitarios = 0;
 for (let i = 0; i < materiales.length; i++) {
   totalVariablesUnitarios += materiales[i].costoTotal;
 }
+return totalVariablesUnitarios;
+  }
 
-  // Total de variables para toda la producción
+  // Llamar a la funcion y usar el resultado
+  let totalVariablesUnitarios = calcularCostoMateriales(materiales);
+   // Total de variables para toda la producción
 let totalVariables = totalVariablesUnitarios * cantidadProduccion;
 
 // Calcular total de gastos fijos
@@ -102,7 +115,7 @@ let costoPorUnidad = costoTotal / cantidadProduccion;
   // Costo por unidad con ganancia incluida
 let costoConGanancia = costoPorUnidad * (1 + gananciaPorcentual / 100);
 
-// Mensaje para mostrar resultados de los calculos
+// Mensaje para mostrar al usuario de manera inmediata los resultados de los calculos 
 let mensaje = "CÁLCULO FINALIZADO\n";
 mensaje += "Producto: " + nombreProducto + "\n"; 
 mensaje += "Cantidad a producir: " + cantidadProduccion + "\n";
@@ -115,14 +128,15 @@ mensaje += "Materiales: ";
 }
 }
 
-
-mensaje += "\nTotal gastos variables: $" + totalVariables + " | Total gastos fijos: $" + totalFijos;
-mensaje += " | Costo total: $" + costoTotal + " | Costo por unidad: $" + costoPorUnidad;
-mensaje += " | Costo con ganancia: $" + costoConGanancia;
+mensaje += "\n| Total gastos variables: $" + totalVariables + " |";
+mensaje += "\n| Total gastos fijos: $" + totalFijos + " |";
+mensaje += "\n| Costo total: $" + costoTotal + " | ";
+mensaje += "\n| Costo por unidad: $" + costoPorUnidad + " | ";
+mensaje += "\n| Costo con ganancia: $" + costoConGanancia + " | ";
 
 alert(mensaje);
 
-  // Mostrar todos los resultados en consola
+  /* Mostrar todos los resultados detalalados en consola
   console.log("-----RESUMEN DE COSTOS-----");
   console.log("Producto: " + nombreProducto);
   console.log("Cantidad a producir: " + cantidadProduccion);
@@ -136,9 +150,10 @@ alert(mensaje);
   console.log("Total gastos fijos: $" + totalFijos);
   console.log("Costo total: $" + costoTotal);
   console.log("Costo por unidad: $" + costoPorUnidad);
-  console.log("Costo con ganancia: $" + costoConGanancia);
-}
+  console.log("Costo por unidad con ganancia: $" + costoConGanancia);
+  */
 
+}
 /*
 Función principal que inicia todo el proceso del simulador
 Se llama a todas las funciones en orden: 1. materiales, 2. gastos fijos 3. cálculos de costos
