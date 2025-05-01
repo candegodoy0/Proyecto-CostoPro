@@ -18,8 +18,8 @@ function agregarMateriales() {
     let nombre = prompt("Ingrese el nombre del material (ej: Tornillo):");
     let costoUnitario = parseFloat(prompt(`Ingrese el costo por unidad de ${nombre} (ej: $1000.00):`));
     let cantidad = parseFloat(prompt(`Ingrese la cantidad requerida de ${nombre} por unidad de producto (ej: 150):`));
-    let unidad = prompt(`Ingrese la unidad de medida para ${nombre} (ej: litros, metros, cajas):`);
-    let unidadesPorSeleccionada = parseFloat(prompt(`Ingrese cantidad de unidades estándar hay por cada ${unidad} (ej: 12 si una caja tiene 12 unidades):`));
+    let unidad = prompt(`Ingrese la unidad de medida para ${nombre} (ej: litro, metro, caja):`);
+    let unidadesPorSeleccionada = parseFloat(prompt(`Ingrese cantidad de unidades estándar que hay por cada ${unidad} (ej: 12 si una caja tiene 12 unidades):`));
 
     if (isNaN(costoUnitario) 
       || isNaN(cantidad) ||
@@ -51,7 +51,7 @@ function agregarGastosFijos() {
 
   while (seguir) {
     let concepto = prompt("Ingrese el concepto del gasto fijo (ej: Alquiler):");
-    let costo = parseFloat(prompt(`Ingrese el costo del gasto fijo ${concepto} (ej: 1000.00):`));
+    let costo = parseFloat(prompt(`Ingrese el costo del gasto fijo ${concepto} (ej: $1000.00):`));
 
     if (isNaN(costo)) {
       alert("Por favor, ingrese un valor numérico válido.");
@@ -106,14 +106,13 @@ for (let i = 0; i < gastosFijos.length; i++) {
   totalFijos += gastosFijos[i].costo;
 }
 
-// Costo total de produccion
+// Calcular costo total con ganancia incluida
 let costoTotal = totalVariables + totalFijos;
-
-//Costo total por unidad sin ganancia
-let costoPorUnidad = costoTotal / cantidadProduccion;
+let costoTotalConGanancia = costoTotal * (1 + gananciaPorcentual / 100);
 
   // Costo por unidad con ganancia incluida
-let costoConGanancia = costoPorUnidad * (1 + gananciaPorcentual / 100);
+  let costoPorUnidadConGanancia = costoTotalConGanancia / cantidadProduccion;
+
 
 // Mensaje para mostrar al usuario de manera inmediata los resultados de los calculos 
 let mensaje = "CÁLCULO FINALIZADO\n";
@@ -130,9 +129,8 @@ mensaje += "Materiales: ";
 
 mensaje += "\n| Total gastos variables: $" + totalVariables + " |";
 mensaje += "\n| Total gastos fijos: $" + totalFijos + " |";
-mensaje += "\n| Costo total: $" + costoTotal + " | ";
-mensaje += "\n| Costo por unidad: $" + costoPorUnidad + " | ";
-mensaje += "\n| Costo con ganancia: $" + costoConGanancia + " | ";
+mensaje += "\n| Costo total de producción: $" + costoTotalConGanancia + " | ";
+mensaje += "\n| Costo por unidad: $" + costoPorUnidadConGanancia + " | ";
 
 alert(mensaje);
 
@@ -148,9 +146,8 @@ alert(mensaje);
 
   console.log("Total gastos variables: $" + totalVariables);
   console.log("Total gastos fijos: $" + totalFijos);
-  console.log("Costo total: $" + costoTotal);
-  console.log("Costo por unidad: $" + costoPorUnidad);
-  console.log("Costo por unidad con ganancia: $" + costoConGanancia);
+  console.log("Costo total de producción: $" + costoTotalConGanancia);
+  console.log("Costo por unidad: $" + costoPorUnidadConGanancia);
   */
 
 }
