@@ -173,6 +173,7 @@ section{
     box-shadow: 0 3px 6px rgba(0, 0,0,0.1);
 }
 
+
 form{
     /*
     display: flex;
@@ -201,7 +202,6 @@ input, select, textarea{
     background-color: #f5f5f5;
     border-collapse: collapse;
 }
-
 
 .table-responsive{
     width: 100%;
@@ -233,7 +233,6 @@ table{
     table-layout: auto;
     margin: 0 auto;
 
-
 }
 
 table th, table td{
@@ -262,7 +261,6 @@ footer h2, footer h3{
   padding: 20px;
   gap: 20px;
 }
-
 
 iframe{
     border: 0;
@@ -318,10 +316,10 @@ iframe{
         min-width: 100% !important;
         display: table;
     }
-
     body{
         padding-left: 0;
     }
+    
 
     main{
         margin-left: 0;
@@ -369,6 +367,7 @@ iframe{
         font-size: 14px;
     }
 
+
     .logo{
         margin: 0 auto 20px;
         width: 140px;
@@ -378,7 +377,6 @@ iframe{
         max-width: 90%;
         margin: 0 auto;
     }
-
 }
 @media (max-width: 1024px) {
   body {
