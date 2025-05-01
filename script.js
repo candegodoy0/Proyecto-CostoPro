@@ -129,8 +129,8 @@ mensaje += "Materiales: ";
 
 mensaje += "\n| Total gastos variables: $" + totalVariables + " |";
 mensaje += "\n| Total gastos fijos: $" + totalFijos + " |";
-mensaje += "\n| Costo total de producción: $" + costoTotalConGanancia + " | ";
-mensaje += "\n| Costo por unidad: $" + costoPorUnidadConGanancia + " | ";
+mensaje += "\n| Costo final (con ganancia) para " + cantidadProduccion + " unidades" + ": $" + costoTotalConGanancia + " |";
+mensaje += "\n| Costo final (con ganancia) por cada unidad: $" + costoPorUnidadConGanancia + " | ";
 
 alert(mensaje);
 
@@ -146,10 +146,9 @@ alert(mensaje);
 
   console.log("Total gastos variables: $" + totalVariables);
   console.log("Total gastos fijos: $" + totalFijos);
-  console.log("Costo total de producción: $" + costoTotalConGanancia);
-  console.log("Costo por unidad: $" + costoPorUnidadConGanancia);
+  console.log("Costo final (con ganancia): $" + costoTotalConGanancia + " para: " + cantidadProduccion + " unidades a producir | ");
+  console.log("Costo final (con ganancia) por cada unidad: $" + costoPorUnidadConGanancia + " | ");
   */
-
 }
 /*
 Función principal que inicia todo el proceso del simulador
