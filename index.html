@@ -5,70 +5,180 @@
   <meta charset="UTF-8">
   <meta name = "viewport" content="width=device-width,initial-scale=1.0">
   <title>CostoPro: Calculadora de Costos De Producción</title>
+
+    <!--Bootstrap CSS-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">  
   <link rel="stylesheet" href="styles.css">
-  <!--Área para incluir futuras hojas de estilo CSS-->
 </head>
 
 <body>
-<header id="inicio">
-  <img src="assets/logo_CostoPro.png" alt="Logo CostoPro" class="logo">
-    <h1>CostoPro: Calculadora de Costos De Producción</h1>
-    <p>Obtén estimaciones precisas para ayudar a fijar precios adecuados.</p>
-</header>
+  <header id="inicio">
+    <input type="checkbox" id="toggle-login" hidden>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">CostoPro</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#inicio">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#calculadora">Calculadora</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contacto">Ayuda y Soporte</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="text-center mt-4">
+      <img src="assets/logo_CostoPro.png" alt="Logo CostoPro" class="logo img-fluid">
+      <h1>CostoPro: Calculadora de Costos De Producción</h1>
+      <p>Obtén estimaciones precisas para ayudar a fijar precios adecuados.</p>
+    </div>
+  </header>
 
-        <div class="main-container">
-          <aside class="sidebar">
-        <h2>Menú</h2>
-      <ul>
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#calculadora">Calculadora</a></li>        
-      </ul>
-      <h2>Apoyo</h2>
-    <ul>
-      <li><a href="#contacto">Ayuda y Soporte</a></li>
-    </ul>
-  </aside>
-
-  <main>
-
-      <!--Sección para agregar los productos-->
+      <!--Sección para agregar los productos-->  
       <section id ="producto">
-        <h3>Productos</h3>
+        <div class="container">
+               
+    <button type="button" class="btn btn-outline-info mt-3" data-bs-toggle="modal" data-bs-target="#ayudaCalculadora">
+      ¿Cómo funciona la calculadora?
+    </button>
+
+    
+  <!-- Modal de ayuda para la calculadora -->
+<div class="modal fade" id="ayudaCalculadora" tabindex="-1" aria-labelledby="ayudaCalculadoraLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ayudaCalculadoraLabel">¿Cómo funciona la calculadora?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <p>Esta calculadora te permite estimar el costo total de producción y el precio por unidad de un producto.</p>
+        <ul>
+          <li> 1. Ingresa los gastos variables por unidad: materiales, cantidades, y costos.</li>
+          <li> 2. Ingresa los gastos fijos como sueldos, alquiler, etc.</li>
+          <li> 3. Especifica cuántas unidades vas a producir y el porcentaje de ganancia deseado.</li>
+        </ul>
+        <p>El sistema te mostrará los costos detallados y el precio sugerido para vender tu producto.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
         <form>
-          <label for = "nombre-producto">Nombre del producto:</label>
-          <input type="text" id="nombre-producto" name="nombre-producto" placeholder="Ejemplo: Mesa">
-          <button type="button">+ (agregar producto)</button>
-          <h3>Gastos Variables (por unidad)</h3>
+          <div class ="row">
+            <div class ="col-12 col-md-6 mb-3">
+          <label for = "nombre-producto" class="form-label">Nombre del producto:</label>
+          <input type="text" class="form-control" id="nombre-producto" name="nombre-producto" placeholder="Ejemplo: Mesa" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-info mt-3" data-bs-toggle="modal" data-bs-target="#agregarProducto">
+          Agregar producto
+        </button>
+    
+    <div class="modal fade" id="agregarProducto" tabindex="-1" aria-labelledby="agregarProductoLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="agregarProductoLabel">Producto agregado correctamente.</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <p>Continua agregando los gastos variables y fijos </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+      
+    
+          <h4>Gastos Variables (por unidad)</h4>
           <p>Aquí podrás agregar los costos relacionados con los materiales y cantidades necesarias para producir una unidad de producto</p>
-          <label for = "nombre-material">Materiales que requiere:</label>
-          <input type="text" id="nombre-material" name="nombre-material" placeholder="Ejemplo: Tornillo">
-          <label for = "costo-material">Costo por unidad($):</label>
-          <input type="number" id="costo-material" name="costo-material" placeholder="Ejemplo: $1.000">
-          <label for = "cantidad">Cantidad requerida: </label>
-          <input type="number" id="cantidad" name="cantidad" placeholder="Ejemplo: 50">
-          <label for = "unidad-material">Unidad de medida: </label>
-          <select id="unidad-material" name="unidad-material">
+
+          <div class ="row">
+            <div class ="col-12 col-md-6 mb-3">
+          <label for = "nombre-material"class="form-label">Materiales que requiere:</label>
+          <input type="text" class="form-control" id="nombre-material" name="nombre-material" placeholder="Ejemplo: Tornillo" required>
+          </div>
+          <div class="col-12 col-md-6 mb-3">
+          <label for = "costo-material" class="form-label">Costo por unidad($):</label>
+          <input type="number"class="form-control" id="costo-material" name="costo-material" placeholder="Ejemplo: $1.000" required>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-4">
+          <label for = "cantidad"class="form-label">Cantidad requerida: </label>
+          <input type="number"class="form-control" id="cantidad" name="cantidad" placeholder="Ejemplo: 50" required>
+          </div>
+
+          <div class="col-12 col-md-6 mb-3">
+          <label for = "unidad-material"class="form-label">Unidad de medida: </label>
+          <select class="form-select" id="unidad-material" name="unidad-material">
+
           <option value="litros">Litros</option>
           <option value="metros">Metros</option>
           <option value="cajas">Cajas</option>
  </select>
- <label for = "cantidad-equivalente">Cantidad de unidades estándar por unidad seleccionada: </label>
- <input type="number" id="cantidad-equivalente" name="cantidad-equivalente" placeholder="Ejemplo: 150">
- <!--Botón para agregar más materiales-->
- <button type="button">+ (agregar otro material)</button>
+</div>
+
+<div class="col-12 col-md-6 mb-3">
+ <label for = "cantidad-equivalente" class="form-label">Cantidad de unidades estándar por unidad seleccionada: </label>
+ <input type="number" class="form-control" id="cantidad-equivalente" name="cantidad-equivalente" placeholder="Ejemplo: 150" required>
+</div>
+</div>
+
+<button type="submit" class="btn btn-outline-info mt-3" data-bs-toggle="modal" data-bs-target="#agregarMaterial">
+  Agregar material
+</button>
+
+<div class="modal fade" id="agregarMaterial" tabindex="-1" aria-labelledby="agregarMaterialLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+  </div>
+  <div class="modal-body">
+    <p>Material agregado correctamente.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+  </div>
+</div>
+</div>
+</div>
+
 </form>
+</div>
 </section>
 
  <!--Tabla de materiales agregados--> 
-     <section id="materiales-variables">
-      <h3>Lista de materiales</h3>
-    <table id ="tabla-materiales">
-      <tr>
+     <section id="materiales-variables" class="container my-5">
+      <h3 class="text-center mb-4">Lista de materiales</h3>
+     
+      <div class="table-container">
+      <div class="table-responsive">
+    <table id ="tabla-materiales" class="table table-bordered table-striped">
+        <thead class="table-primary">
+          <tr>
         <th>Material</th>
         <th>Costo</th>
         <th>Cantidad</th>
       </tr>
-        <tr>
+      </thead>
+    <tbody>
+    <tr>
         <td> </td>
         <td id = "material-1">$0.00</td>
         <td></td> 
@@ -78,36 +188,75 @@
         <td id = "material-2">$0.00</td>
         <td> </td> 
       </tr>
-    </table>
+    </tbody>
+  </table>
+  </div>
+</div>
 
-    <button>Paso siguiente >></button>
+
+  <div class="text-end">
+    <button class="btn btn-primary">Paso siguiente >></button>
+  </div>
 </section>
 
-    <!--Sección para gastos fijos-->
     <section id="gastos-fijos">
+      <div class="container">
     <h3>Gastos Fijos</h3>
     <p>Aquí podras agregar los costos fijos relacionados con la producción, como alquiler, sueldos, etc </p>
 
     <!--Formulario para agregar gastos fijos-->
     <form>
-    <label for = "concepto-fijo">Concepto:</label>
-    <input type="text" id="concepto-fijo" name="concepto-fijo" placeholder="Ejemplo: Alquiler">
-    <label for = "costo-fijo">Costo fijo ($):</label>
-    <input type="number" id="costo-fijo" name="costo-fijo" placeholder="Ejemplo: $1000">
+      <div class ="row">
+      <div class="col-12 col-md-6 mb-3">
+        <label for="concepto-fijo" class="form-label">Concepto:</label>
+    <input type="text"class="form-control" id="concepto-fijo" name="concepto-fijo" placeholder="Ejemplo: Alquiler" required>
+  </div>
 
-     <!--Botón para agregar más gastos fijos-->
-    <button type="button">+ (agregar otro gasto)</button>
+  <div class ="col-12 col-md-6 mb-3">
+    <label for = "costo-fijo" class="form-label">Costo fijo ($):</label>
+    <input type="number"class="form-control" id="costo-fijo" name="costo-fijo" placeholder="Ejemplo: $1000" required>
+  </div>
+</div>
+
+
+<button type="submit" class="btn btn-outline-info mt-3" data-bs-toggle="modal" data-bs-target="#agregarGasto">
+  Agregar gasto
+</button>
+
+<div class="modal fade" id="agregarGasto" tabindex="-1" aria-labelledby="agregarGastoLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+  </div>
+  <div class="modal-body">
+    <p>Gasto agregado correctamente.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+  </div>
+</div>
+</div>
+</div>
+
     </form>
+  </div>
     </section>
 
+
     <!--Tabla de gastos fijos agregados--> 
-    <section id="gastos-fijos-agregados">
-      <h3>Lista de gastos fijos</h3>
-    <table id ="tabla-gastos-fijos">
+    <section id="gastos-fijos-agregados" class="container my-5">
+      <h3 class="text-center mb-4">Lista de gastos fijos</h3>
+
+      <div class="table-responsive">
+        <table id ="tabla-gastos-fijos" class="table table-bordered table-striped">
+      <thead class="table-primary">
       <tr>
         <th>Concepto</th>
         <th>Costo</th>
       </tr>
+      </thead>
+    <tbody>
         <tr>
         <td> </td>
         <td id = "gasto-1">$0.00</td>
@@ -116,41 +265,59 @@
           <td> </td>
         <td id = "gasto-2">$0.00</td>
       </tr>
+    </tbody>
     </table>
-     <!--Botón para agregar más gastos fijos-->
-     <button>Paso siguiente >> </button>
-   </section>
+  </div>
+
+  <div class="text-end">
+    <button class="btn btn-primary">Paso siguiente >></button>
+  </div>
+    </section>
 
     <!--Seccion Calculadora-->
     <section id="calculadora">
+      <div class="container">
       <h2>Calculadora</h2>
      <h3>Cantidad a producir</h3>
     <p> Indica cuantas unidades deseas producir para calcular el costo total.</p>
 
     <!--Formulario para indicar total de produccion-->
-    <!-- Agregar estilos para la alineación y diseño del formulario-->
     <form>
+
+      <div class ="row">
+        <div class="col-12 col-md-6 mb-3">
           <!-- Campo para ingresar el porcentaje de la ganancia -->
-      <label for="ganancia">Porcentaje de Ganancia(%):</label>
-      <input type="number" id="ganancia" name ="ganancia" placeholder="Ejemplo: 21%">
-      <label for="tipo-calculo">Tipo de calculo:</label>
-      <select id="tipo-calculo" name="tipo-calculo">
-<option value="unidad" > Por Unidad</option>
-<option value="total">Por Cantidad Total</option>
-</select>
+      <label for="ganancia" class="form-label">Porcentaje de Ganancia(%):</label>
+      <input type="number"class="form-control" id="ganancia" name ="ganancia" placeholder="Ejemplo: 21%" required>
+    </div>
+
+    <div class="col-12 col-md-6 mb-3">
+      <!-- Campo para ingresar la catidad de unidades a producir -->
+  <label for="cantidadTotal" class="form-label">Cantidad de unidades a producir:</label>
+  <input type="number"class="form-control" id="cantidadTotal" name ="cantidadTotal" placeholder="Ejemplo: 200" required>
+</div>
+</div>
+
       <!-- Botón para calcular el costo total -->
-        <button type="button">Calcular Costo Total</button>
+        <button type="submit" class="btn btn-success">Calcular Costo Total</button>
     </form>
+  </div>
 </section>
 
+
     <!--Tabla de resultados--> 
-     <section id="resultados">
-      <h3>TABLA DE RESULTADOS</h3>
-    <table class="tabla-resultados" id="tabla-final">
+     <section id="resultados" class="container my-5">
+      <h3 class="text-center mb-4">TABLA DE RESULTADOS</h3>
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover" id="tabla-final">
+        <thead class="table-primary">
       <tr>
         <th>Concepto</th>
         <th>Costo</th>
       </tr>
+    </thead>
+  <tbody>
         <tr>
         <td>Gastos Variables </td>
         <td id = "total-variables">$0.00</td>
@@ -163,33 +330,66 @@
         <td>Costo Por unidad</td>
         <td id = "costo-ganancia">$0.00</td>
       </tr>
+  </tbody>
     </table>
+      </div>
   </section>
-</main>
 
   <!--Sección de contacto-->
   <footer id="contacto"> 
+    <div class="container">
     <h3>Ayuda y soporte</h3>
     <p>Si tienes preguntas sobre nuestros servicios, nuestro equipo está aquí para ayudarlo.</p>
     <p>Email: atencionCP@costopro.com</p>
     <p>Teléfono: 3406987596</p>
-    <p>Ubicación: 124, BV 25 de Mayo, 3000</p>
-
+    <h3>Ubicación</h3>
+    
+    <div class="container my-5">
+      <div class="row justify-content-center"> 
+    <div class="col-12 col-md-8">
+      <div class="ratio ratio-16x9">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d107174.69152824469!2d-60.755985279739825!3d-32.919073018704026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sestudios%20contables%20rosario%20santa%20fe!5e0!3m2!1ses-419!2sar!4v1745259919564!5m2!1ses-419!2sar" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
         <!--Formulario para pedir ayuda-->
     <!-- Agregar estilos para la alineación y diseño del formulario-->
     <form>
-      <h2>Ponte en contacto</h2>
+      <h4 class="text-center text-white">Ponte en contacto</h4>
+
+      <div class =" row mb-3">
+        <div class ="col-12 col-md-6 mb-3">
     <!-- Campos para que el usuario ingrese los datos -->
-      <label for="nombre-usuario">Nombre de usuario:</label>
-    <input type="text" id="nombre-usuario" name="nombre-usuario" placeholder="Nombre">
-     <label for="direccion-correo-electronico">Dirección de correo electrónico:</label>
-     <input type="text" id="direccion-correo-electronico" name ="direccion-correo-electronico" placeholder="Correo electrónico">
-     <label for="numero-telefono">Número de teléfono:</label>
-     <input type="text" id="numero-telefono" name ="numero-telefono" placeholder="Teléfono">
-     <label for="mensaje">Mensaje:</label>
-     <textarea id="mensaje" name ="mensaje" placeholder="Escribe tu mensaje"> </textarea>
-       <button type="button">Entregar</button>
+      <label for="nombre-usuario" class="form-label text-white">Nombre de usuario:</label>
+    <input type="text" class="form-control" id="nombre-usuario" name="nombre-usuario" placeholder="Nombre" required>
+  </div>
+
+    <div class ="col-12 col-md-6 mb-3">
+     <label for="email"class="form-label text-white">Dirección de correo electrónico:</label>
+     <input type="email" class="form-control" id="email" name ="email" placeholder="Correo electrónico" required>
+    </div>
+  </div>
+
+  <div class ="row mb-3">
+    <div class ="col-12 col-md-6 mb-3">
+     <label for="numero-telefono" class="form-label text-white">Número de teléfono:</label>
+     <input type="text" class="form-control" id="numero-telefono" name ="numero-telefono" placeholder="Teléfono" required>
+    </div>
+
+    <div class ="col-12 col-md-6 mb-3">
+     <label for="mensaje" class="form-label text-white">Mensaje:</label>
+     <textarea class="form-control"  id="mensaje" name ="mensaje"  placeholder="Escribe tu mensaje" required> </textarea> 
+    </div>
+  </div>
+
+       <button type="submit"class="btn btn-primary">Entregar</button>
     </form>
+  </div>
   </footer>
+
+    <!--Bootstrap JavaScript-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+
 </body>
 </html>
