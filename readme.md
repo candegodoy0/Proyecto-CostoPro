@@ -1,28 +1,31 @@
 # CostoPro : Calculadora de Costos de Producción
 
 ## Descripción
-CostoPro es una herramienta web interactiva diseñada para ayudar a calcular los costos asociados a la producción de un proyecto. 
-El simulador permitirá a los usuarios ingresar datos sobre materiales, mano de obra y otros costos relacionados,calculando el costo total de producción y proporcionando un desglose detallado de los mismos.
+CostoPro es una herramienta web interactiva diseñada para ayudar a calcular los costos asociados a la producción de un producto. 
+El simulador permitirá a los usuarios ingresar datos sobre materiales, gastos fijos, calculando el costo total de producción y proporcionando un desglose detallado de los mismos.
 Esta herramienta está orientada a optimizar el proceso de planificación y estimación de costos para proyectos de producción. 
 
 ## Objetivos del proyecto 
-- Desarrollar una página web interactiva para calcular los costos de producción de un proyecto.
-- Permitir a los usuarios ingresar información sobre materiales, mano de obra y otros costos.
-- Calcular y mostrar el costo total de producción, incluyendo una división detallada de los costos involucrados.
+- Desarrollar una página web interactiva para calcular los costos de producción de un producto.
+- Permitir a los usuarios ingresar información sobre materiales y otros costos.
+- Calcular y mostrar el costo total de producción, por unidad de producto, incluyendo una división detallada de los costos involucrados.
 - Ofrecer un espacio para mejorar y agregar más funcionalidades, como la gestión de presupuestos, en futuras entregas.
 
 ## Tecnologías Utilizadas
 - HTML5: Para estructurar la página web.
-- CSS: Para el diseño y laestilización (esto se implementará en entregas posteriores).
-- JavaScript: Para implementar las funcionalidades interactivas del simulador (esto se planificará para futuras entregas).
+- CSS: Para el diseño y la estilización.
+- JavaScript: Para implementar las funcionalidades interactivas del simulador.
+- Bootstrap 5: Framework CSS para diseño responsivo.
 
 ## Funcionalidades previstas
 - Ingreso de datos sobre materiales y costos asociados.
-- Cálculo automático del costo total basado en los datos ingresados.
-- Desglose de los costos de mano de obraa, materiales y otros gastos.
-- Capacidad para actualizar los cálculos en tiempo real a medida que el usuario ingresa datos.
-- Opción de guardar o exportar los resultados de la simulación para futuras referencias.
+- Cálculo automático del costo total y por unidad basado en los datos ingresados.
+- Desglose de los costos fijos, materiales y otros gastos.
 
 ## Maqueta de Diseño Web
 El diseño de la página incluirá una interfaz sencilla y clara que permita a los usuarios interactuar fácilmente con las distintas herramientas del simulador. Se planea una disposición en colmumnas con formularios para ingresar los datos y una sección separada donde se mostrarán los resultados calculados.
 Puedes ver el prototipo del mockup [aquí](https://www.canva.com/design/DAGh8ePo5lA/f8PBcSXs0Y3Je0_3SCwQHQ/edit?utm_content=DAGh8ePo5lA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton).
+
+## Diagrama de Flujo
+El siguiente diagrama representa el algoritmo prinicipal de la aplicación, incluyendo entradas, procesos, decisiones y salidas.
+[Ver diagrama de Flujo](https://drive.google.com/file/d/1Yv0KHfX70MYScOEtr9NniePTkI21eynK/view?usp=sharing)
