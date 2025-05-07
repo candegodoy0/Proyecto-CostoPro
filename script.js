@@ -2,6 +2,26 @@
 let nombreProducto = prompt("Ingrese el nombre del producto (ej: Mesa):");
 console.log(` Producto: ${nombreProducto}`);
 
+//Clases
+class Material {
+  constructor(nombre, costoUnitario, cantidad, unidad, unidadesPorSeleccionada) {
+    this.nombre = nombre;
+    this.costoUnitario = costoUnitario;
+    this.cantidad = cantidad;
+    this.unidad = unidad;
+    this.unidadesPorSeleccionada = unidadesPorSeleccionada;
+    this.costoTotal = costoUnitario * cantidad;
+  }
+}
+
+class GastoFijo {
+  constructor(concepto, costo) {
+    this.concepto = concepto;
+    this.costo = costo;
+  }
+}
+
+
 // Arrays vacios para guardar materiales (gastos variables) y gastos fijos
 const materiales = [];
 const gastosFijos = [];
@@ -31,14 +51,14 @@ function agregarMateriales() {
     }
 
      // Se agrega el material al array con los datos necesarios
-    materiales.push({
+    materiales.push(new Material({
       nombre,
       costoUnitario,
       cantidad,
       unidad,
       unidadesPorSeleccionada,
       costoTotal: costoUnitario * cantidad
-    });
+    }));
 
     seguir = confirm("¿Quiere agregar otro material?");
   }
@@ -59,7 +79,7 @@ function agregarGastosFijos() {
     }
 
      // Se agrega el gasto fijo al array
-    gastosFijos.push({ concepto, costo });
+    gastosFijos.push(new GastoFijo( concepto, costo));
     seguir = confirm("¿Quiere agregar otro gasto fijo?");
   }
 }
