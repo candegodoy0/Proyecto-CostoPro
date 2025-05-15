@@ -1,10 +1,8 @@
 import Calculadora from './Calculadora.js';
-import Material from './Material.js';
-import GastoFijo from './GastoFijo.js';
 
 function iniciarCalculadora(){
     alert("Bienvenido a CostoPro - Calculadora de Costos de Producción");
-    const nombreProducto = prompt("Ingrese el nombre del producto que desea calcular (ej: Mesa) y siga los pasos:");
+    let nombreProducto = prompt("Ingrese el nombre del producto que desea calcular (ej: Mesa) y siga los pasos:");
 
 const calculadora = new Calculadora(nombreProducto);
 
