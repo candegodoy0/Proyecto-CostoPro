@@ -1,189 +1,100 @@
+import { Calculadora } from './Calculadora.js';
+import { Material } from './material.js';
+import GastoFijo from './GastoFijo.js';
+
+function iniciarCaluladora(){
+    alert("Bienvenido a CostoPro - Calculadora de Costos de Producción");
+
 // Declaracion de variable para guardar el nombre del producto ingresado por el usuario
-let nombreProducto = prompt("Ingrese el nombre del producto (ej: Mesa):");
-console.log(` Producto: ${nombreProducto}`);
+const nombreProducto = prompt("Ingrese el nombre del producto (ej: Mesa):");
+const calculadora = new Calculadora(nombreProducto);
 
-//Clases
-class Material {
-  constructor(nombre, costoUnitario, cantidad, unidad, unidadesPorSeleccionada) {
-    this.nombre = nombre;
-    this.costoUnitario = costoUnitario;
-    this.cantidad = cantidad;
-    this.unidad = unidad;
-    this.unidadesPorSeleccionada = unidadesPorSeleccionada;
-    this.costoTotal = costoUnitario * cantidad;
-  }
-}
+  let salir = false;
+  let gananciaPorcentual = null;
+let cantidadProduccion = null;
 
-class GastoFijo {
-  constructor(concepto, costo) {
-    this.concepto = concepto;
-    this.costo = costo;
-  }
-}
+  while (!salir) {
+    const opcion = prompt(
+      `MENÚ PRINCIPAL - ${nombreProducto}\n` +
+      `1. Agregar material\n` +
+      `2. Agregar gasto fijo\n` +
+      `3. Ingresar porcentaje de ganancia y cantidad a producir\n` +
+      `4. Calcular y mostrar resumen\n` +
+      `5. Salir\n\n` +
+      `Ingrese una opción:`
+    );
 
-
-// Arrays vacios para guardar materiales (gastos variables) y gastos fijos
-const materiales = [];
-const gastosFijos = [];
-
-/*
-- Función para agregar materiales necesarios para fabricar una unidad de producto.
-- El usuario puede ingresar uno o mas materiales.
-- Cada material tiene un nombre, costo por unidad, cantidad necesaria, y costo total.
-*/
-function agregarMateriales() {
-  let seguir = true;
-
-  while (seguir) {
+switch(opcion){
+        // Agregar materiales
+  case "1":
+let seguirMaterial = true;
+        while (seguirMaterial) {
     let nombre = prompt("Ingrese el nombre del material (ej: Tornillo):");
-    let costoUnitario = parseFloat(prompt(`Ingrese el costo por unidad de ${nombre} (ej: $1000.00):`));
-    let cantidad = parseFloat(prompt(`Ingrese la cantidad requerida de ${nombre} por unidad de producto (ej: 150):`));
-    let unidad = prompt(`Ingrese la unidad de medida para ${nombre} (ej: litro, metro, caja):`);
-    let unidadesPorSeleccionada = parseFloat(prompt(`Ingrese cantidad de unidades estándar que hay por cada ${unidad} (ej: 12 si una caja tiene 12 unidades):`));
+    let costoUnitario = parseFloat(prompt('Ingrese el costo por unidad de ${nombre}(ej: $1.000):'));
+    let cantidad = parseFloat(prompt('Ingrese la cantidad requerida de ${nombre} por unidad de producto (ej: 150):'));
+    let unidad = prompt("Ingrese la unidad de medida para ${nombre} (ej: litro, metro, caja):");
+    let unidadesPorSeleccionada = parseFloat(prompt('Ingrese cantidad de unidades estándar que hay por cada ${unidad} (ej: 12 si una caja tiene 12 unidades):'));
 
-    if (isNaN(costoUnitario) 
-      || isNaN(cantidad) ||
-    isNaN(unidadesPorSeleccionada) ||
-    unidadesPorSeleccionada <= 0
-  ) {
-      alert("Por favor, ingrese valores numéricos válidos.");
-      continue;
-    }
-
-     // Se agrega el material al array con los datos necesarios
-    materiales.push(new Material({
-      nombre,
-      costoUnitario,
-      cantidad,
-      unidad,
-      unidadesPorSeleccionada,
-      costoTotal: costoUnitario * cantidad
-    }));
-
-    seguir = confirm("¿Quiere agregar otro material?");
-  }
+    if (
+  !nombre || isNaN(costoUnitario) || isNaN(cantidad) ||
+  !unidad || isNaN(unidadesPorSeleccionada)) {
+      alert("Por favor, ingrese datos válidos.");
+}else{
+        calculadora.agregarMaterial({ nombre, costoUnitario, cantidad, unidad, unidadesPorSeleccionada });
+    alert(" Material agregado correctamente.");
 }
+        seguirMaterial = confirm("¿Quiere agregar otro material?");
+  }
+  break;
 
-
-//Función para ingresar los gastos fijos que no dependen de la cantidad producida. Ejemplo: alquiler, sueldos, etc.//
-function agregarGastosFijos() {
-  let seguir = true;
-
-  while (seguir) {
+  // Agregar gastos fijos
+  case "2":
+       let seguirGasto = true;
+        while (seguirGasto) {
     let concepto = prompt("Ingrese el concepto del gasto fijo (ej: Alquiler):");
-    let costo = parseFloat(prompt(`Ingrese el costo del gasto fijo ${concepto} (ej: $1000.00):`));
-
-    if (isNaN(costo)) {
+    let costo = parseFloat(prompt('Ingrese el costo del gasto fijo ${concepto} (ej: $1000.00): '));
+    
+    if (!concepto || isNaN(costo)) {
       alert("Por favor, ingrese un valor numérico válido.");
-      continue;
+    }else{
+    calculadora.agregarGastoFijo(concepto, costo);
+     alert(" Gasto fijo agregado correctamente.");
     }
-
-     // Se agrega el gasto fijo al array
-    gastosFijos.push(new GastoFijo( concepto, costo));
-    seguir = confirm("¿Quiere agregar otro gasto fijo?");
+    seguirGasto = confirm("¿Quiere agregar otro gasto?");
   }
-}
+  break;
 
-/*
-Función para realizar todos los cálculos del simuador:
-- Primero valida que haya agregado correctamente materiales y gastos fijos.
-- Se le pide al usuario el porcentaje de ganancia y cantidad a producir
-- Se calcula el costo total de materiales, gastos fijos, y costos totales finales de producion
-- Se muestra un resumen de todos los costos
-*/
-
-function calcularCostos() {
-  if (materiales.length === 0 || gastosFijos.length === 0) {
-    alert("Debe ingresar al menos un material y un gasto fijo antes de calcular.");
-    return;
-  }
-
-  let gananciaPorcentual = parseFloat(prompt("Ingrese el porcentaje de ganancia que desee (ej: 25%):"));
+case "3":
+  gananciaPorcentual = parseFloat(prompt("Ingrese el porcentaje de ganancia que desee (ej: 25%):"));
   let cantidadProduccion = parseInt(prompt("Ingrese la cantidad total a producir (ej: 200):"));
 
   if (isNaN(cantidadProduccion) || isNaN(gananciaPorcentual) || cantidadProduccion <= 0) {
     alert("Cantidad o ganancia ingresadas inválidas.");
-    return;
+  }else{
+    alert("Valores guardados correctamente")
   }
+    break;
+  
+    case "4":
+      if (calculadora.materiales.length === 0 || calculadora.gastosFijos.length === 0) {
+          alert("Debe agregar al menos un material y un gasto fijo antes de calcular.");
+        } else if (gananciaPorcentual === null || cantidadProduccion === null) {
+          alert("Debe ingresar la ganancia y la cantidad a producir antes de calcular.");
+        } else {
+          const resumen = calculadora.generarResumen(gananciaPorcentual, cantidadProduccion);
+          alert(resumen);
+        }
+        break;
 
-  // Calcular total de gastos variables por unidad
-  function calcularCostoMateriales(materiales) {
-let totalVariablesUnitarios = 0;
-for (let i = 0; i < materiales.length; i++) {
-  totalVariablesUnitarios += materiales[i].costoTotal;
+         case "5":
+        salir = true;
+        alert("Gracias por usar CostoPro.");
+        break;
+
+      default:
+        alert("Opción inválida. Ingrese un número del 1 al 5.");
+        break;
 }
-return totalVariablesUnitarios;
   }
-
-  // Llamar a la funcion y usar el resultado
-  let totalVariablesUnitarios = calcularCostoMateriales(materiales);
-   // Total de variables para toda la producción
-let totalVariables = totalVariablesUnitarios * cantidadProduccion;
-
-// Calcular total de gastos fijos
-let totalFijos = 0;
-for (let i = 0; i < gastosFijos.length; i++) {
-  totalFijos += gastosFijos[i].costo;
 }
-
-// Calcular costo total con ganancia incluida
-let costoTotal = totalVariables + totalFijos;
-let costoTotalConGanancia = costoTotal * (1 + gananciaPorcentual / 100);
-
-  // Costo por unidad con ganancia incluida
-  let costoPorUnidadConGanancia = costoTotalConGanancia / cantidadProduccion;
-
-
-// Mensaje para mostrar al usuario de manera inmediata los resultados de los calculos 
-let mensaje = "CÁLCULO FINALIZADO\n";
-mensaje += "Producto: " + nombreProducto + "\n"; 
-mensaje += "Cantidad a producir: " + cantidadProduccion + "\n";
-mensaje += "Materiales: ";
-
- for (let i = 0; i < materiales.length; i++) {
-  mensaje += materiales[i].nombre + ": $" + materiales[i].costoTotal;
-  if (i < materiales.length - 1) {
-    mensaje += " | "; 
-}
-}
-
-mensaje += "\n| Total gastos variables: $" + totalVariables + " |";
-mensaje += "\n| Total gastos fijos: $" + totalFijos + " |";
-mensaje += "\n| Costo final (con ganancia) para " + cantidadProduccion + " unidades" + ": $" + costoTotalConGanancia + " |";
-mensaje += "\n| Costo final (con ganancia) por cada unidad: $" + costoPorUnidadConGanancia + " | ";
-
-alert(mensaje);
-
-  /* Mostrar todos los resultados detalalados en consola
-  console.log("-----RESUMEN DE COSTOS-----");
-  console.log("Producto: " + nombreProducto);
-  console.log("Cantidad a producir: " + cantidadProduccion);
-
-  console.log("Materiales:");
-  for (let i = 0; i < materiales.length; i++) {
-    console.log(materiales[i].nombre + ": $" + materiales[i].costoTotal);
-  }
-
-  console.log("Total gastos variables: $" + totalVariables);
-  console.log("Total gastos fijos: $" + totalFijos);
-  console.log("Costo final (con ganancia): $" + costoTotalConGanancia + " para: " + cantidadProduccion + " unidades a producir | ");
-  console.log("Costo final (con ganancia) por cada unidad: $" + costoPorUnidadConGanancia + " | ");
-  */
-}
-/*
-Función principal que inicia todo el proceso del simulador
-Se llama a todas las funciones en orden: 1. materiales, 2. gastos fijos 3. cálculos de costos
-*/
-
-function iniciarCalculadora() {
-  alert("Bienvenido a CostoPro - Simulador- Calculadora de Costos de Producción");
-
-  agregarMateriales();
-  agregarGastosFijos();
-  calcularCostos();
-
-  alert("Gracias por usar la calculadora de CostoPro.");
-}
-
-//ejecutar el programa
-iniciarCalculadora();
+iniciarCaluladora(); 
