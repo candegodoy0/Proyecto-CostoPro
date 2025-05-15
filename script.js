@@ -1,5 +1,5 @@
 import Calculadora from './Calculadora.js';
-import { Material } from './Material.js';
+import Material from './Material.js';
 import GastoFijo from './GastoFijo.js';
 
 function iniciarCaluladora(){
