@@ -28,7 +28,7 @@ class Calculadora{
   }
 
   calcularCostoMaterialesUnitario() {
-    return this.materiales.reduce((total, material) => total + material.calcularCostoTotal(), 0);
+    return this.materiales.reduce((total, material) => total + material.calcularCostoPorUnidadProducto(), 0);
   }
 
   calcularCostoMaterialesTotal(cantidad) {
