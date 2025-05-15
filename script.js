@@ -30,9 +30,9 @@ let seguirMaterial = true;
         while (seguirMaterial) {
     let nombre = prompt("Ingrese el nombre del material (ej: Tornillo):");
     let costoUnitario = parseFloat(prompt(`Ingrese el costo por unidad de ${nombre} (ej: $1.000):`));
-    let cantidad = parseFloat(prompt(`Ingrese la cantidad requerida de ${nombre} por unidad de producto (ej: 150):'));
+    let cantidad = parseFloat(prompt(`Ingrese la cantidad requerida de ${nombre} por unidad de producto (ej: 150):`));
     let unidad = prompt(`Ingrese la unidad de medida para ${nombre} (ej: litro, metro, caja):`);
-    let unidadesPorSeleccionada = parseFloat(prompt('Ingrese cantidad de unidades estándar que hay por cada ${unidad} (ej: 12 si una caja tiene 12 unidades):'));
+    let unidadesPorSeleccionada = parseFloat(prompt(`Ingrese cantidad de unidades estándar que hay por cada ${unidad} (ej: 12 si una caja tiene 12 unidades):`));
 
     if (
   !nombre || isNaN(costoUnitario) || isNaN(cantidad) ||
