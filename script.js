@@ -2,7 +2,10 @@ import Calculadora from './Calculadora.js';
 
 function iniciarCalculadora(){
     alert("Bienvenido a CostoPro - Calculadora de Costos de Producción");
-    let nombreProducto = prompt("Ingrese el nombre del producto que desea calcular (ej: Mesa) y siga los pasos:");
+    let nombreProducto = null;
+while (!nombreProducto) {
+  nombreProducto = prompt("Ingrese el nombre del producto que desea calcular (ej: Mesa) y siga los pasos:");
+}
 
 const calculadora = new Calculadora(nombreProducto);
 
