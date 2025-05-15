@@ -1,4 +1,4 @@
-import { Calculadora } from './Calculadora.js';
+import Calculadora from './Calculadora.js';
 import { Material } from './material.js';
 import GastoFijo from './GastoFijo.js';
 
