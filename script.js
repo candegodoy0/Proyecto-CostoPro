@@ -2,11 +2,10 @@ import Calculadora from './Calculadora.js';
 import Material from './Material.js';
 import GastoFijo from './GastoFijo.js';
 
-function iniciarCaluladora(){
+function iniciarCalculadora(){
     alert("Bienvenido a CostoPro - Calculadora de Costos de Producción");
+    const nombreProducto = prompt("Ingrese el nombre del producto que desea calcular (ej: Mesa) y siga los pasos:");
 
-// Declaracion de variable para guardar el nombre del producto ingresado por el usuario
-const nombreProducto = prompt("Ingrese el nombre del producto (ej: Mesa):");
 const calculadora = new Calculadora(nombreProducto);
 
   let salir = false;
@@ -30,9 +29,9 @@ switch(opcion){
 let seguirMaterial = true;
         while (seguirMaterial) {
     let nombre = prompt("Ingrese el nombre del material (ej: Tornillo):");
-    let costoUnitario = parseFloat(prompt('Ingrese el costo por unidad de ${nombre}(ej: $1.000):'));
-    let cantidad = parseFloat(prompt('Ingrese la cantidad requerida de ${nombre} por unidad de producto (ej: 150):'));
-    let unidad = prompt("Ingrese la unidad de medida para ${nombre} (ej: litro, metro, caja):");
+    let costoUnitario = parseFloat(prompt(`Ingrese el costo por unidad de ${nombre} (ej: $1.000):`));
+    let cantidad = parseFloat(prompt(`Ingrese la cantidad requerida de ${nombre} por unidad de producto (ej: 150):'));
+    let unidad = prompt(`Ingrese la unidad de medida para ${nombre} (ej: litro, metro, caja):`);
     let unidadesPorSeleccionada = parseFloat(prompt('Ingrese cantidad de unidades estándar que hay por cada ${unidad} (ej: 12 si una caja tiene 12 unidades):'));
 
     if (
@@ -52,7 +51,7 @@ let seguirMaterial = true;
        let seguirGasto = true;
         while (seguirGasto) {
     let concepto = prompt("Ingrese el concepto del gasto fijo (ej: Alquiler):");
-    let costo = parseFloat(prompt('Ingrese el costo del gasto fijo ${concepto} (ej: $1000.00): '));
+    let costo = parseFloat(prompt(`Ingrese el costo del gasto fijo ${concepto} (ej: $1000.00): `));
     
     if (!concepto || isNaN(costo)) {
       alert("Por favor, ingrese un valor numérico válido.");
@@ -66,7 +65,7 @@ let seguirMaterial = true;
 
 case "3":
   gananciaPorcentual = parseFloat(prompt("Ingrese el porcentaje de ganancia que desee (ej: 25%):"));
-  let cantidadProduccion = parseInt(prompt("Ingrese la cantidad total a producir (ej: 200):"));
+   cantidadProduccion = parseInt(prompt("Ingrese la cantidad total a producir (ej: 200):"));
 
   if (isNaN(cantidadProduccion) || isNaN(gananciaPorcentual) || cantidadProduccion <= 0) {
     alert("Cantidad o ganancia ingresadas inválidas.");
@@ -97,4 +96,4 @@ case "3":
 }
   }
 }
-iniciarCaluladora(); 
+iniciarCalculadora(); 
