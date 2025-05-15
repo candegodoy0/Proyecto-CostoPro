@@ -9,6 +9,10 @@
   calcularCostoPorUnidadProducto() {
     return (this.costoUnitario / this.unidadesPorSeleccionada) * this.cantidad;
   }
+
+    calcularCostoTotal() {
+    return this.calcularCostoPorUnidadProducto();
+  }
 }
 
 export default Material
