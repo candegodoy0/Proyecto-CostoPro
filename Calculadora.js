@@ -66,3 +66,5 @@ class Calculadora{
     return mensaje;
   }
 }
+
+export default Calculadora;
