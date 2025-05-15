@@ -1,4 +1,4 @@
- export class Material {
+  class Material {
   constructor(nombre, costoUnitario, cantidad, unidad, unidadesPorSeleccionada) {
     this.nombre = nombre;
     this.costoUnitario = costoUnitario;
@@ -10,3 +10,5 @@
     return (this.costoUnitario / this.unidadesPorSeleccionada) * this.cantidad;
   }
 }
+
+export default Material
