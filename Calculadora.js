@@ -1,6 +1,6 @@
 
 import GastoFijo from './GastoFijo.js';
-import { Material } from './material.js';
+import Material from './Material.js';
 
 
 class Calculadora{
@@ -67,4 +67,4 @@ class Calculadora{
   }
 }
 
-export default Calculadora;
+export default Calculadora
