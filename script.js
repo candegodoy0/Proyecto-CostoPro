@@ -53,12 +53,21 @@ function recuperarDatosPrevios() {
 
   materialesGuardados.forEach((m) => {
     calculadora.agregarMaterial(m);
-    mostrarMaterialEnTabla(m);
   });
+
+  mostrarMaterialesEnTabla();
 
   gastosFijosGuardados.forEach((g) => {
     calculadora.agregarGastoFijo(g.concepto, g.costo);
     mostrarGastoFijoEnTabla(g);
+  });
+}
+
+function mostrarMaterialesEnTabla() {
+  tablaMateriales.innerHTML = ""; 
+
+  calculadora.materiales.forEach(material => {
+    mostrarMaterialEnTabla(material);
   });
 }
 
@@ -75,10 +84,10 @@ formProducto.addEventListener("submit", function (e) {
   if (nombre && !isNaN(costoUnitario) && !isNaN(cantidad) && unidad && !isNaN(unidadesPorSeleccionada)) {
     const material = { nombre, costoUnitario, cantidad, unidad, unidadesPorSeleccionada };
     calculadora.agregarMaterial(material);
-    mostrarMaterialEnTabla(material);
+    mostrarMaterialesEnTabla(); 
     guardarDatosEnStorage();
 
-    // Se limpian los campos
+    //Se limpian los campos
     formProducto.reset();
   }
 });
