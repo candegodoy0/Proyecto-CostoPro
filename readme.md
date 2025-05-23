@@ -29,3 +29,7 @@ Puedes ver el prototipo del mockup [aquí](https://www.canva.com/design/DAGh8ePo
 ## Diagrama de Flujo
 El siguiente diagrama representa el algoritmo prinicipal de la aplicación, incluyendo entradas, procesos, decisiones y salidas.
 [Ver diagrama de Flujo](https://drive.google.com/file/d/1Yv0KHfX70MYScOEtr9NniePTkI21eynK/view?usp=sharing)
+
+## Diagrama de Clases
+El diagrama muestra las clases, sus propiedades, métodos y relaciones, reflejando la estructura del código. Ayuda a comprender la lógica del simulador y su escalabilidad.
+[Ver diagrama de Clases](https://drive.google.com/file/d/1MiHFjw6tcudcweqcTY5JpL-WYaUtxc_W/view?usp=sharing)g
