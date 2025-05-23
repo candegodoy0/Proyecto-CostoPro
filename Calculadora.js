@@ -4,8 +4,7 @@ import Material from './Material.js';
 
 
 class Calculadora{
-    constructor(nombreProducto) {
-    this.nombreProducto = nombreProducto;
+    constructor() {
     this.materiales = [];
     this.gastosFijos = [];
   }
@@ -48,7 +47,6 @@ class Calculadora{
 
     // Mensaje para mostrar al usuario de manera inmediata los resultados de los calculos 
     let mensaje = "CÁLCULO FINALIZADO\n";
-    mensaje += "Producto: " + this.nombreProducto + "\n";
     mensaje += "Cantidad a producir: " + cantidadProduccion + "\n";
     mensaje += "Materiales: ";
 
