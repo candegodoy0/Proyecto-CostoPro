@@ -1,100 +1,134 @@
 import Calculadora from './Calculadora.js';
 
-function iniciarCalculadora(){
-    alert("Bienvenido a CostoPro - Calculadora de Costos de Producción");
-    let nombreProducto = null;
-while (!nombreProducto) {
-  nombreProducto = prompt("Ingrese el nombre del producto que desea calcular (ej: Mesa) y siga los pasos:");
+const formProducto = document.querySelector("#producto form");
+const formGastoFijo = document.querySelector("#gastos-fijos form");
+const formCalculadora = document.querySelector("#calculadora form");
+
+const tablaMateriales = document.querySelector("#tabla-materiales tbody");
+const tablaGastosFijos = document.querySelector("#tabla-gastos-fijos tbody");
+const totalVariablesDOM = document.getElementById("total-variables");
+const totalFijosDOM = document.getElementById("total-fijos");
+const costoTotalDOM = document.getElementById("costo-total");
+const costoGananciaDOM = document.getElementById("costo-ganancia");
+
+// Se crea la instancia de la calculadora
+let nombreProducto = localStorage.getItem("nombreProducto") || "Producto sin nombre";
+let calculadora = new Calculadora(nombreProducto);
+
+// Se cargan los datos previos guardados 
+recuperarDatosPrevios();
+
+// FUNCIONES
+
+// Se muestra material en la tabla y se actualzian los datos 
+function mostrarMaterialEnTabla(material) {
+  const fila = document.createElement("tr");
+  fila.innerHTML = `
+    <td>${material.nombre}</td>
+    <td>$${material.costoUnitario}</td>
+    <td>${material.cantidad}</td>
+  `;
+  tablaMateriales.appendChild(fila);
 }
 
-const calculadora = new Calculadora(nombreProducto);
-
-  let salir = false;
-  let gananciaPorcentual = null;
-let cantidadProduccion = null;
-
-  while (!salir) {
-    const opcion = prompt(
-      `MENÚ PRINCIPAL - ${nombreProducto}\n` +
-      `1. Agregar material\n` +
-      `2. Agregar gasto fijo\n` +
-      `3. Ingresar porcentaje de ganancia y cantidad a producir\n` +
-      `4. Calcular y mostrar resumen\n` +
-      `5. Salir\n\n` +
-      `Ingrese una opción:`
-    );
-
-switch(opcion){
-        // Agregar materiales
-  case "1":
-let seguirMaterial = true;
-        while (seguirMaterial) {
-    let nombre = prompt("Ingrese el nombre del material (ej: Tornillo):");
-    let costoUnitario = parseFloat(prompt(`Ingrese el costo por unidad de ${nombre} (ej: $1.000):`));
-    let cantidad = parseFloat(prompt(`Ingrese la cantidad requerida de ${nombre} por unidad de producto (ej: 150):`));
-    let unidad = prompt(`Ingrese la unidad de medida para ${nombre} (ej: litro, metro, caja):`);
-    let unidadesPorSeleccionada = parseFloat(prompt(`Ingrese cantidad de unidades estándar que hay por cada ${unidad} (ej: 12 si una caja tiene 12 unidades):`));
-
-    if (
-  !nombre || isNaN(costoUnitario) || isNaN(cantidad) ||
-  !unidad || isNaN(unidadesPorSeleccionada)) {
-      alert("Por favor, ingrese datos válidos.");
-}else{
-        calculadora.agregarMaterial({ nombre, costoUnitario, cantidad, unidad, unidadesPorSeleccionada });
-    alert(" Material agregado correctamente.");
+// Se muestra gasto fijo en la tabla y actualizar storage
+function mostrarGastoFijoEnTabla(gasto) {
+  const fila = document.createElement("tr");
+  fila.innerHTML = `
+    <td>${gasto.concepto}</td>
+    <td>$${gasto.costo}</td>
+  `;
+  tablaGastosFijos.appendChild(fila);
 }
-        seguirMaterial = confirm("¿Quiere agregar otro material?");
+
+// Se guardan datos actualizados 
+function guardarDatosEnStorage() {
+  localStorage.setItem("nombreProducto", calculadora.nombreProducto);
+  localStorage.setItem("materiales", JSON.stringify(calculadora.materiales));
+  localStorage.setItem("gastosFijos", JSON.stringify(calculadora.gastosFijos));
+}
+
+// Se leen los datos guardados y se vuelven a mostrar en las tablas
+function recuperarDatosPrevios() {
+  const materialesGuardados = JSON.parse(localStorage.getItem("materiales")) || [];
+  const gastosFijosGuardados = JSON.parse(localStorage.getItem("gastosFijos")) || [];
+
+  materialesGuardados.forEach((m) => {
+    calculadora.agregarMaterial(m);
+    mostrarMaterialEnTabla(m);
+  });
+
+  gastosFijosGuardados.forEach((g) => {
+    calculadora.agregarGastoFijo(g.concepto, g.costo);
+    mostrarGastoFijoEnTabla(g);
+  });
+}
+
+
+
+// Evento para gregar producto
+formProducto.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const inputNombre = document.getElementById("nombre-producto");
+  calculadora.nombreProducto = inputNombre.value.trim();
+  localStorage.setItem("nombreProducto", calculadora.nombreProducto);
+  inputNombre.value = "";
+});
+
+// Evento para agregar material
+formProducto.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const nombre = document.getElementById("nombre-material").value.trim();
+  const costoUnitario = parseFloat(document.getElementById("costo-material").value);
+  const cantidad = parseFloat(document.getElementById("cantidad").value);
+  const unidad = document.getElementById("unidad-material").value;
+  const unidadesPorSeleccionada = parseFloat(document.getElementById("cantidad-equivalente").value);
+
+  if (nombre && !isNaN(costoUnitario) && !isNaN(cantidad) && unidad && !isNaN(unidadesPorSeleccionada)) {
+    const material = { nombre, costoUnitario, cantidad, unidad, unidadesPorSeleccionada };
+    calculadora.agregarMaterial(material);
+    mostrarMaterialEnTabla(material);
+    guardarDatosEnStorage();
+
+    // Se limpian los campos
+    formProducto.reset();
   }
-  break;
+});
 
-  // Agregar gastos fijos
-  case "2":
-       let seguirGasto = true;
-        while (seguirGasto) {
-    let concepto = prompt("Ingrese el concepto del gasto fijo (ej: Alquiler):");
-    let costo = parseFloat(prompt(`Ingrese el costo del gasto fijo ${concepto} (ej: $1000.00): `));
-    
-    if (!concepto || isNaN(costo)) {
-      alert("Por favor, ingrese un valor numérico válido.");
-    }else{
+// Evento para aggregar gasto fijo
+formGastoFijo.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const concepto = document.getElementById("concepto-fijo").value.trim();
+  const costo = parseFloat(document.getElementById("costo-fijo").value);
+
+  if (concepto && !isNaN(costo)) {
     calculadora.agregarGastoFijo(concepto, costo);
-     alert(" Gasto fijo agregado correctamente.");
-    }
-    seguirGasto = confirm("¿Quiere agregar otro gasto?");
+    mostrarGastoFijoEnTabla({ concepto, costo });
+    guardarDatosEnStorage();
+
+    formGastoFijo.reset();
   }
-  break;
+});
 
-case "3":
-  gananciaPorcentual = parseFloat(prompt("Ingrese el porcentaje de ganancia que desee (ej: 25%):"));
-   cantidadProduccion = parseInt(prompt("Ingrese la cantidad total a producir (ej: 200):"));
+// Evento para calcular los costos finales
+formCalculadora.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const gananciaPorcentual = parseFloat(document.getElementById("ganancia").value);
+  const cantidadProduccion = parseInt(document.getElementById("cantidadTotal").value);
 
-  if (isNaN(cantidadProduccion) || isNaN(gananciaPorcentual) || cantidadProduccion <= 0) {
-    alert("Cantidad o ganancia ingresadas inválidas.");
-  }else{
-    alert("Valores guardados correctamente")
+  if (!isNaN(gananciaPorcentual) && !isNaN(cantidadProduccion) && cantidadProduccion > 0) {
+    const resumen = calculadora.generarResumen(gananciaPorcentual, cantidadProduccion);
+
+    // Se muestran los resultados
+    const totalVariables = calculadora.calcularCostoMaterialesTotal(cantidadProduccion);
+    const totalFijos = calculadora.calcularGastosFijos();
+    const costoTotal = totalVariables + totalFijos;
+    const costoTotalConGanancia = costoTotal * (1 + gananciaPorcentual / 100);
+    const costoUnidad = costoTotalConGanancia / cantidadProduccion;
+
+    totalVariablesDOM.textContent = `$${totalVariables.toFixed(2)}`;
+totalFijosDOM.textContent = `$${totalFijos.toFixed(2)}`;
+costoTotalDOM.textContent = `$${costoTotalConGanancia.toFixed(2)}`;
+costoGananciaDOM.textContent = `$${costoUnidad.toFixed(2)}`;
   }
-    break;
-  
-    case "4":
-      if (calculadora.materiales.length === 0 || calculadora.gastosFijos.length === 0) {
-          alert("Debe agregar al menos un material y un gasto fijo antes de calcular.");
-        } else if (gananciaPorcentual === null || cantidadProduccion === null) {
-          alert("Debe ingresar la ganancia y la cantidad a producir antes de calcular.");
-        } else {
-          const resumen = calculadora.generarResumen(gananciaPorcentual, cantidadProduccion);
-          alert(resumen);
-        }
-        break;
-
-         case "5":
-        salir = true;
-        alert("Gracias por usar CostoPro.");
-        break;
-
-      default:
-        alert("Opción inválida. Ingrese un número del 1 al 5.");
-        break;
-}
-  }
-}
-iniciarCalculadora(); 
+});
