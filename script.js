@@ -64,8 +64,6 @@ function recuperarDatosPrevios() {
   });
 }
 
-
-
 // Evento para gregar producto
 formProducto.addEventListener("submit", function (e) {
   e.preventDefault();
