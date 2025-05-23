@@ -64,7 +64,7 @@ function recuperarDatosPrevios() {
 }
 
 function mostrarMaterialesEnTabla() {
-  tablaMateriales.innerHTML = ""; 
+
 
   calculadora.materiales.forEach(material => {
     mostrarMaterialEnTabla(material);
