@@ -12,7 +12,6 @@ const costoTotalDOM = document.getElementById("costo-total");
 const costoGananciaDOM = document.getElementById("costo-ganancia");
 
 // Se crea la instancia de la calculadora
-let nombreProducto = localStorage.getItem("nombreProducto") || "Producto sin nombre";
 let calculadora = new Calculadora(nombreProducto);
 
 // Se cargan los datos previos guardados 
@@ -43,7 +42,6 @@ function mostrarGastoFijoEnTabla(gasto) {
 
 // Se guardan datos actualizados 
 function guardarDatosEnStorage() {
-  localStorage.setItem("nombreProducto", calculadora.nombreProducto);
   localStorage.setItem("materiales", JSON.stringify(calculadora.materiales));
   localStorage.setItem("gastosFijos", JSON.stringify(calculadora.gastosFijos));
 }
@@ -64,14 +62,6 @@ function recuperarDatosPrevios() {
   });
 }
 
-// Evento para gregar producto
-formProducto.addEventListener("submit", function (e) {
-  e.preventDefault();
-  const inputNombre = document.getElementById("nombre-producto");
-  calculadora.nombreProducto = inputNombre.value.trim();
-  localStorage.setItem("nombreProducto", calculadora.nombreProducto);
-  inputNombre.value = "";
-});
 
 // Evento para agregar material
 formProducto.addEventListener("submit", function (e) {
