@@ -76,35 +76,6 @@
 </div>
     
         <form>
-          <div class ="row">
-            <div class ="col-12 col-md-6 mb-3">
-          <label for = "nombre-producto" class="form-label">Nombre del producto:</label>
-          <input type="text" class="form-control" id="nombre-producto" name="nombre-producto" placeholder="Ejemplo: Mesa" required>
-          </div>
-        </div>
-
-        <button type="submit" class="btn btn-outline-info mt-3" data-bs-toggle="modal" data-bs-target="#agregarProducto">
-          Agregar producto
-        </button>
-    
-    <div class="modal fade" id="agregarProducto" tabindex="-1" aria-labelledby="agregarProductoLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="agregarProductoLabel">Producto agregado correctamente.</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-          </div>
-          <div class="modal-body">
-            <p>Continua agregando los gastos variables y fijos </p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-      
     
           <h4>Gastos Variables (por unidad)</h4>
           <p>Aquí podrás agregar los costos relacionados con los materiales y cantidades necesarias para producir una unidad de producto</p>
@@ -167,36 +138,27 @@
      <section id="materiales-variables" class="container my-5">
       <h3 class="text-center mb-4">Lista de materiales</h3>
      
-      <div class="table-container">
-      <div class="table-responsive">
-    <table id ="tabla-materiales" class="table table-bordered table-striped">
-        <thead class="table-primary">
-          <tr>
-        <th>Material</th>
-        <th>Costo</th>
-        <th>Cantidad</th>
-      </tr>
-      </thead>
-    <tbody>
-    <tr>
-        <td> </td>
-        <td id = "material-1">$0.00</td>
-        <td></td> 
-      </tr>
+<div class="table-container">
+  <div class="table-responsive">
+    <table id="tabla-materiales" class="table table-bordered table-striped">
+      <thead class="table-primary">
         <tr>
-          <td> </td>
-        <td id = "material-2">$0.00</td>
-        <td> </td> 
-      </tr>
-    </tbody>
-  </table>
+          <th>Material</th>
+          <th>Costo</th>
+          <th>Cantidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td id="material-1">$0.00</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
-
-  <div class="text-end">
-    <button class="btn btn-primary">Paso siguiente >></button>
-  </div>
 </section>
 
     <section id="gastos-fijos">
@@ -261,17 +223,11 @@
         <td> </td>
         <td id = "gasto-1">$0.00</td>
       </tr>
-        <tr>
-          <td> </td>
-        <td id = "gasto-2">$0.00</td>
-      </tr>
+
     </tbody>
     </table>
   </div>
 
-  <div class="text-end">
-    <button class="btn btn-primary">Paso siguiente >></button>
-  </div>
     </section>
 
     <!--Seccion Calculadora-->
@@ -299,7 +255,28 @@
 </div>
 
       <!-- Botón para calcular el costo total -->
-        <button type="submit" class="btn btn-success">Calcular Costo Total</button>
+     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#calcular-costos-finales">
+  Calcular Costo Total
+</button>
+
+
+        
+<div class="modal fade" id="calcular-costos-finales" tabindex="-1" aria-labelledby="calcular-costos-finales" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+  </div>
+  <div class="modal-body">
+    <p>Los cálculos se realizaron correctamente.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+  </div>
+</div>
+</div>
+</div>
+
     </form>
   </div>
 </section>
