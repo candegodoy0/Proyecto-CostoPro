@@ -12,7 +12,7 @@ const costoTotalDOM = document.getElementById("costo-total");
 const costoGananciaDOM = document.getElementById("costo-ganancia");
 
 // Se crea la instancia de la calculadora
-let calculadora = new Calculadora(nombreProducto);
+let calculadora = new Calculadora();
 
 // Se cargan los datos previos guardados 
 recuperarDatosPrevios();
