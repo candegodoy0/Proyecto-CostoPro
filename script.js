@@ -64,8 +64,6 @@ function recuperarDatosPrevios() {
 }
 
 function mostrarMaterialesEnTabla() {
-
-
   calculadora.materiales.forEach(material => {
     mostrarMaterialEnTabla(material);
   });
@@ -84,13 +82,18 @@ formProducto.addEventListener("submit", function (e) {
   if (nombre && !isNaN(costoUnitario) && !isNaN(cantidad) && unidad && !isNaN(unidadesPorSeleccionada)) {
     const material = { nombre, costoUnitario, cantidad, unidad, unidadesPorSeleccionada };
     calculadora.agregarMaterial(material);
-    mostrarMaterialesEnTabla(); 
+    mostrarMaterialEnTabla(material);
     guardarDatosEnStorage();
 
     //Se limpian los campos
     formProducto.reset();
+
+     // Se muestra modal dependiendo si se completaron o no los campos
+  const modalMaterial = new bootstrap.Modal(document.getElementById('agregarMaterial'));
+  modalMaterial.show();
+} 
   }
-});
+);
 
 // Evento para  aregar gasto fijo
 formGastoFijo.addEventListener("submit", function (e) {
@@ -104,6 +107,10 @@ formGastoFijo.addEventListener("submit", function (e) {
     guardarDatosEnStorage();
 
     formGastoFijo.reset();
+
+     // Mostrar modal manualmente
+  const modalGasto = new bootstrap.Modal(document.getElementById('agregarGasto'));
+  modalGasto.show();
   }
 });
 
@@ -127,5 +134,9 @@ totalVariablesDOM.textContent = `$${totalVariables.toFixed(2)}`;
 totalFijosDOM.textContent = `$${totalFijos.toFixed(2)}`;
 costoTotalDOM.textContent = `$${costoTotalConGanancia.toFixed(2)}`;
 costoGananciaDOM.textContent = `$${costoUnidad.toFixed(2)}`;
+
+// Se muestra modal dependiendo si se completaron o no los campos
+    const modalFinal = new bootstrap.Modal(document.getElementById('calculosFinales'));
+modalFinal.show();
   }
 });
