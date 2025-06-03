@@ -38,6 +38,7 @@ class Calculadora{
     return this.gastosFijos.reduce((total, gasto) => total + gasto.costo, 0);
   }
 
+ // SE Genera un resumen de los cálculos en formato objeto (desacoplado del DOM)
   generarResumen(gananciaPorcentual, cantidadProduccion) {
     const totalVariables = this.calcularCostoMaterialesTotal(cantidadProduccion);
     const totalFijos = this.calcularGastosFijos();
@@ -45,24 +46,51 @@ class Calculadora{
     const costoTotalConGanancia = costoTotal * (1 + gananciaPorcentual / 100);
     const costoPorUnidadConGanancia = costoTotalConGanancia / cantidadProduccion;
 
-    // Mensaje para mostrar al usuario de manera inmediata los resultados de los calculos 
-    let mensaje = "CÁLCULO FINALIZADO\n";
-    mensaje += "Cantidad a producir: " + cantidadProduccion + "\n";
-    mensaje += "Materiales: ";
-
-    for (let i = 0; i < this.materiales.length; i++) {
-      const material = this.materiales[i];
-      mensaje += material.nombre + ": $" + material.calcularCostoTotal();
-      if (i < this.materiales.length - 1) mensaje += " | ";
-    }
-
-    mensaje += `\n| Total gastos variables: $${totalVariables} |`;
-    mensaje += `\n| Total gastos fijos: $${totalFijos} |`;
-    mensaje += `\n| Costo final (con ganancia) para ${cantidadProduccion} unidades: $${costoTotalConGanancia} |`;
-    mensaje += `\n| Costo por unidad (con ganancia): $${costoPorUnidadConGanancia} |`;
-
-    return mensaje;
+    return {
+      cantidadProduccion,
+      totalVariables,
+      totalFijos,
+      costoTotal,
+      costoTotalConGanancia,
+      costoPorUnidadConGanancia,
+      materiales: this.materiales.map((m) => ({
+        nombre: m.nombre,
+        costoTotal: m.calcularCostoTotal(),
+        unidad: m.unidad,
+        cantidad: m.cantidad,
+        costoUnitario: m.costoUnitario
+      })),
+      gastosFijos: this.gastosFijos.map((g) => ({
+        concepto: g.concepto,
+        costo: g.costo
+      }))
+    };
   }
+
+  vaciarMateriales() {
+    this.materiales = [];
+  }
+
+  vaciarGastosFijos() {
+    this.gastosFijos = [];
+  }
+
+  eliminarMaterial(index) {
+  this.materiales.splice(index, 1);
 }
 
-export default Calculadora
+eliminarGastoFijo(index) {
+  this.gastosFijos.splice(index, 1);
+}
+
+isMaterialsEmpty() {
+  return this.materiales.length === 0;
+}
+
+isGastosFijosEmpty() {
+  return this.gastosFijos.length === 0;
+}
+
+}
+
+export default Calculadora;
