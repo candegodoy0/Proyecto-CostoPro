@@ -21,6 +21,13 @@ recuperarDatosPrevios();
 
 // FUNCIONES
 
+function mostrarResumenEnPantalla(resumen) {
+  totalVariablesDOM.textContent = `$${resumen.totalVariables.toFixed(2)}`;
+  totalFijosDOM.textContent = `$${resumen.totalFijos.toFixed(2)}`;
+  costoTotalDOM.textContent = `$${resumen.costoTotal.toFixed(2)}`;
+  costoGananciaDOM.textContent = `$${resumen.costoTotalConGanancia.toFixed(2)}`;
+}
+
 /**
  * se agrega una fila a la tabla de materiales con los datos del material
  * y botones para editar o eliminar
@@ -78,8 +85,13 @@ function recuperarDatosPrevios() {
   const materialesGuardados = JSON.parse(localStorage.getItem("materiales")) || [];
   const gastosFijosGuardados = JSON.parse(localStorage.getItem("gastosFijos")) || [];
 
-  calculadora.materiales = materialesGuardados;
-  calculadora.gastosFijos = gastosFijosGuardados;
+  calculadora.materiales = materialesGuardados.map(obj => 
+    new Material(obj.nombre, obj.costoUnitario, obj.cantidad, obj.unidad, obj.unidadesPorSeleccionada)
+  );
+
+  calculadora.gastosFijos = gastosFijosGuardados.map(obj => 
+    new GastoFijo(obj.concepto, obj.costo)
+  );
 
   actualizarTablaMateriales();
   actualizarTablaGastosFijos();
@@ -97,32 +109,67 @@ function actualizarTablaGastosFijos() {
   calculadora.gastosFijos.forEach((g, i) => mostrarGastoFijoEnTabla(g, i));
 }
 
+function validarMaterial({ nombre, costoUnitario, cantidad, unidad, unidadesPorSeleccionada }) {
+  return (
+    nombre &&
+    !isNaN(costoUnitario) && costoUnitario > 0 &&
+    !isNaN(cantidad) && cantidad > 0 &&
+    unidad &&
+    !isNaN(unidadesPorSeleccionada) && unidadesPorSeleccionada > 0
+  );
+}
+
+function confirmarVaciar({ tabla, onConfirm, colspan, mensaje }) {
+  tabla.innerHTML = "";
+  const filaConfirmacion = document.createElement("tr");
+  filaConfirmacion.innerHTML = `
+    <td colspan="${colspan}" class="text-center text-danger">
+      ${mensaje}
+      <button class="btn btn-danger btn-sm btn-confirmar-vaciar">Confirmar</button>
+      <button class="btn btn-secondary btn-sm btn-cancelar-vaciar">Cancelar</button>
+    </td>
+  `;
+  tabla.appendChild(filaConfirmacion);
+  filaConfirmacion.querySelector(".btn-confirmar-vaciar").addEventListener("click", () => {
+    onConfirm();
+  });
+  filaConfirmacion.querySelector(".btn-cancelar-vaciar").addEventListener("click", () => {
+    if (tabla === tablaMateriales) {
+      actualizarTablaMateriales();
+    } else {
+      actualizarTablaGastosFijos();
+    }
+  });
+}
+
 // Evento para agregar material
-// Valida los datos, agrega el material, actualiza la tabla y guarda en localStorage
+
 formProducto.addEventListener("submit", function (e) {
   e.preventDefault();
+
   const nombre = document.getElementById("nombre-material").value.trim();
   const costoUnitario = parseFloat(document.getElementById("costo-material").value);
   const cantidad = parseFloat(document.getElementById("cantidad").value);
-  const unidad = document.getElementById("unidad-material").value;
+  const unidad = document.getElementById("unidad-material").value.trim();
   const unidadesPorSeleccionada = parseFloat(document.getElementById("cantidad-equivalente").value);
 
-  if (nombre && !isNaN(costoUnitario) && !isNaN(cantidad) && unidad && !isNaN(unidadesPorSeleccionada)) {
-    const material = { nombre, costoUnitario, cantidad, unidad, unidadesPorSeleccionada };
-    calculadora.agregarMaterial(material);
-   actualizarTablaMateriales(); 
-    guardarDatosEnStorage();
+  const mensajeError = document.getElementById("mensaje-error-material");
 
-    //Se limpian los campos
-    formProducto.reset();
+const material = { nombre, costoUnitario, cantidad, unidad, unidadesPorSeleccionada };
 
-     // Se muestra modal dependiendo si se completaron o no los campos
+if (validarMaterial(material)) {
+  // es válido
+  mensajeError.textContent = "";
+  calculadora.agregarMaterial(material);
+  actualizarTablaMateriales();
+  guardarDatosEnStorage();
+  formProducto.reset();
   const modalMaterial = new bootstrap.Modal(document.getElementById('agregarMaterial'));
   modalMaterial.show();
-} 
+} else {
+  mensajeError.textContent = "Por favor, completá todos los campos correctamente y con valores mayores a cero.";
   }
-);
-
+});
 
 //Evento para editar material
 tablaMateriales.addEventListener("click", (e) => {
@@ -138,7 +185,7 @@ tablaMateriales.addEventListener("click", (e) => {
     document.getElementById("cantidad-equivalente").value = m.unidadesPorSeleccionada;
 
     // Eliminar y esperar nuevo submit
-    calculadora.materiales.splice(index, 1);
+    calculadora.eliminarMaterial(index);
     guardarDatosEnStorage();
     actualizarTablaMateriales();
   }
@@ -155,7 +202,7 @@ tablaGastosFijos.addEventListener("click", (e) => {
     document.getElementById("concepto-fijo").value = g.concepto;
     document.getElementById("costo-fijo").value = g.costo;
 
-    calculadora.gastosFijos.splice(index, 1);
+    calculadora.eliminarGastoFijo(index);
     guardarDatosEnStorage();
     actualizarTablaGastosFijos();
   }
@@ -179,7 +226,7 @@ tablaMateriales.addEventListener("click", (e) => {
     `;
 
     fila.querySelector(".btn-confirmar").addEventListener("click", () => {
-      calculadora.materiales.splice(index, 1);
+      calculadora.eliminarMaterial(index);
       guardarDatosEnStorage();
       actualizarTablaMateriales();
     });
@@ -208,7 +255,7 @@ tablaGastosFijos.addEventListener("click", (e) => {
     `;
 
     fila.querySelector(".btn-confirmar").addEventListener("click", () => {
-      calculadora.gastosFijos.splice(index, 1);
+      calculadora.eliminarGastoFijo(index);
       guardarDatosEnStorage();
       actualizarTablaGastosFijos();
     });
@@ -227,17 +274,20 @@ formGastoFijo.addEventListener("submit", function (e) {
   const concepto = document.getElementById("concepto-fijo").value.trim();
   const costo = parseFloat(document.getElementById("costo-fijo").value);
 
-  if (concepto && !isNaN(costo)) {
+  try {
     calculadora.agregarGastoFijo(concepto, costo);
-  actualizarTablaGastosFijos();
+    actualizarTablaGastosFijos();
     guardarDatosEnStorage();
-
     formGastoFijo.reset();
 
      // Mostrar modal manualmente
   const modalGasto = new bootstrap.Modal(document.getElementById('agregarGasto'));
   modalGasto.show();
-  }
+
+  } catch (error) {
+    console.error(error);
+    // Mostrar un mensaje de error al usuario
+  }
 });
 
 // Evento para calcular costos totales de producción
@@ -256,77 +306,48 @@ formCalculadora.addEventListener("submit", function (e) {
   }
 
   // se validan datos de ganancia y cantidad de producción
-  if (!isNaN(gananciaPorcentual) && !isNaN(cantidadProduccion) && cantidadProduccion > 0) {
+if (!isNaN(gananciaPorcentual) && !isNaN(cantidadProduccion) && cantidadProduccion > 0) {
+    // Se llama a generarResumen, que devuelve todos los calculos hechos
     const resumen = calculadora.generarResumen(gananciaPorcentual, cantidadProduccion);
 
-    const totalVariables = calculadora.calcularCostoMaterialesTotal(cantidadProduccion);
-    const totalFijos = calculadora.calcularGastosFijos();
-    const costoTotal = totalVariables + totalFijos;
-    const costoTotalConGanancia = costoTotal * (1 + gananciaPorcentual / 100);
-    const costoUnidad = costoTotalConGanancia / cantidadProduccion;
-
-    totalVariablesDOM.textContent = `$${totalVariables.toFixed(2)}`;
-    totalFijosDOM.textContent = `$${totalFijos.toFixed(2)}`;
-    costoTotalDOM.textContent = `$${costoTotalConGanancia.toFixed(2)}`;
-    costoGananciaDOM.textContent = `$${costoUnidad.toFixed(2)}`;
-
+    mostrarResumenEnPantalla(resumen);
+}
     const modalFinal = new bootstrap.Modal(document.getElementById('calculosFinales'));
     modalFinal.show();
   }
-});
+)
 
 // Vacía completamente la lista de materiales después de una confirmación del usuario
 document.getElementById("vaciar-materiales").addEventListener("click", function () {
-  if (calculadora.materiales.length === 0) {
-    return; 
+  if (calculadora.isMaterialesEmpty()) {
+    return;
   }
-  
-  const filaConfirmacion = document.createElement("tr");
-  filaConfirmacion.innerHTML = `
-    <td colspan="4" class="text-center text-danger">
-      ¿Seguro que quieres vaciar todos los materiales?
-      <button class="btn btn-danger btn-sm btn-confirmar-vaciar">Confirmar</button>
-      <button class="btn btn-secondary btn-sm btn-cancelar-vaciar">Cancelar</button>
-    </td>
-  `;
-  tablaMateriales.innerHTML = "";
-  tablaMateriales.appendChild(filaConfirmacion);
-
-  filaConfirmacion.querySelector(".btn-confirmar-vaciar").addEventListener("click", () => {
-    calculadora.materiales = [];
-    guardarDatosEnStorage();
-    actualizarTablaMateriales();
-  });
-
-  filaConfirmacion.querySelector(".btn-cancelar-vaciar").addEventListener("click", () => {
-    actualizarTablaMateriales();
+  confirmarVaciar({
+    tabla: tablaMateriales,
+    onConfirm: () => {
+      calculadora.vaciarMateriales();
+      guardarDatosEnStorage();
+      actualizarTablaMateriales();
+    },
+    colspan: 4,
+    mensaje: "¿Seguro que quieres vaciar todos los materiales?"
   });
 });
 
+
 // Vacía completamente la lista de gastos fijos después de una confirmación del usuario
 document.getElementById("vaciar-gastos").addEventListener("click", function () {
-  if (calculadora.gastosFijos.length === 0) {
+  if (calculadora.isGastosFijosEmpty()) {
     return;
   }
-  
-  const filaConfirmacion = document.createElement("tr");
-  filaConfirmacion.innerHTML = `
-    <td colspan="3" class="text-center text-danger">
-      ¿Seguro que quieres vaciar todos los gastos fijos?
-      <button class="btn btn-danger btn-sm btn-confirmar-vaciar">Confirmar</button>
-      <button class="btn btn-secondary btn-sm btn-cancelar-vaciar">Cancelar</button>
-    </td>
-  `;
-  tablaGastosFijos.innerHTML = "";
-  tablaGastosFijos.appendChild(filaConfirmacion);
-
-  filaConfirmacion.querySelector(".btn-confirmar-vaciar").addEventListener("click", () => {
-    calculadora.gastosFijos = [];
-    guardarDatosEnStorage();
-    actualizarTablaGastosFijos();
-  });
-
-  filaConfirmacion.querySelector(".btn-cancelar-vaciar").addEventListener("click", () => {
-    actualizarTablaGastosFijos();
-  });
+  confirmarVaciar({
+    tabla: tablaGastosFijos,
+    onConfirm: () => {
+      calculadora.vaciarGastosFijos();
+      guardarDatosEnStorage();
+      actualizarTablaGastosFijos();
+    },
+    colspan: 3,
+    mensaje: "¿Seguro que quieres vaciar todos los gastos fijos?"
+  });
 });
