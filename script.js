@@ -1,11 +1,12 @@
 import Calculadora from './Calculadora.js';
+import GastoFijo from './GastoFijo.js';
+import Material from './Material.js';
 
 
 // formularios y elementos del DOM utilizados 
 const formProducto = document.querySelector("#producto form");
 const formGastoFijo =   document.querySelector("#gastos-fijos form");
 const formCalculadora = document.querySelector("#calculadora form");
-
 const tablaMateriales = document.querySelector("#tabla-materiales tbody");
 const tablaGastosFijos = document.querySelector("#tabla-gastos-fijos tbody");
 const totalVariablesDOM = document.getElementById("total-variables");
@@ -15,6 +16,17 @@ const costoGananciaDOM = document.getElementById("costo-ganancia");
 
 // Se crea la instancia de la calculadora
 let calculadora = new Calculadora();
+
+let indiceGastoAEditar = null;
+let indiceEditandoMaterial  = null; // Para saber si estamos editanto un material
+
+function refrescarUI(){
+  actualizarTablaGastosFijos();
+  actualizarTablaMateriales();
+  guardarDatosEnStorage();
+}
+
+calculadora.subscriber(refrescarUI);
   
 // Recuperar materiales y gastos fijos previamente guardados en localStorage
 recuperarDatosPrevios();
@@ -84,29 +96,14 @@ function guardarDatosEnStorage() {
 function recuperarDatosPrevios() {
   const materialesGuardados = JSON.parse(localStorage.getItem("materiales")) || [];
   const gastosFijosGuardados = JSON.parse(localStorage.getItem("gastosFijos")) || [];
-
   calculadora.materiales = materialesGuardados.map(obj => 
     new Material(obj.nombre, obj.costoUnitario, obj.cantidad, obj.unidad, obj.unidadesPorSeleccionada)
   );
-
   calculadora.gastosFijos = gastosFijosGuardados.map(obj => 
     new GastoFijo(obj.concepto, obj.costo)
   );
 
-  actualizarTablaMateriales();
-  actualizarTablaGastosFijos();
-}
-
-// se limpia y actualiza la tabla de materiales con los datos actuales
-function actualizarTablaMateriales() {
-  tablaMateriales.innerHTML = "";
-  calculadora.materiales.forEach((m, i) => mostrarMaterialEnTabla(m, i));
-}
-
-// se limpia y actualiza la tabla de gastos fijos con los datos actuales
-function actualizarTablaGastosFijos() {
-  tablaGastosFijos.innerHTML = "";
-  calculadora.gastosFijos.forEach((g, i) => mostrarGastoFijoEnTabla(g, i));
+  refrescarUI();
 }
 
 function validarMaterial({ nombre, costoUnitario, cantidad, unidad, unidadesPorSeleccionada }) {
@@ -117,6 +114,10 @@ function validarMaterial({ nombre, costoUnitario, cantidad, unidad, unidadesPorS
     unidad &&
     !isNaN(unidadesPorSeleccionada) && unidadesPorSeleccionada > 0
   );
+}
+
+function validarGasto({ nombre, valor }) {
+  return nombre.trim() !== "" && !isNaN(valor) && valor > 0;
 }
 
 function confirmarVaciar({ tabla, onConfirm, colspan, mensaje }) {
@@ -142,32 +143,49 @@ function confirmarVaciar({ tabla, onConfirm, colspan, mensaje }) {
   });
 }
 
-// Evento para agregar material
+function actualizarTablaMateriales() {
+  tablaMateriales.innerHTML = "";
+  calculadora.materiales.forEach((material, index) => {
+    mostrarMaterialEnTabla(material, index);
+  });
+}
 
+function actualizarTablaGastosFijos() {
+  tablaGastosFijos.innerHTML = "";
+  calculadora.gastosFijos.forEach((gasto, index) => {
+    mostrarGastoFijoEnTabla(gasto, index);
+  });
+}
+
+// Evento para agregar material
 formProducto.addEventListener("submit", function (e) {
   e.preventDefault();
-
   const nombre = document.getElementById("nombre-material").value.trim();
   const costoUnitario = parseFloat(document.getElementById("costo-material").value);
   const cantidad = parseFloat(document.getElementById("cantidad").value);
   const unidad = document.getElementById("unidad-material").value.trim();
   const unidadesPorSeleccionada = parseFloat(document.getElementById("cantidad-equivalente").value);
-
   const mensajeError = document.getElementById("mensaje-error-material");
-
-const material = { nombre, costoUnitario, cantidad, unidad, unidadesPorSeleccionada };
-
-if (validarMaterial(material)) {
-  // es válido
-  mensajeError.textContent = "";
-  calculadora.agregarMaterial(material);
-  actualizarTablaMateriales();
-  guardarDatosEnStorage();
-  formProducto.reset();
-  const modalMaterial = new bootstrap.Modal(document.getElementById('agregarMaterial'));
-  modalMaterial.show();
-} else {
-  mensajeError.textContent = "Por favor, completá todos los campos correctamente y con valores mayores a cero.";
+  const material = { nombre, costoUnitario, cantidad, unidad, unidadesPorSeleccionada };
+  if (validarMaterial(material)) {
+    mensajeError.textContent = "";
+    if (indiceEditandoMaterial !== null) {
+      // SI SE ESTA editando, actualizamos el material
+      calculadora.materiales[indiceEditandoMaterial] = material;
+      indiceEditandoMaterial = null;
+      document.querySelector("#producto button[type='submit']").textContent = "Agregar material";
+    } else {
+      // SI NO SE ESTA editando, agregamos uno nuevo
+      calculadora.agregarMaterial(material);
+    }
+    actualizarTablaMateriales();
+    guardarDatosEnStorage();
+    formProducto.reset(); 
+    // SE MUESTRA MODAL
+    const modalMaterial = new bootstrap.Modal(document.getElementById('agregarMaterial'));
+    modalMaterial.show();
+  } else {
+    mensajeError.textContent = "Por favor, completá todos los campos correctamente y con valores mayores a cero.";
   }
 });
 
@@ -177,31 +195,31 @@ tablaMateriales.addEventListener("click", (e) => {
     const index = parseInt(e.target.dataset.index);
     const m = calculadora.materiales[index];
 
-   // Prellena el formulario con los datos y elimina temporalmente el material para reemplazarlo
     document.getElementById("nombre-material").value = m.nombre;
     document.getElementById("costo-material").value = m.costoUnitario;
     document.getElementById("cantidad").value = m.cantidad;
     document.getElementById("unidad-material").value = m.unidad;
     document.getElementById("cantidad-equivalente").value = m.unidadesPorSeleccionada;
 
-    // Eliminar y esperar nuevo submit
+    indiceEditandoMaterial = index;
+
+    // Se cambia el texto del botón para que noo diga agregar
+    document.querySelector("#producto button[type='submit']").textContent = "Actualizar material";
+  }
+   // Eliminar y esperar nuevo submit
     calculadora.eliminarMaterial(index);
     guardarDatosEnStorage();
     actualizarTablaMateriales();
-  }
 });
-
 
 // Evento para editar gasto fijo
 tablaGastosFijos.addEventListener("click", (e) => {
-// Prellena el formulario y elimina el gasto para reemplazarlo
+  // Prellena el formulario y elimina el gasto para reemplazarlo
   if (e.target.dataset.tipo === "editar-gasto") {
     const index = parseInt(e.target.dataset.index);
-    const g = calculadora.gastosFijos[index];
-
-    document.getElementById("concepto-fijo").value = g.concepto;
-    document.getElementById("costo-fijo").value = g.costo;
-
+    const gasto = calculadora.gastosFijos[index]; // Corregido
+    document.getElementById("concepto-fijo").value = gasto.concepto; // Actualizado
+    document.getElementById("costo-fijo").value = gasto.costo; // Actualizado
     calculadora.eliminarGastoFijo(index);
     guardarDatosEnStorage();
     actualizarTablaGastosFijos();
@@ -238,12 +256,11 @@ tablaMateriales.addEventListener("click", (e) => {
 });
 
 tablaGastosFijos.addEventListener("click", (e) => {
-  // se confirma con el usuario antes de eliminar un gasto fijo
-// se muestra botones de "Confirmar" y "Cancelar" en la fila
-  if (e.target.dataset.tipo === "gasto") {
-    const fila = e.target.closest("tr");
-    const index = parseInt(e.target.dataset.index);
+  const index = parseInt(e.target.dataset.index);
+  const fila = e.target.closest("tr");
 
+  // confirmar eliminación de gasto
+  if (e.target.dataset.tipo === "gasto") {
     if (fila.querySelector(".btn-confirmar")) return;
 
     fila.innerHTML = `
@@ -266,29 +283,39 @@ tablaGastosFijos.addEventListener("click", (e) => {
   }
 });
 
-
 // Evento para  aregar gasto fijo
-// se valida los datos, los agrega y actualiza la tabla y el localStorage
 formGastoFijo.addEventListener("submit", function (e) {
   e.preventDefault();
-  const concepto = document.getElementById("concepto-fijo").value.trim();
-  const costo = parseFloat(document.getElementById("costo-fijo").value);
 
-  try {
-    calculadora.agregarGastoFijo(concepto, costo);
+  const nombre = document.getElementById("concepto-fijo").value;
+  const valor = parseFloat(document.getElementById("costo-fijo").value);
+  const mensajeError = document.getElementById("mensaje-error-gasto");
+
+  const gasto = { nombre, valor};
+
+  if (validarGasto(gasto)) {
+    mensajeError.textContent = "";
+
+    if (indiceGastoAEditar !== null) {
+      calculadora.gastosFijos[indiceGastoAEditar] = gasto;
+      indiceGastoAEditar = null;
+
+      const boton = document.querySelector("#gastoFijo button[type='submit']");
+      boton.textContent = "Agregar gasto fijo";
+    } else {
+      calculadora.agregarGastoFijo(nombre, valor);
+    }
+
     actualizarTablaGastosFijos();
     guardarDatosEnStorage();
     formGastoFijo.reset();
 
-     // Mostrar modal manualmente
-  const modalGasto = new bootstrap.Modal(document.getElementById('agregarGasto'));
-  modalGasto.show();
-
-  } catch (error) {
-    console.error(error);
-    // Mostrar un mensaje de error al usuario
-  }
-});
+    const modalGasto = new bootstrap.Modal(document.getElementById('agregarGasto'));
+    modalGasto.show();
+  } else {
+    mensajeError.textContent = "Por favor, completá todos los campos correctamente y con valores mayores a cero.";
+  }
+  });
 
 // Evento para calcular costos totales de producción
 // se aplivca ganancia porcentual y muestra resultados 

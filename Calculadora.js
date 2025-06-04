@@ -7,23 +7,30 @@ class Calculadora{
     constructor() {
     this.materiales = [];
     this.gastosFijos = [];
+    this.subscribers = [];
   }
 
-  /*
-- Función para agregar materiales necesarios para fabricar una unidad de producto.
-- El usuario puede ingresar uno o mas materiales.
-- Cada material tiene un nombre, costo por unidad, cantidad necesaria, y costo total.
-*/
+  subscriber(fn){
+    this.subscribers.push(fn);
+  }
+
+  notify(){
+  this.subscribers.forEach(fn => fn());
+  }
+
+  //Función para agregar materiales necesarios para fabricar una unidad de producto//
 
    agregarMaterial({ nombre, costoUnitario, cantidad, unidad, unidadesPorSeleccionada }) {
     // Se agrega el material al array con los datos necesarios
     this.materiales.push(new Material(nombre, costoUnitario, cantidad, unidad, unidadesPorSeleccionada));
+    this.notify();
   }
 
   //Función para ingresar los gastos fijos que no dependen de la cantidad producida. Ejemplo: alquiler, sueldos, etc.//
   agregarGastoFijo(concepto, costo) {
      // Se agrega el gasto fijo al array
     this.gastosFijos.push(new GastoFijo(concepto, costo));
+    this.notify();
   }
 
   calcularCostoMaterialesUnitario() {
@@ -69,21 +76,25 @@ class Calculadora{
 
   vaciarMateriales() {
     this.materiales = [];
+    this.notify();
   }
 
   vaciarGastosFijos() {
     this.gastosFijos = [];
+    this.notify();
   }
 
   eliminarMaterial(index) {
   this.materiales.splice(index, 1);
+  this.notify();
 }
 
 eliminarGastoFijo(index) {
   this.gastosFijos.splice(index, 1);
+  this.notify();
 }
 
-isMaterialsEmpty() {
+isMaterialesEmpty() {
   return this.materiales.length === 0;
 }
 
