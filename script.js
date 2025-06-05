@@ -116,8 +116,8 @@ function validarMaterial({ nombre, costoUnitario, cantidad, unidad, unidadesPorS
   );
 }
 
-function validarGasto({ nombre, valor }) {
-  return nombre.trim() !== "" && !isNaN(valor) && valor > 0;
+function validarGasto({ concepto, costo }) {
+  return concepto.trim() !== "" && !isNaN(costo) && costo > 0;
 }
 
 function confirmarVaciar({ tabla, onConfirm, colspan, mensaje }) {
@@ -206,23 +206,22 @@ tablaMateriales.addEventListener("click", (e) => {
     // Se cambia el texto del botón para que noo diga agregar
     document.querySelector("#producto button[type='submit']").textContent = "Actualizar material";
   }
-   // Eliminar y esperar nuevo submit
-    calculadora.eliminarMaterial(index);
-    guardarDatosEnStorage();
-    actualizarTablaMateriales();
 });
-
+ 
 // Evento para editar gasto fijo
 tablaGastosFijos.addEventListener("click", (e) => {
   // Prellena el formulario y elimina el gasto para reemplazarlo
   if (e.target.dataset.tipo === "editar-gasto") {
     const index = parseInt(e.target.dataset.index);
-    const gasto = calculadora.gastosFijos[index]; // Corregido
-    document.getElementById("concepto-fijo").value = gasto.concepto; // Actualizado
-    document.getElementById("costo-fijo").value = gasto.costo; // Actualizado
-    calculadora.eliminarGastoFijo(index);
-    guardarDatosEnStorage();
-    actualizarTablaGastosFijos();
+    const gasto = calculadora.gastosFijos[index]; 
+    document.getElementById("concepto-fijo").value = gasto.concepto; 
+    document.getElementById("costo-fijo").value = gasto.costo; 
+    
+      indiceGastoAEditar = index;
+
+    // Se cambia texto del botón
+    document.querySelector("#gastos-fijos button[type='submit']").textContent = "Actualizar gasto fijo";
+
   }
 });
 
@@ -287,11 +286,11 @@ tablaGastosFijos.addEventListener("click", (e) => {
 formGastoFijo.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const nombre = document.getElementById("concepto-fijo").value;
-  const valor = parseFloat(document.getElementById("costo-fijo").value);
+  const concepto = document.getElementById("concepto-fijo").value;
+  const costo = parseFloat(document.getElementById("costo-fijo").value);
   const mensajeError = document.getElementById("mensaje-error-gasto");
 
-  const gasto = { nombre, valor};
+  const gasto = { concepto, costo};
 
   if (validarGasto(gasto)) {
     mensajeError.textContent = "";
@@ -300,10 +299,10 @@ formGastoFijo.addEventListener("submit", function (e) {
       calculadora.gastosFijos[indiceGastoAEditar] = gasto;
       indiceGastoAEditar = null;
 
-      const boton = document.querySelector("#gastoFijo button[type='submit']");
+      const boton = document.querySelector("#gastos-fijos button[type='submit']");
       boton.textContent = "Agregar gasto fijo";
     } else {
-      calculadora.agregarGastoFijo(nombre, valor);
+      calculadora.agregarGastoFijo(concepto, costo);
     }
 
     actualizarTablaGastosFijos();
@@ -336,13 +335,12 @@ formCalculadora.addEventListener("submit", function (e) {
 if (!isNaN(gananciaPorcentual) && !isNaN(cantidadProduccion) && cantidadProduccion > 0) {
     // Se llama a generarResumen, que devuelve todos los calculos hechos
     const resumen = calculadora.generarResumen(gananciaPorcentual, cantidadProduccion);
-
     mostrarResumenEnPantalla(resumen);
-}
+
     const modalFinal = new bootstrap.Modal(document.getElementById('calculosFinales'));
     modalFinal.show();
   }
-)
+});
 
 // Vacía completamente la lista de materiales después de una confirmación del usuario
 document.getElementById("vaciar-materiales").addEventListener("click", function () {
