@@ -171,14 +171,13 @@ formProducto.addEventListener("submit", function (e) {
     mensajeError.textContent = "";
     if (indiceEditandoMaterial !== null) {
       // SI SE ESTA editando, actualizamos el material
-      calculadora.materiales[indiceEditandoMaterial] = material;
+      calculadora.actualizarMaterial(indiceEditandoMaterial, material);
       indiceEditandoMaterial = null;
       document.querySelector("#producto button[type='submit']").textContent = "Agregar material";
     } else {
       // SI NO SE ESTA editando, agregamos uno nuevo
       calculadora.agregarMaterial(material);
     }
-    actualizarTablaMateriales();
     guardarDatosEnStorage();
     formProducto.reset(); 
     // SE MUESTRA MODAL
@@ -245,11 +244,9 @@ tablaMateriales.addEventListener("click", (e) => {
     fila.querySelector(".btn-confirmar").addEventListener("click", () => {
       calculadora.eliminarMaterial(index);
       guardarDatosEnStorage();
-      actualizarTablaMateriales();
     });
 
     fila.querySelector(".btn-cancelar").addEventListener("click", () => {
-      actualizarTablaMateriales();
     });
   }
 });
@@ -273,11 +270,9 @@ tablaGastosFijos.addEventListener("click", (e) => {
     fila.querySelector(".btn-confirmar").addEventListener("click", () => {
       calculadora.eliminarGastoFijo(index);
       guardarDatosEnStorage();
-      actualizarTablaGastosFijos();
     });
 
     fila.querySelector(".btn-cancelar").addEventListener("click", () => {
-      actualizarTablaGastosFijos();
     });
   }
 });
@@ -296,7 +291,7 @@ formGastoFijo.addEventListener("submit", function (e) {
     mensajeError.textContent = "";
 
     if (indiceGastoAEditar !== null) {
-      calculadora.gastosFijos[indiceGastoAEditar] = gasto;
+     calculadora.actualizarGastoFijo(indiceGastoAEditar, gasto);
       indiceGastoAEditar = null;
 
       const boton = document.querySelector("#gastos-fijos button[type='submit']");
@@ -304,8 +299,6 @@ formGastoFijo.addEventListener("submit", function (e) {
     } else {
       calculadora.agregarGastoFijo(concepto, costo);
     }
-
-    actualizarTablaGastosFijos();
     guardarDatosEnStorage();
     formGastoFijo.reset();
 
@@ -352,7 +345,6 @@ document.getElementById("vaciar-materiales").addEventListener("click", function 
     onConfirm: () => {
       calculadora.vaciarMateriales();
       guardarDatosEnStorage();
-      actualizarTablaMateriales();
     },
     colspan: 4,
     mensaje: "¿Seguro que quieres vaciar todos los materiales?"
@@ -370,7 +362,6 @@ document.getElementById("vaciar-gastos").addEventListener("click", function () {
     onConfirm: () => {
       calculadora.vaciarGastosFijos();
       guardarDatosEnStorage();
-      actualizarTablaGastosFijos();
     },
     colspan: 3,
     mensaje: "¿Seguro que quieres vaciar todos los gastos fijos?"
