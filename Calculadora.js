@@ -18,6 +18,20 @@ class Calculadora{
   this.subscribers.forEach(fn => fn());
   }
 
+  // Funcion para modificar /edtar un material 
+  actualizarMaterial(index, { nombre, costoUnitario, cantidad, unidad, unidadesPorSeleccionada }) {
+  this.materiales[index] = new Material(nombre, costoUnitario, cantidad, unidad, unidadesPorSeleccionada);
+  this.notify();
+}
+
+// Funcion para modificar / editarlo un gasto fijo 
+actualizarGastoFijo(indice, { concepto, costo }) {
+  if (indice >= 0 && indice < this.gastosFijos.length) {
+    this.gastosFijos[indice] = new GastoFijo(concepto, costo);
+    this.notify();
+  }
+}
+
   //Función para agregar materiales necesarios para fabricar una unidad de producto//
 
    agregarMaterial({ nombre, costoUnitario, cantidad, unidad, unidadesPorSeleccionada }) {
