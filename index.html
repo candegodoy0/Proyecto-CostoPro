@@ -115,24 +115,12 @@
 </button>
 
 <p id="mensaje-error-material" class="text-danger mt-2"></p>
-
-<div class="modal fade" id="agregarMaterial" tabindex="-1" aria-labelledby="agregarMaterialLabel" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered">
-<div class="modal-content">
-  <div class="modal-header">
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-  </div>
-  <div class="modal-body">
-    <p>Material agregado correctamente.</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-  </div>
-</div>
-</div>
-</div>
-
 </form>
+
+<!-- boton para cargar desde JSON -->
+<div class="text-center mt-3">
+  <button id="btnCargarMateriales" class="btn btn-secondary">Cargar materiales desde JSON</button>
+</div>
 
 </div>
 </section>
@@ -158,24 +146,6 @@
     </table>
   </div>
 </div><button class="btn btn-outline-danger mt-3" id="vaciar-materiales">Vaciar materiales</button>
-
-
-<div class="modal fade" id="agregarMaterial" tabindex="-1" aria-labelledby="agregarMaterialLabel" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered">
-<div class="modal-content">
-  <div class="modal-header">
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Aceptar"></button>
-  </div>
-  <div class="modal-body">
-    <p>Debe insertar al menos un registro para realizar esta acción.</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-  </div>
-</div>
-</div>
-</div>
-
 
 
 </section>
@@ -205,23 +175,13 @@
 </button>
 
  <p id="mensaje-error-gasto" class="text-danger mt-2"></p>
-
-<div class="modal fade" id="agregarGasto" tabindex="-1" aria-labelledby="agregarGastoLabel" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered">
-<div class="modal-content">
-  <div class="modal-header">
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-  </div>
-  <div class="modal-body">
-    <p>Gasto agregado correctamente.</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-  </div>
-</div>
-</div>
-</div>
     </form>
+
+    <!-- boton para cargar desde JSON -->
+<div class="text-center mt-3">
+<button id="btnCargarGastos" class="btn btn-secondary">Cargar Gastos desde JSON</button>
+</div>
+
   </div>
     </section>
 
@@ -275,40 +235,7 @@
 <button type="submit" class="btn btn-success">
   Calcular Costo Total
 </button>
-
-
-<div class="modal fade" id="calculosFinales" tabindex="-1" aria-labelledby="calculosFinales" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered">
-<div class="modal-content">
-  <div class="modal-header">
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-  </div>
-  <div class="modal-body">
-    <p>Los cálculos se realizaron correctamente.</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-  </div>
-</div>
-</div>
-</div>
-
-
-<div class="modal fade" id="modalAntesDeCalcular" tabindex="-1" aria-labelledby="modalAntesDeCalcularLabel" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered">
-<div class="modal-content">
-  <div class="modal-header">
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-  </div>
-  <div class="modal-body">
-    <p>⚠️ Asegúrate de ingresar al menos un material o un gasto fijo antes de calcular.</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-  </div>
-</div>
-</div>
-</div>
+    
 
     </form>
   </div>
@@ -316,7 +243,7 @@
 
 
     <!--Tabla de resultados--> 
-     <section id="resultados" class="container my-5">
+    <section id="resultados" class="container my-5 d-none">
       <h3 class="text-center mb-4">TABLA DE RESULTADOS</h3>
 
       <div class="table-responsive">
@@ -407,6 +334,7 @@
   
   <!-- Enlace al archivo de JavaScript que maneja la lógica de la calculadora -->
   <script defer type="module" src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
 

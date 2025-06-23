@@ -64,8 +64,9 @@ actualizarGastoFijo(indice, { concepto, costo }) {
     const totalVariables = this.calcularCostoMaterialesTotal(cantidadProduccion);
     const totalFijos = this.calcularGastosFijos();
     const costoTotal = totalVariables + totalFijos;
-    const costoTotalConGanancia = costoTotal * (1 + gananciaPorcentual / 100);
-    const costoPorUnidadConGanancia = costoTotalConGanancia / cantidadProduccion;
+const costoPorUnidad = costoTotal / cantidadProduccion;
+const costoPorUnidadConGanancia = costoPorUnidad * (1 + gananciaPorcentual / 100);
+const costoTotalConGanancia = costoPorUnidadConGanancia * cantidadProduccion;
 
     return {
       cantidadProduccion,

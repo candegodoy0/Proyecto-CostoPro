@@ -1,0 +1,17 @@
+[
+  {
+    "nombre": "Tornillo",
+    "cantidad": 10,
+    "precioUnitario": 120.00
+  },
+  {
+    "nombre": "Pintura",
+    "cantidad": 5,
+    "precioUnitario": 5000.00
+  },
+  {
+    "nombre": "Madera",
+    "cantidad": 7,
+    "precioUnitario": 1850.00
+  }
+]
