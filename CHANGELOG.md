@@ -5,77 +5,79 @@ Este proyecto sigue el control de versiones semántico.
 
 ---
 
+### PR #7 – `release/segundo-parcial` – 2025-06-23 
+**PR asociado:** *(todavía no disponible – es la entrega final)*  
+
+### Added
+- Carga de datos asíncrona con `fetch()` desde archivos JSON locales (`materiales.json` y `gastos.json`) dentro de la carpeta `api/`.
+- Implementación de botones para importar materiales y gastos de forma dinámica.
+- Uso de la librería externa **SweetAlert** para mostrar alertas interactivas y modernas.
+- Nuevas validaciones de campos con alertas integradas.
+- Confirmaciones para acciones destructivas como vaciar listas o eliminar ítems.
+
+### Changed
+- Mejora de la UI con feedback visual mediante SweetAlert.
+- Organización de carpetas (`api/`, `.github/`, etc.).
+- Ajuste en los textos y validaciones de formularios.
+- Adaptación de `script.js` para soportar la carga dinámica.
+
+### Documentation
+- Se agregó el Pull Request Template en `.github/PULL_REQUEST_TEMPLATE.md`.
+- Se actualizó el archivo `README.md`.
+- Creación del archivo `CHANGELOG.md`.
+
+---
+
+### PR #6 – `feature/cuarta-entrega` – 2025-06-03  [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/6)
+
 ### Added
 - Captura de eventos del usuario y modificación del DOM.
-- Cálculo dinámico del costo unitario y total.
 - Almacenamiento persistente con `localStorage`.
 - Botones funcionales: editar, eliminar y vaciar registros desde la tabla.
-- Diagrama de clases UML actualizado y enlazado en el `README.md`.
-- Plantilla profesional de Pull Request.
 
 ### Changed
 - Refactor completo en archivos separados: `Material.js`, `GastoFijo.js`, `Calculadora.js`, `script.js`.
-- Lógica encapsulada en clases con métodos organizados.
 - Renombrado de variables y funciones para mejorar la legibilidad.
-- Interfaz rediseñada con Bootstrap 5 y sistema de columnas responsive.
+- Interfaz rediseñada.
 
 ### Documentation
-- Archivo `README.md` actualizado con tecnologías, objetivos y enlaces.
-- Diagrama de clases UML actualizado y enlazado.
-- Plantilla de Pull Request agregada al repositorio.
-- Creación de este archivo `CHANGELOG.md`.
-
-
-## Previous Deliveries
-
-### PR #7 – release/segundo-parcial – 2025-06-23 [(Ver PR)]()
-
-- 
-- 
-- 
-
-### PR #6 – feature/cuarta-entrega – 2025-06-03 ([Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/6))
-
-- Eventos, DOM y almacenamiento local.
-- Refactor con clases.
-- Diagrama de clases incorporado.
+- Diagrama de clases UML actualizado y enlazado en el `README.md`.
 
 ---
 
-### PR #5 – feature/tercera-entrega – 2025-05-20 ([Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/5))
+### PR #5 – `feature/tercera-entrega` – 2025-05-20  [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/5)
 
-- Simulación funcional con entrada, proceso y salida.
-- Arrays, objetos y funciones en JS.
-- Diagrama de flujo agregado al README.
+### Added
+- Simulación funcional completa con entrada, procesamiento y salida.
+- Manejo de arrays, objetos y funciones personalizadas en JavaScript.
 
----
-
-### PR #3 – release/primer-parcial – 2025-04-08 ([Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/3))
-
-- Componente avanzado (Google Maps).
-- Bootstrap y diseño responsive.
-- Creación de rama release/primer-parcial.
+### Documentation
+- Diagrama de flujo incorporado en el `README.md`.
 
 ---
 
-### PR #2 – feature/segunda-entrega – 2025-03-25 ([Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/2))
+### PR #4 – `release/primer-parcial` – 2025-04-08  [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/3)
 
-- Maquetación con CSS, herencia de estilos.
-- Diseño responsive con flex y media queries.
+### Added
+- Componente avanzado: integración de Google Maps.
+- Estructura visual adaptada a diseño responsive.
+- Uso de Bootstrap para maquetado.
 
 ---
 
+### PR #2 – `feature/segunda-entrega` – 2025-03-25  [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/2)
 
-### PR #1 – feature/primera-entrega – 2025-03-11 ([Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/1))
+### Added
+- Maquetación HTML/CSS con herencia de estilos.
+- Uso de Flexbox y media queries para diseño responsive.
 
-- Estructura en HTML5 con formularios, listas e imágenes.
-- README inicial.
-- Comentarios en el código HTML.
+---
 
+### PR #1 – `feature/primera-entrega` – 2025-03-11 [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/1)
 
+### Added
+- Estructura básica en HTML5 con formularios, listas e imágenes.
+- Primer README del proyecto.
+- Comentarios en el HTML explicando la estructura.
 
-
-
-
-
-
+---
