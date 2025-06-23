@@ -37,7 +37,7 @@ function mostrarResumenEnPantalla(resumen) {
   totalVariablesDOM.textContent = `$${resumen.totalVariables.toFixed(2)}`;
   totalFijosDOM.textContent = `$${resumen.totalFijos.toFixed(2)}`;
   costoTotalDOM.textContent = `$${resumen.costoTotal.toFixed(2)}`;
-  costoGananciaDOM.textContent = `$${resumen.costoTotalConGanancia.toFixed(2)}`;
+  costoGananciaDOM.textContent = `$${resumen.costoPorUnidadConGanancia.toFixed(2)}`;
 }
 
 /**
@@ -180,11 +180,25 @@ formProducto.addEventListener("submit", function (e) {
     }
     guardarDatosEnStorage();
     formProducto.reset(); 
-    // SE MUESTRA MODAL
-    const modalMaterial = new bootstrap.Modal(document.getElementById('agregarMaterial'));
-    modalMaterial.show();
+
+        // alerta de éxito
+    Swal.fire({
+      icon: 'success',
+      title: '¡Material agregado!',
+      text: 'El material fue agregado con éxito',
+      timer: 1500,
+      showConfirmButton: false
+ 
+});
+
   } else {
-    mensajeError.textContent = "Por favor, completá todos los campos correctamente y con valores mayores a cero.";
+
+    // Alerta de error de validación
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Completá todos los campos con valores válidos y mayores a cero.'
+    });
   }
 });
 
@@ -228,51 +242,53 @@ tablaMateriales.addEventListener("click", (e) => {
   // se confirma con el usuario antes de eliminar un material de la lista
 // se muestra botones de "Confirmar" y "Cancelar" dentro de la fila
   if (e.target.dataset.tipo === "material") {
-    const fila = e.target.closest("tr");
     const index = parseInt(e.target.dataset.index);
 
-    if (fila.querySelector(".btn-confirmar")) return;
-
-    fila.innerHTML = `
-      <td colspan="4" class="text-center text-danger">
-        ¿Seguro que quieres eliminar este material?
-        <button class="btn btn-danger btn-sm btn-confirmar" data-index="${index}">Confirmar</button>
-        <button class="btn btn-secondary btn-sm btn-cancelar">Cancelar</button>
-      </td>
-    `;
-
-    fila.querySelector(".btn-confirmar").addEventListener("click", () => {
-      calculadora.eliminarMaterial(index);
-      guardarDatosEnStorage();
-    });
-
-    fila.querySelector(".btn-cancelar").addEventListener("click", () => {
+Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Este material se eliminará permanentemente',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        calculadora.eliminarMaterial(index);
+        guardarDatosEnStorage();
+        actualizarTablaMateriales(); // refrescar la tabla después de eliminar
+        Swal.fire({
+          icon: 'success',
+          title: 'Eliminado',
+          text: 'El material fue eliminado correctamente'
+        });
+      }
     });
   }
 });
 
 tablaGastosFijos.addEventListener("click", (e) => {
+    if (e.target.dataset.tipo === "gasto") {
   const index = parseInt(e.target.dataset.index);
-  const fila = e.target.closest("tr");
 
   // confirmar eliminación de gasto
-  if (e.target.dataset.tipo === "gasto") {
-    if (fila.querySelector(".btn-confirmar")) return;
-
-    fila.innerHTML = `
-      <td colspan="3" class="text-center text-danger">
-        ¿Seguro que quieres eliminar este gasto?
-        <button class="btn btn-danger btn-sm btn-confirmar" data-index="${index}">Confirmar</button>
-        <button class="btn btn-secondary btn-sm btn-cancelar">Cancelar</button>
-      </td>
-    `;
-
-    fila.querySelector(".btn-confirmar").addEventListener("click", () => {
-      calculadora.eliminarGastoFijo(index);
-      guardarDatosEnStorage();
-    });
-
-    fila.querySelector(".btn-cancelar").addEventListener("click", () => {
+  Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Este gasto fijo se eliminará permanentemente',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        calculadora.eliminarGastoFijo(index);
+        guardarDatosEnStorage();
+        actualizarTablaGastosFijos();
+        Swal.fire({
+          icon: 'success',
+          title: 'Eliminado',
+          text: 'El gasto fue eliminado correctamente'
+        });
+      }
     });
   }
 });
@@ -302,12 +318,26 @@ formGastoFijo.addEventListener("submit", function (e) {
     guardarDatosEnStorage();
     formGastoFijo.reset();
 
-    const modalGasto = new bootstrap.Modal(document.getElementById('agregarGasto'));
-    modalGasto.show();
+      // alerta de éxito
+    Swal.fire({
+      icon: 'success',
+      title: 'Gasto agregado!',
+      text: 'El gasto fue agregado con éxito',
+      timer: 1500,
+      showConfirmButton: false
+ 
+});
+
   } else {
-    mensajeError.textContent = "Por favor, completá todos los campos correctamente y con valores mayores a cero.";
+
+    // Alerta de error de validación
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Completá todos los campos con valores válidos y mayores a cero.'
+    });
   }
-  });
+});
 
 // Evento para calcular costos totales de producción
 // se aplivca ganancia porcentual y muestra resultados 
@@ -315,14 +345,17 @@ formCalculadora.addEventListener("submit", function (e) {
   e.preventDefault();
 
   const gananciaPorcentual = parseFloat(document.getElementById("ganancia").value);
-  const cantidadProduccion = parseInt(document.getElementById("cantidadTotal").value);
+  const cantidadProduccion = parseFloat(document.getElementById("cantidadTotal").value);
 
   // se valida si hay al menos un material o gasto fijo
   if (calculadora.materiales.length === 0 && calculadora.gastosFijos.length === 0) {
-    const modalAntesDeCalcular = new bootstrap.Modal(document.getElementById('modalAntesDeCalcular'));
-    modalAntesDeCalcular.show();
-    return;
-  }
+Swal.fire({
+    icon: 'warning',
+    title: 'Datos incompletos',
+    text: 'Debés ingresar al menos un material o un gasto fijo antes de calcular.'
+  });
+  return;
+}
 
   // se validan datos de ganancia y cantidad de producción
 if (!isNaN(gananciaPorcentual) && !isNaN(cantidadProduccion) && cantidadProduccion > 0) {
@@ -330,40 +363,137 @@ if (!isNaN(gananciaPorcentual) && !isNaN(cantidadProduccion) && cantidadProducci
     const resumen = calculadora.generarResumen(gananciaPorcentual, cantidadProduccion);
     mostrarResumenEnPantalla(resumen);
 
-    const modalFinal = new bootstrap.Modal(document.getElementById('calculosFinales'));
-    modalFinal.show();
-  }
+           // Mostrar resumen
+    Swal.fire({
+      icon: 'info',
+      title: 'Resumen del Costo',
+      html: `
+        <p>Total Gastos Variables: <strong>$${resumen.totalVariables.toFixed(2)}</strong></p>
+        <p>Total Gastos Fijos: <strong>$${resumen.totalFijos.toFixed(2)}</strong></p>
+        <p>Costo total (con ganancia): <strong>$${resumen.costoTotal.toFixed(2)}</strong></p>
+       <p>Costo Por Unidad (con ganancia): <strong>$${resumen.costoPorUnidadConGanancia.toFixed(2)}</strong></p>
+      `,
+      confirmButtonText: 'Aceptar'
+   }).then(() => {
+  // se muestra la tabla solo después de cerrar el resumen de alerta
+  document.getElementById('resultados').classList.remove('d-none');
 });
+  
+    } else {
+
+    // Alerta de error de validación
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Completá todos los campos con valores válidos y mayores a cero.'
+    });
+  }
+  });
+
 
 // Vacía completamente la lista de materiales después de una confirmación del usuario
 document.getElementById("vaciar-materiales").addEventListener("click", function () {
-  if (calculadora.isMaterialesEmpty()) {
+  if (calculadora.isMaterialesEmpty()) 
+
     return;
-  }
-  confirmarVaciar({
-    tabla: tablaMateriales,
-    onConfirm: () => {
+ Swal.fire({
+    title: '¿Estás segura?',
+    text: 'Vas a eliminar todos los materiales',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Sí, vaciar',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
       calculadora.vaciarMateriales();
       guardarDatosEnStorage();
-    },
-    colspan: 4,
-    mensaje: "¿Seguro que quieres vaciar todos los materiales?"
+      actualizarTablaMateriales();
+      Swal.fire('Vaciado', 'Se eliminaron todos los materiales', 'success');
+    }
+  });
+});
+
+// Vacía completamente la lista de gastos fijos después de una confirmación del usuario
+document.getElementById("vaciar-gastos").addEventListener("click", function () {
+  if (calculadora.isGastosFijosEmpty()) 
+    return;
+
+  Swal.fire({
+    title: '¿Estás segura?',
+    text: 'Vas a eliminar todos los gastos fijos',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Sí, vaciar',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      calculadora.vaciarGastosFijos(); // ✔️ CORRECTO
+      guardarDatosEnStorage();
+      actualizarTablaGastosFijos();    // ✔️ CORRECTO
+      Swal.fire('Vaciado', 'Se eliminaron todos los gastos fijos', 'success');
+    }
   });
 });
 
 
-// Vacía completamente la lista de gastos fijos después de una confirmación del usuario
-document.getElementById("vaciar-gastos").addEventListener("click", function () {
-  if (calculadora.isGastosFijosEmpty()) {
-    return;
-  }
-  confirmarVaciar({
-    tabla: tablaGastosFijos,
-    onConfirm: () => {
-      calculadora.vaciarGastosFijos();
+// Carga de materiales simulados desde archivo JSON/fwtch
+document.getElementById('btnCargarMateriales').addEventListener('click', () => {
+  fetch('api/materiales.json')
+    .then(res => res.json())
+    .then(materiales => {
+      materiales.forEach(m => {
+        const material = new Material(m.nombre, m.precioUnitario, m.cantidad, "unidad", 1);
+        calculadora.agregarMaterial(material);
+      });
+
       guardarDatosEnStorage();
-    },
-    colspan: 3,
-    mensaje: "¿Seguro que quieres vaciar todos los gastos fijos?"
-  });
+      actualizarTablaMateriales();
+
+      const costos = materiales.map(m => m.precioUnitario * m.cantidad);
+      const total = costos.reduce((acc, val) => acc + val, 0);
+
+      Swal.fire({
+        icon: 'info',
+        title: 'Materiales cargados',
+        text: `Se importaron materiales por un total de $${total}`,
+        confirmButtonText: 'Aceptar'
+      });
+    })
+    .catch(error => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: `No se pudieron cargar los materiales: ${error.message}`
+      });
+    });
 });
+
+document.getElementById('btnCargarGastos').addEventListener('click', () => {
+  fetch('api/gastos.json')
+    .then(res => res.json())
+    .then(gastos => {
+      gastos.forEach(g => {
+        calculadora.agregarGastoFijo(g.concepto, g.costo);
+      });
+
+      guardarDatosEnStorage();
+      actualizarTablaGastosFijos();
+
+      const total = gastos.reduce((acc, g) => acc + g.costo, 0);
+
+      Swal.fire({
+        icon: 'info',
+        title: 'Gastos cargados',
+        text: `Se importaron gastos por un total de $${total}`,
+        confirmButtonText: 'Aceptar'
+      });
+    })
+    .catch(error => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: `No se pudieron cargar los gastos: ${error.message}`
+      });
+    });
+});
+

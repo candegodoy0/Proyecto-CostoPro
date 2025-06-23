@@ -1,0 +1,16 @@
+[
+  { 
+    "concepto": "Alquiler", 
+    "costo": 820000.00
+},
+
+  { 
+    "concepto": "Luz", 
+    "costo": 120000.00
+},
+  
+{ 
+    "concepto": "Internet", 
+    "costo": 25000.00 
+}
+]
