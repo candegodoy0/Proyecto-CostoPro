@@ -5,7 +5,7 @@ Este proyecto sigue el control de versiones semántico.
 
 ---
 
-### PR #7 – `release/segundo-parcial` – 2025-06-23 
+### PR #7 – `release/segundo-parcial` – 2025-06-26 
 **PR asociado:** *(todavía no disponible – es la entrega final)*  
 
 ### Added
@@ -28,7 +28,7 @@ Este proyecto sigue el control de versiones semántico.
 
 ---
 
-### PR #6 – `feature/cuarta-entrega` – 2025-06-03  [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/6)
+### PR #6 – `feature/cuarta-entrega` – 2025-05-30  [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/6)
 
 ### Added
 - Captura de eventos del usuario y modificación del DOM.
@@ -45,11 +45,15 @@ Este proyecto sigue el control de versiones semántico.
 
 ---
 
-### PR #5 – `feature/tercera-entrega` – 2025-05-20  [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/5)
+### PR #5 – `feature/tercera-entrega` – 2025-05-12  [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/5)
 
 ### Added
 - Simulación funcional completa con entrada, procesamiento y salida.
 - Manejo de arrays, objetos y funciones personalizadas en JavaScript.
+
+### Changed
+- Reorganización de la lógica de simulación para mayor claridad.
+- Refactor modular de lógica en múltiples archivos.
 
 ### Documentation
 - Diagrama de flujo incorporado en el `README.md`.
@@ -65,7 +69,7 @@ Este proyecto sigue el control de versiones semántico.
 
 ---
 
-### PR #2 – `feature/segunda-entrega` – 2025-03-25  [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/2)
+### PR #2 – `feature/segunda-entrega` – 2025-04-14  [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/2)
 
 ### Added
 - Maquetación HTML/CSS con herencia de estilos.
@@ -73,7 +77,7 @@ Este proyecto sigue el control de versiones semántico.
 
 ---
 
-### PR #1 – `feature/primera-entrega` – 2025-03-11 [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/1)
+### PR #1 – `feature/primera-entrega` – 2025-03-31 [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/1)
 
 ### Added
 - Estructura básica en HTML5 con formularios, listas e imágenes.
