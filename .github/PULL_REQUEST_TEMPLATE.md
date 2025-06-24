@@ -1,7 +1,7 @@
 # Pull Request - [Nombre de la entrega o feature]
 
 # Description
-Por favor, incluye un resumen breve de los cambios realizados y el motivo de estos. Explica qué problema resuelve o qué mejora introduce este Pull Request.
+Por favor, agrega un resumen breve de los cambios realizados y el motivo de estos. Explica qué problema resuelve o qué mejora introduce este Pull Request.
 
 
 # Type of change 
