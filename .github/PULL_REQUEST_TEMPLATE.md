@@ -1,7 +1,7 @@
 # Pull Request - [Nombre de la entrega o feature]
 
 # Description
-Por favor, agrega un resumen breve de los cambios realizados y el motivo de estos. Explica qué problema resuelve o qué mejora introduce este Pull Request.
+_Por favor, agrega un resumen breve de los cambios realizados y el motivo de estos. Explica qué problema resuelve o qué mejora introduce este Pull Request_
 
 
 # Type of change 
@@ -10,7 +10,7 @@ Por favor, marca lo que corresponda:
 - [ ] New feature (nueva funcionalidad)
 - [ ] Documentation update (actualización de documentación)
 - [ ] Refactor (reestructuración de código)
-- [ ] Other (otro) - especificar: ___________
+- [ ] Other (otro) - _especificar: ___________
 
 # Checklist
 Antes de solicitar la revisión, confirma que:
@@ -22,7 +22,7 @@ Antes de solicitar la revisión, confirma que:
 
 
 # Additional notes 
-Agrega aquí cualquier detalle o aclaración extra que consideres importante.
+_Agrega aquí cualquier detalle o aclaración extra que consideres importante._
 
 ---
 
