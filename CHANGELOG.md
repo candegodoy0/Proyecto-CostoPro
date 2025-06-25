@@ -5,8 +5,7 @@ Este proyecto sigue el control de versiones semántico.
 
 ---
 
-### PR #7 – `release/segundo-parcial` – 2025-06-26 
-**PR asociado:** *(todavía no disponible – es la entrega final)*  
+### PR #7 – `release/segundo-parcial` – 2025-06-26 [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/7)
 
 ### Added
 - Carga de datos asíncrona con `fetch()` desde archivos JSON locales (`materiales.json` y `gastos.json`) dentro de la carpeta `api/`.
