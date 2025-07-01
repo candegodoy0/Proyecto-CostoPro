@@ -437,10 +437,12 @@ document.getElementById("vaciar-gastos").addEventListener("click", function () {
 
 
 // Carga de materiales simulados desde archivo JSON/fwtch
-document.getElementById('btnCargarMateriales').addEventListener('click', () => {
-  fetch('api/materiales.json')
-    .then(res => res.json())
-    .then(materiales => {
+document.getElementById('btnCargarMateriales').addEventListener('click', async () => {
+  try{
+    const res = await fetch('api/materiales.json');
+    if (!res.ok) throw new Error("Error al obtener materiales");
+    const materiales = await res.json();
+    
       materiales.forEach(m => {
         const material = new Material(m.nombre, m.precioUnitario, m.cantidad, "unidad", 1);
         calculadora.agregarMaterial(material);
@@ -458,22 +460,23 @@ document.getElementById('btnCargarMateriales').addEventListener('click', () => {
         text: `Se importaron materiales por un total de $${total}`,
         confirmButtonText: 'Aceptar'
       });
-    })
-    .catch(error => {
+
+    }catch(error){
       Swal.fire({
         icon: 'error',
         title: 'Error',
         text: `No se pudieron cargar los materiales: ${error.message}`
       });
+    }
     });
-});
 
-document.getElementById('btnCargarGastos').addEventListener('click', () => {
-  fetch('api/gastos.json')
-    .then(res => res.json())
-    .then(gastos => {
-      gastos.forEach(g => {
-        calculadora.agregarGastoFijo(g.concepto, g.costo);
+document.getElementById('btnCargarGastos').addEventListener('click', async () => {
+  try{
+    const res = await fetch('api/gastos.json');
+    if (!res.ok) throw new Error("Error al obtener gastos fijos");
+    const gastos = await res.json();
+    gastos.forEach(g => {
+      calculadora.agregarGastoFijo(g.concepto, g.costo);
       });
 
       guardarDatosEnStorage();
@@ -487,12 +490,12 @@ document.getElementById('btnCargarGastos').addEventListener('click', () => {
         text: `Se importaron gastos por un total de $${total}`,
         confirmButtonText: 'Aceptar'
       });
-    })
-    .catch(error => {
+
+    }catch(error){
       Swal.fire({
         icon: 'error',
         title: 'Error',
         text: `No se pudieron cargar los gastos: ${error.message}`
       });
-    });
+    }
 });
