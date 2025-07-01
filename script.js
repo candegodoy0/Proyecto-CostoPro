@@ -496,4 +496,3 @@ document.getElementById('btnCargarGastos').addEventListener('click', () => {
       });
     });
 });
-

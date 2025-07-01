@@ -1,11 +1,4 @@
-# CHANGELOG
-
-Este archivo documenta todos los cambios notables realizados en este proyecto. Se utilizó Git Flow y los avances se organizaron por entregas y Pull Requests.
-Este proyecto sigue el control de versiones semántico.
-
----
-
-### PR #7 – `release/segundo-parcial` – 2025-06-26 [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/7)
+### [PR #7 – `release/segundo-parcial` – 2025-06-26](https://github.com/candegodoy0/Proyecto-CostoPro/pull/7)
 
 ### Added
 - Carga de datos asíncrona con `fetch()` desde archivos JSON locales (`materiales.json` y `gastos.json`) dentro de la carpeta `api/`.
@@ -27,7 +20,7 @@ Este proyecto sigue el control de versiones semántico.
 
 ---
 
-### PR #6 – `feature/cuarta-entrega` – 2025-05-30  [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/6)
+### [PR #6 – `feature/cuarta-entrega` – 2025-05-30](https://github.com/candegodoy0/Proyecto-CostoPro/pull/6)
 
 ### Added
 - Captura de eventos del usuario y modificación del DOM.
@@ -43,8 +36,7 @@ Este proyecto sigue el control de versiones semántico.
 - Diagrama de clases UML actualizado y enlazado en el `README.md`.
 
 ---
-
-### PR #5 – `feature/tercera-entrega` – 2025-05-12  [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/5)
+### [PR #5 – `feature/tercera-entrega` – 2025-05-12](https://github.com/candegodoy0/Proyecto-CostoPro/pull/5)
 
 ### Added
 - Simulación funcional completa con entrada, procesamiento y salida.
@@ -59,7 +51,7 @@ Este proyecto sigue el control de versiones semántico.
 
 ---
 
-### PR #4 – `release/primer-parcial` – 2025-04-08  [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/3)
+### [PR #4 – `release/primer-parcial` – 2025-04-08](https://github.com/candegodoy0/Proyecto-CostoPro/pull/3)
 
 ### Added
 - Componente avanzado: integración de Google Maps.
@@ -68,7 +60,7 @@ Este proyecto sigue el control de versiones semántico.
 
 ---
 
-### PR #2 – `feature/segunda-entrega` – 2025-04-14  [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/2)
+### [PR #2 – `feature/segunda-entrega` – 2025-04-14](https://github.com/candegodoy0/Proyecto-CostoPro/pull/2)
 
 ### Added
 - Maquetación HTML/CSS con herencia de estilos.
@@ -76,7 +68,7 @@ Este proyecto sigue el control de versiones semántico.
 
 ---
 
-### PR #1 – `feature/primera-entrega` – 2025-03-31 [Ver PR](https://github.com/candegodoy0/Proyecto-CostoPro/pull/1)
+### [PR #1 – `feature/primera-entrega` – 2025-03-31](https://github.com/candegodoy0/Proyecto-CostoPro/pull/1)
 
 ### Added
 - Estructura básica en HTML5 con formularios, listas e imágenes.
