@@ -48,5 +48,5 @@ El diagrama muestra las clases, sus propiedades, métodos y relaciones, reflejan
 [Ver diagrama de Clases](https://drive.google.com/file/d/1MiHFjw6tcudcweqcTY5JpL-WYaUtxc_W/view?usp=sharing)
 
 --- 
-Anexo - "Frameworks y Node JS"
+## [Anexo - "Frameworks y Node JS"](./docs/Anexos.md)
 
