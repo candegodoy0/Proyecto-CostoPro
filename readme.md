@@ -1,10 +1,10 @@
 # CostoPro : Calculadora de Costos de Producción
 
-**Apellido, Nombre:** Godoy Candela 
-**Materia:** Programación Web I
-**Carrera:** Tecnicatura en Programación de Sistemas 
-**Profesor:** Matias Velasquez
-**Año:** 2025
+**Apellido, Nombre:** Godoy Candela.  
+**Materia:** Programación Web I.  
+**Carrera:** Tecnicatura en Programación de Sistemas.  
+**Profesor:** Matias Velasquez.  
+**Año:** 2025.  
 
 ---
 
