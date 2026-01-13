@@ -69,5 +69,7 @@ A continuación se muestran algunas vistas representativas de la página:
 
 ---
 
-## 📁 Estructura del proyecto
+## 👩‍💻 Autora
 
+**Candela Godoy**  
+Desarrollada en la Tecnicatura Universitaria en Programación de Sistemas – UCES  
