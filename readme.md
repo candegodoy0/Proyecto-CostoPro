@@ -7,7 +7,7 @@ Esta herramienta está orientada a optimizar el proceso de planificación y esti
 
 ---
 
-[Versión desplegada y disponible para uso online](https://candegodoy0.github.io/Proyecto-CostoPro/)
+## [Versión desplegada y disponible para uso online](https://candegodoy0.github.io/Proyecto-CostoPro/)
 
 ---
 
