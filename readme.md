@@ -57,7 +57,7 @@ El diagrama muestra las clases, sus propiedades, métodos y relaciones, reflejan
 
 ## Capturas de la interfaz
 
-A continuación se muestran algunas vistas representativas de la página:
+A continuación se muestran **algunas vistas** representativas de la página:
 
 <p align="center">
   <img src="img/cap1.png" width="260"/>
